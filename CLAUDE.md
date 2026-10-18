@@ -12,6 +12,10 @@ y no lo contradigas. Si algo que te piden choca con él, dilo y pregunta.
 
 - No escribas código de la aplicación (ni backend, ni frontend, ni migraciones).
   Los fragmentos ilustrativos dentro de la documentación sí están permitidos.
+- Excepción: durante la Entrega 1 se permite un script desechable de medición de la IA
+  en `scripts/spike/`. Se versiona en el fork y no cuenta como código de la aplicación.
+  Usa solo casos ficticios y lee la clave de la variable de entorno `ANTHROPIC_API_KEY`,
+  nunca del repositorio.
 - Los entregables son `readme.md` y `prompts.md`, en la raíz, con los nombres y en el
   orden de sus plantillas. No los renombres ni cambies el índice. Puedes escribir
   directamente en ellos.
