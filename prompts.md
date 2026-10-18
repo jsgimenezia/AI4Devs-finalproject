@@ -5,10 +5,12 @@ Este archivo recoge una **selección** de los prompts más representativos de la
 ## Notas generales
 
 - **Herramientas y modelos:**
-  - **Claude Code, app de escritorio**, modelo `claude-sonnet-5-5` con esfuerzo `high`, durante toda la sesión de documentación. El autor intentó cambiar a Opus a mitad de la sesión, pero la transcripción muestra que el cambio no llegó a aplicarse: todos los mensajes del asistente figuran con `claude-sonnet-5-5`.
+  - **Claude Code, app de escritorio**, modelo `claude-sonnet-5-5` con esfuerzo `high`, durante toda la sesión de documentación. El autor intentó cambiar a Opus dentro de esa sesión, pero la transcripción muestra que el cambio no llegó a aplicarse: todos los mensajes del asistente figuran con `claude-sonnet-5-5`.
+  - **Claude Code, terminal**, para la revisión crítica y la aplicación de cambios (sección 9): modelo `claude-opus-5-5`. Se comprobó en el registro local de la sesión: 121 mensajes del asistente con `claude-opus-5-5` y 1 con `claude-sonnet-5-5` (el primero, una prueba del hook, anterior al cambio de modelo). El esfuerzo `high` lo indica el autor y no consta en el registro.
   - **Gemini**, en una conversación independiente, solo para generar la idea inicial y, más tarde, revisar el documento de producto. El autor indica que el modelo era «Gemini 4 Argon»; no se ha podido comprobar.
 - **Fidelidad:** los prompts están copiados **tal cual**, con sus erratas. Cuando un prompt contenía datos personales o de trabajo del autor, esos fragmentos se han sustituido por `[… omitido por privacidad]`. Los textos pegados de otro agente se han sustituido por `[… omitido por extensión]`.
 - **Qué falta:** las secciones 2.3, 2.6, 4, 5, 6 y 7 se rellenarán al redactar esas partes del `readme.md`. Los prompts de esa fase se registran automáticamente con un hook (`.claude/hooks/log-prompt.sh`).
+- **De dónde salen los prompts de la sección 9:** del registro que escribe el hook (`.claude/prompt-log.md`, local y no versionado), con el texto tal como se lanzó.
 - **Dónde está el resultado:** el documento de producto resultante está en [`docs/producto.md`](docs/producto.md).
 
 ## Índice
@@ -21,6 +23,7 @@ Este archivo recoge una **selección** de los prompts más representativos de la
 6. [Tickets de trabajo](#6-tickets-de-trabajo)
 7. [Pull requests](#7-pull-requests)
 8. [Prompts transversales: preparación del repositorio y del flujo de trabajo](#8-prompts-transversales-preparación-del-repositorio-y-del-flujo-de-trabajo)
+9. [Revisión crítica con otro modelo y aplicación de los cambios](#9-revisión-crítica-con-otro-modelo-y-aplicación-de-los-cambios)
 
 ---
 
@@ -154,7 +157,7 @@ Este archivo recoge una **selección** de los prompts más representativos de la
 > he subido el modelo, dale un último repaso al documento para ver si está todo blindado o si hay algo que se haya podido quedar suelto y que nos pueda suponer problemas a la hora de la implementación
 
 - **Resultado:** el asistente leyó el documento entero y encontró huecos reales: una persona solo podía estar en un equipo (se pasó a una relación con membresía), contradicciones entre la inmutabilidad del historial y datos que se rellenaban después, estados incompletos, reglas que no cabían en «un campo, una comprobación», y una salida que no funcionaba sin IA. Se corrigieron en la versión 0.5.
-- **Ajuste humano:** el autor creía haber cambiado de Sonnet a Opus para esta revisión, pero la transcripción indica que el modelo siguió siendo Sonnet.
+- **Ajuste humano:** el autor creía haber cambiado de Sonnet a Opus para esta revisión, pero la transcripción indica que el modelo siguió siendo Sonnet. La revisión con Opus se hizo después, en una sesión de terminal (sección 9).
 
 **Prompt 3: formularios dinámicos**
 
@@ -219,3 +222,79 @@ Dos mensajes consecutivos del autor:
 
 - **Resultado:** tras consultar la documentación oficial de hooks (el campo `prompt` y el hecho de que la salida estándar llega al modelo), se creó un script que añade cada prompt a `.claude/prompt-log.md`, se probó con seis casos en un directorio temporal y se verificó después disparado por Claude Code. El registro queda ignorado por git.
 - **Ajuste humano:** el autor aprobó el diseño antes de escribir los archivos y comprobó él mismo que el hook registraba un prompt real.
+
+---
+
+## 9. Revisión crítica con otro modelo y aplicación de los cambios
+
+Esta fase se hizo en una **sesión de Claude Code en terminal con `claude-opus-5-5`**, abierta dentro del repositorio (por eso se aplicaron `CLAUDE.md` y el hook de registro). Los dos primeros prompts **los redactó Claude en la sesión de escritorio** (Sonnet 5.5) a petición del autor, que los revisó, añadió sus decisiones y los lanzó en la sesión de Opus. El tercero es del propio autor. Se han quitado de los textos las etiquetas de «contenido pegado» que añade la herramienta.
+
+**Prompt 1: revisión crítica e independiente del documento** (Claude Code, terminal, Opus 5.5)
+
+> Quiero que hagas una revisión crítica e independiente de un documento de producto. No lo modifiques: tu entrega es un informe.
+>
+> CONTEXTO
+> El documento está en docs/producto.md (lo tienes en este repositorio). Describe "Umbral", una herramienta web para que un equipo de desarrollo reciba peticiones completas: comprueba con reglas deterministas lo que falta en una petición, pregunta al solicitante y, cuando está completa, la pasa a un revisor. Una IA opcional ayuda con sugerencias pero nunca decide. Es un proyecto individual cuyo MVP debe poder construirse en unas 30 horas de trabajo, con TypeScript (React + Vite, NestJS, PostgreSQL con Prisma). El desarrollo lo hará un agente de IA a partir de este documento, sin que su autor escriba código, así que lo que el documento deje ambiguo, el agente lo inventará.
+>
+> LO QUE TIENES QUE HACER
+> Lee el documento ENTERO, de principio a fin, y revisa lo siguiente:
+> 1. Contradicciones internas entre secciones (requisitos, reglas de negocio, modelo de datos, estados, API, pruebas, plan).
+> 2. Ambigüedades o huecos que obligarían a quien implemente a tomar una decisión que el documento no toma.
+> 3. Integridad del modelo de datos: relaciones, claves, restricciones, inmutabilidad del historial, concurrencia, qué se puede o no consultar.
+> 4. Seguridad: aislamiento entre equipos, permisos por rol, sesión, entrada no confiable hacia la IA, abuso y coste.
+> 5. Que lo que se promete como "verificable con tests" lo sea de verdad, y que la estrategia de pruebas cubra los requisitos.
+> 6. Si el alcance y las horas del plan son realistas, y qué se recortaría primero.
+> 7. Calidad de la parte de IA: contrato de entrada y salida, fallos, proveedor simulado y qué NO queda demostrado.
+> 8. Errores mecánicos: referencias cruzadas rotas, numeración de requisitos o reglas, tablas incoherentes, diagramas Mermaid con sintaxis dudosa.
+>
+> Decisiones ya tomadas por el autor. No las reabras, salvo que encuentres una contradicción o un riesgo grave en ellas, y entonces dilo con el motivo:
+> - El stack, el MVP con dos tipos de petición, y que las reglas viven en configuración tipada detrás de una interfaz en el MVP (no en base de datos).
+> - Un usuario pertenece a un solo equipo en el MVP, pero el modelo usa una tabla de membresía.
+> - La herramienta es neutra respecto al sector del equipo.
+> - La entrega no necesita URL pública; se ejecuta en local con Docker Compose.
+>
+> CÓMO TRABAJAR
+> - Verifica leyendo; no te fíes de lo que el propio documento afirma sobre sí mismo. Cita siempre la sección o el requisito donde ves cada problema.
+> - No seas complaciente. Si algo está bien, dilo en una línea; dedica el esfuerzo a lo que falla.
+> - Distingue entre lo que has comprobado y lo que solo supones.
+> - No ejecutes comandos de git que cambien el repositorio ni edites ningún archivo.
+>
+> FORMATO DE LA RESPUESTA (en castellano)
+> 1. Veredicto en tres líneas: ¿se puede empezar a implementar con esto, sí o no, y por qué?
+> 2. Hallazgos ordenados de más a menos grave, en una tabla con: nº, gravedad (bloqueante / importante / menor), sección, problema, por qué importa y arreglo concreto propuesto.
+> 3. Lo que está bien resuelto (breve).
+> 4. Preguntas que solo puede responder el autor.
+> 5. Qué no has podido comprobar.
+
+- **Resultado:** un informe de 22 hallazgos (3 bloqueantes, 12 importantes y 7 menores) con el veredicto «todavía no». La sesión de escritorio contrastó los hallazgos con el documento y con la referencia de la API: los comprobables resultaron ciertos, incluido un error mío sobre la salida estructurada de la IA (un `Record` no sería compatible con `additionalProperties: false`). Se aceptaron 17 tal cual y 5 con matiz; en uno, el del límite de salida de la IA, se discrepó con motivo.
+- **Ajuste humano:** el autor decidió las 11 preguntas que el informe dejaba abiertas (en el prompt siguiente). El propio prompt, redactado por Claude, pedía no editar nada y separar lo comprobado de lo supuesto.
+
+**Prompt 2: aplicar las decisiones con las respuestas del autor**
+
+> Apruebo las 11 propuestas por defecto, con estas precisiones:
+>
+> 9. Sustituye mi propuesta por este texto: "Presupuesto: 30 horas de objetivo, más un margen de hasta 10 horas reservado al núcleo (motor de reglas, estados y transiciones atómicas, aislamiento, versiones y exportación). Es una estimación sin medir; las horas reales de la Entrega 1 se contrastarán con las 9 previstas y, si la desviación supera el 30 %, se replanifica. Orden de recorte cuando se agote el margen: (1) coherencia, título y borrador de la IA, dejando solo el relleno de campos; (2) historial como lista simple; (3) E2E con un solo recorrido; (4) límite de IA solo global; (5) comparación de modelos y ajuste fino, manteniendo el adaptador del proveedor real con una ejecución manual documentada. El adaptador real solo se plantea quitar si en el punto de control del 19 de enero (final de la Entrega 2) quedan menos horas que las necesarias para cerrar los tests."
+>
+> Tus siete puntos:
+> A. De acuerdo con tu propuesta. Refleja en 7.5 los DOS modos de llamada (ayuda al autor, y criterios o hipótesis para el revisor), cada uno con su esquema de salida, y en 6.7, 7.1, RF-08 y la fila 1.0 del historial.
+> B. De acuerdo: el revisor ve toda petición con enviada_en no nulo (incluidas retiradas, devueltas y canceladas); un borrador que nunca se ha enviado devuelve 404. Actualiza RF-23, la sección 3, la matriz 6.7 y la sección 18.
+> C. Tope global: 200 sugerencias al día por instalación, configurable por variable de entorno. Mantén los límites de 10 por usuario y hora y 100 por equipo y día.
+> D. Espera máxima de 60 segundos hasta medirlo, sin streaming en el MVP. Si se agota el tiempo, guarda la sugerencia como DESCARTADA con motivo TIEMPO_AGOTADO y tokens a null. Marca el valor como "a medir en la comprobación inicial". maxRetries bajo (0 o 1). max_tokens en torno a 8.000, también a medir.
+> E. De acuerdo: adelanta a la Entrega 1 un subconjunto con los Ejemplos 1 y 2 más 3 o 4 casos, con sus campos esperados. scripts/spike/ SE VERSIONA en el fork; debe usar solo casos ficticios y leer la clave de una variable de entorno, nunca del repositorio. Ponlo en el documento y en CLAUDE.md.
+> F. De acuerdo: documéntalo como riesgo aceptado, frenado por el límite de intentos. Reformula RF-29 como propones.
+> G. De acuerdo: el margen va aparte, sin tocar la tabla del plan ni el total orientativo de 30 h.
+>
+> Tus dos detalles también: límite de intentos de códigos de invitación por dirección (5 fallidos en 15 minutos), y aclaraciones con el número de versión en la ruta, que debe ser la última; si no lo es, responde con conflicto.
+>
+> Puedes empezar a editar.
+
+- **Contexto:** un prompt anterior, también redactado por Claude, había pedido a la sesión que no editara hasta recibir estas respuestas. La sesión respondió con siete puntos y dos detalles donde las propuestas chocaban con el documento; este mensaje los resuelve.
+- **Resultado:** el documento se reescribió completo en la versión 1.1 y se aplicaron los 22 hallazgos. La sesión avisó además de una consecuencia de diseño: con el primer paso del recorte tal como estaba redactado, la sección de aclaraciones habría quedado siempre vacía. Se corrigió en un mensaje posterior, reordenando el recorte.
+- **Ajuste humano:** el autor aprobó las propuestas por defecto salvo la del presupuesto, para la que decidió un margen de hasta 10 horas con un punto de control, y sustituyó el texto. Decidió también que `scripts/spike/` se versione en el fork.
+
+**Prompt 3: comprobación final antes de congelar**
+
+> haz una última lectura al documento en detalle y dime si ya tenemos un documento cerrado para ir al siguiente paso
+
+- **Resultado:** la sesión encontró un error que ella misma había introducido en la versión 1.1 (el token CSRF se guardaba solo como hash, así que no se podía volver a entregar al recargar la página) y dos detalles menores. Tras corregirlos, una revisión más encontró cinco detalles menores, también aplicados. El documento quedó congelado en la versión 1.1.
+- **Ajuste humano:** el autor repitió la revisión precisamente porque la IA había introducido un error al aplicar los cambios, y aceptó congelar el documento para no entrar en un bucle de revisiones.
