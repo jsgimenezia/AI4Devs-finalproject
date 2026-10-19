@@ -1,27 +1,59 @@
 # Documento de producto — Umbral: validador y asistente de peticiones
 
 > **Nombre del producto:** Umbral — *Unclear Messages Become Ready, Actionable and Listed*.
-> **Versión:** 1.1 (base para empezar a implementar) · **Fecha:** 18 de octubre de 2026
+> **Versión:** 1.2 (base para empezar a implementar) · **Fecha:** 19 de octubre de 2026
 > **Autor:** Javier (JSG) · **Contexto:** Proyecto final del Máster AI4Devs (LIDR Academy)
 > **Estado:** **cerrados por el autor:** alcance, stack, catálogo de reglas de los dos tipos de petición (códigos, campos y comprobaciones), estados y transiciones, permisos, sesión y aislamiento. **Provisionales:** las severidades de las reglas (6.2 y 6.3), los valores iniciales de 6.9 (algunos marcados «a medir») y la API y el diseño detallado. **Pendientes:** modelo y esfuerzo de la IA, y cuenta, clave y presupuesto de Anthropic (sección 19).
+
+> **Nota (versión 1.2, 19 de octubre de 2026).** Esta versión incorpora una revisión externa que añadió un **glosario** (sección 0),
+> un **ejemplo de principio a fin** (2.4), una **tabla única de errores** (10.6), **escenarios Given/When/Then** (21)
+> y un **orden de construcción** (22), sin modificar el resto. El autor corrigió después esas piezas y tomó varias
+> decisiones (ver el historial).
 
 ### Historial de versiones
 
 | Versión | Cambios |
 |---|---|
 | 0.1 | Primera versión del validador de peticiones |
-| 0.2 | Producto neutro respecto al sector; ejemplos y reglas sin referencias a un sector concreto |
-| 0.3 | Reglas definidas como datos para poder adaptar la herramienta a un sector |
-| 0.4 | Las reglas pasan a configuración tipada con forma de datos, tras una interfaz (sin tablas de reglas en el MVP); `TERMINO_VAGO` como configuración; paquete compartido de esquemas; formularios dinámicos como opción primaria con alternativa de formularios fijos más test de coherencia; nombre y eslogan definitivos |
-| 0.5 | Revisión de huecos: definición completa de reglas (opciones, aplicabilidad, campos más finos); especificación de las comprobaciones; ciclo de vida de estados, aclaraciones y sugerencias de IA; permisos por rol; plantillas de salida deterministas; pertenencia a equipos como relación N:M en el modelo; modelo de datos corregido (inmutabilidad, versión aceptada, título versionado, concurrencia); esbozo de API y de pantallas; decisión del proveedor de IA antes de la Entrega 1 |
-| 0.6 | Decisiones del autor: un equipo por usuario en el MVP con **equipo activo en la sesión**; el solicitante ve solo sus peticiones y no hay administrador de plataforma; autoaprobación del único revisor con **salida por tiempo (7 días)** para que nada quede bloqueado; sesión con cookie y protección CSRF (alternativa aceptada: token en localStorage); aislamiento con repositorios y test que falla si hay rutas no registradas |
-| 0.7 | Proveedor de IA decidido: Anthropic (API de Claude con el SDK oficial de TypeScript); plazo de autoaprobación de 7 días confirmado; valores iniciales genéricos fijados (sección 6.9); `SUGERENCIA_IA` guarda modelo y tokens |
-| 1.0 | Revisión final antes de implementar: fecha de envío (`enviada_en`) para el plazo de autoaprobación; las sugerencias de IA descartadas también se guardan (coste y límites); proxy de entrada en la arquitectura; sugerencias de IA del autor solo en borrador o devuelta (la 1.1 añade el modo revisor); trabajo con pull requests en el fork; material propuesto para el README (16.1). Solo Anthropic para el MVP |
-| 1.1 | Revisión crítica aplicada con las decisiones del autor: origen de la salida y formato de `salida_final`; dos modos de llamada a la IA (autor y revisor), cada uno con su esquema de objeto fijo; decisiones visibles en el detalle y aclaraciones solo en la última versión; transiciones atómicas y tabla `TRANSICION`; invitaciones de un solo uso con marcado atómico y códigos de 128 bits; `motivo_autodecision` en lugar de `autoaprobada`; el revisor solo ve peticiones enviadas alguna vez; sesión en servidor (`SESION`); validación de campos al guardar; definición de «completa»; fecha de referencia inyectada y hash del catálogo; límites y tiempos de la IA; conjunto de evaluación con campos esperados y métrica; script de medición en `scripts/spike/`; segunda dimensión del test de aislamiento; disparadores de solo añadir; presupuesto con margen y orden de recorte; correcciones mecánicas. Después, con más decisiones del autor: texto en bruto opcional (el modo autor de la IA exige texto); sesión de 8 horas desde el inicio, sin renovación; orden de recorte en seis pasos, separando coherencia, título y criterios del modo revisor de las preguntas adicionales y las aclaraciones. Tras la lectura final: token CSRF en claro en `SESION` (el de la cookie sigue solo como hash); espera de la IA de 60 s en total con reintentos incluidos y proxy con espera mayor; E2E en dos recorridos; campos y aclaraciones también como datos no confiables en 6.4; RF-21 limitado a la aceptación; límites de IA por día natural en Europe/Madrid y 429 al superarlos; contadores de límites (IA desde `SUGERENCIA_IA`, el resto en memoria). Última pasada antes de congelar el documento: la decisión indica el número de versión, como el envío (409 si ya no es la última); E2E con pasos de IA en los dos recorridos; 4.1 alineada con los datos no confiables; «hora» de los límites = últimos 60 minutos en ventana deslizante; se guarda cada llamada al proveedor (el 429 y el 400 por falta de texto no guardan nada) |
+| 0.2 | Producto neutro respecto al sector |
+| 0.3 | Reglas definidas como datos |
+| 0.4 | Reglas en configuración tipada tras una interfaz; esquemas compartidos; formularios dinámicos; nombre y eslogan |
+| 0.5 | Revisión de huecos: reglas completas, comprobaciones, estados, permisos, plantillas de salida, membresía N:M, API y pantallas |
+| 0.6 | Decisiones del autor sobre pertenencia, visibilidad, autoaprobación, sesión y aislamiento |
+| 0.7 | Proveedor de IA (Anthropic), plazo de autoaprobación de 7 días y valores iniciales |
+| 1.0 | Revisión final antes de implementar |
+| 1.1 | Revisión crítica aplicada (22 hallazgos y 11 decisiones del autor) y pasada final antes de congelar |
+| 1.2 | Revisión externa incorporada: glosario, ejemplo de principio a fin, tabla única de errores, escenarios Given/When/Then y orden de construcción. Correcciones del autor: el ejemplo muestra la salida en bruto y la edición del revisor; también hay preguntas de reglas recomendadas; escenarios con códigos y referencias corregidos, cuatro escenarios nuevos y aviso de selección no exhaustiva; glosario ampliado; las aclaraciones vacías se omiten. Decisiones: códigos 401, 403 y 422 (y 429 también para el bloqueo de intentos), precedencia de `UNICO_REVISOR` y construcción en dos oleadas. Historial resumido a una línea por versión. Ajustes finales: pieza de cuentas, equipos, invitaciones y sesión en el orden de construcción; límite de intentos y `X-Forwarded-For` en la oleada 1, y oleada 2 ordenada por prioridad; 401 y 400 con mensaje genérico para credenciales incorrectas, email ya registrado y código de invitación no válido; versiones del ejemplo renumeradas; en el ejemplo, el revisor corrige un criterio de la IA que decidía por su cuenta; enlace de diseño neutro. Lectura final: «E2E ampliado» definido como el recorrido (b) de 12.1 (el (a) va en la oleada 1); la nota de la cabecera habla de varias decisiones; la fila de la Entrega 2 de la sección 15 remite a la oleada 1 |
 
-No constan versiones 0.8 ni 0.9.
+No constan versiones 0.8 ni 0.9. El detalle de cada versión está en el historial de git.
 
 ---
+
+## 0. Glosario
+
+| Término | Definición breve |
+|---|---|
+| **Umbral** | El producto. También: línea que una petición cruza cuando está «completa» y puede pasar a revisión. |
+| **Petición** | Unidad de trabajo (identidad + estado). Tiene una o más versiones. |
+| **Versión** | Contenido de la petición en un momento (título, texto en bruto y campos). **Inmutable**: editar crea una nueva. |
+| **Análisis** | Resultado determinista de evaluar una versión con las reglas (uno por versión). |
+| **Regla** | Comprobación sobre un campo estructurado (presencia, cifra, fecha, enlace, opción). Definida como dato, no como función. |
+| **Catálogo** | Conjunto de reglas por defecto (RI para incidencia, RC para cambio), común a todos los equipos en el MVP. |
+| **Campo** | Dato estructurado que define una regla (clave estable, p. ej. `alcance`). |
+| **Puntuación** | % de reglas obligatorias aplicables cumplidas. **Solo informativa**; no habilita el envío. |
+| **Completa** | Ninguna regla obligatoria aplicable en «no cumple». Es la condición real de envío (RF-19). |
+| **Pregunta de plantilla** | Texto fijo de una regla no cumplida. Se «responde» rellenando el campo. No es una entidad propia. |
+| **Aclaración** | Respuesta a una pregunta adicional de la IA, vinculada a una versión. No afecta a las reglas; sí entra en la salida. |
+| **Sugerencia de IA** | Salida de la IA (modo autor o revisor), siempre editable, nunca aplicada sola. Se guarda incluso si se descarta. |
+| **Decisión** | Aceptar / devolver / rechazar de un revisor. Al aceptar guarda `salida_final`. |
+| **Transición** | Cambio de estado registrado (solo-añadir), atómico y condicionado al estado de origen. |
+| **Equipo / Membresía** | Unidad de aislamiento de datos / relación usuario-equipo con rol (N:M; una por usuario en el MVP). |
+| **Equipo activo** | Equipo con el que trabaja la sesión; de él salen todos los datos que se consultan. |
+| **Solicitante** | Rol de quien pide. Crea peticiones y solo ve las suyas. |
+| **Revisor** | Rol de quien decide. Ve las peticiones del equipo que se han enviado alguna vez y también puede crear las suyas. |
+| **Autor** | Quien creó una petición concreta. Suele ser un solicitante, pero un revisor también puede serlo; las reglas de autodecisión dependen de ello. |
+| **Modo autor / modo revisor** | Las dos formas de pedir ayuda a la IA: el autor pide relleno de campos, preguntas, título y coherencia; el revisor pide criterios o hipótesis. |
+| **Término vago** | Palabra imprecisa del vocabulario (por ejemplo «mejorar» o «cuanto antes») que se avisa si no va acompañada de una cifra. No afecta a la puntuación. |
 
 ## 1. Resumen
 
@@ -77,6 +109,82 @@ Está mejor planteado y explica el motivo de negocio, pero **el título contradi
 
 ### 2.3 Qué hace la herramienta con ellos
 Automatiza lo que hoy se hace a mano: pedir siempre los mismos datos, de forma consistente y sin depender de la memoria de quien revisa, y dejar constancia de cómo mejora cada petición.
+
+### 2.4 Ejemplo de principio a fin
+
+Un solo recorrido con valores concretos, usando el Ejemplo 2, para ver el mecanismo completo.
+
+**1. Entrada.** El solicitante pega el Ejemplo 2 (el botón «iniciar sesión sin contraseña» debería ser secundario), elige tipo **cambio** y origen **jira**.
+
+**2. IA modo autor** propone campos y un **aviso de coherencia** (el título habla del botón de *recuperar* contraseña; la descripción, del de *iniciar sesión sin contraseña*). El autor acepta parte de la propuesta, incluido el título sugerido «Hacer secundario el botón de iniciar sesión sin contraseña». Segunda versión (la primera se creó al dar de alta la petición, sin campos):
+
+| Campo | Valor | Resultado |
+|---|---|---|
+| `comportamiento_actual` | «Hay dos botones en el inicio de sesión…» | cumple |
+| `comportamiento_deseado` | «El botón de iniciar sesión sin contraseña debe ser secundario» | cumple (presencia) |
+| `actor` | «Usuarios que no recuerdan su contraseña» | cumple |
+| `motivo` | «Que más usuarios recuperen la contraseña y queden con sesión iniciada» | cumple |
+| `tiene_metrica` | SI | cumple |
+| `metrica_exito` | *(vacío)* | **no cumple** → RC-06 |
+| `motivo_sin_metrica` | *(vacío)* | no aplica (RC-07, porque `tiene_metrica` = SI) |
+| `alcance` | *(vacío)* | **no cumple** → RC-08 |
+| `afecta_interfaz` | SI | cumple |
+| `referencia_diseno` | *(vacío)* | **no cumple** → RC-10 |
+| `urgencia` | *(vacío)* | no cumple → RC-11 (recomendada: no impide el envío) |
+
+**3. Evaluación.** Obligatorias aplicables: 9. Cumplidas: 6. **Puntuación = 67**. Se muestran 4 preguntas de plantilla: 3 de reglas obligatorias (métrica, alcance, diseño) y 1 de la recomendada RC-11 (urgencia). Estado: «borrador», propiedad «con carencias».
+
+**4. Bucle.** El solicitante responde rellenando los campos (tercera versión):
+
+- `metrica_exito` = «+15% de recuperaciones de contraseña en 30 días»
+- `alcance` = «Pantalla de login, web y móvil»
+- `referencia_diseno` = «https://diseno.example/login-v2»
+
+**5. Reevaluación.** 9/9 obligatorias → **puntuación 100**, «completa». La pregunta recomendada de urgencia sigue visible, pero no impide el envío. El autor **envía a revisión** indicando el número de la última versión (3) → «lista para revisión».
+
+**6. Revisión.** Un revisor que no es el autor abre la vista previa de la salida compuesta (versión 3) y pide a la IA **criterios de aceptación** (modo revisor). En `salida_final` ajusta la redacción de la frase de la historia y corrige un criterio: la IA propuso «El botón primario pasa a ser "Recuperar contraseña"», que toma una decisión de producto que la petición no pide, y el revisor lo sustituye por «El botón de iniciar sesión sin contraseña deja de mostrarse con estilo primario; el resto de la pantalla no cambia». Después **acepta** indicando el número de la versión que ha visto (3).
+
+**7. Salida compuesta.** La plantilla de 6.8 inserta los campos tal cual, así que la composición en bruto queda así (sin urgencia ni aclaraciones, porque están vacías; los criterios son los que propuso la IA en el paso 6):
+
+```
+Título: Hacer secundario el botón de iniciar sesión sin contraseña
+
+Como Usuarios que no recuerdan su contraseña, quiero El botón de iniciar sesión sin contraseña debe ser secundario, para Que más usuarios recuperen la contraseña y queden con sesión iniciada.
+
+Situación actual: Hay dos botones en el inicio de sesión…
+Alcance: Pantalla de login, web y móvil
+Métrica de éxito: +15% de recuperaciones de contraseña en 30 días
+Diseño: https://diseno.example/login-v2
+
+Criterios de aceptación:
+- El botón de iniciar sesión sin contraseña se muestra con estilo secundario en web y móvil.
+- El botón primario pasa a ser «Recuperar contraseña».
+- Se mide el % de recuperaciones durante 30 días tras el cambio.
+```
+
+**8. Exportación.** Antes de aceptar, el revisor ajusta la redacción y corrige el segundo criterio en `salida_final` (RF-21). Lo que se exporta es:
+
+```
+Título: Hacer secundario el botón de iniciar sesión sin contraseña
+
+Como Usuarios que no recuerdan su contraseña, quiero que el botón de iniciar sesión
+sin contraseña sea secundario, para que más usuarios recuperen la contraseña y queden
+con sesión iniciada.
+
+Situación actual: Hay dos botones en el inicio de sesión…
+Alcance: Pantalla de login, web y móvil
+Métrica de éxito: +15% de recuperaciones de contraseña en 30 días
+Diseño: https://diseno.example/login-v2
+
+Criterios de aceptación:
+- El botón de iniciar sesión sin contraseña se muestra con estilo secundario en web y móvil.
+- El botón de iniciar sesión sin contraseña deja de mostrarse con estilo primario; el resto de la pantalla no cambia.
+- Se mide el % de recuperaciones durante 30 días tras el cambio.
+```
+
+La IA propone y la persona decide: el criterio que añadía una decisión que nadie había pedido no llega a la exportación.
+
+La composición determinista no produce frases naturales si los campos no se escriben pensando en la frase «Como…, quiero…, para…». Por eso el revisor la ajusta antes de aceptar (cuestión 23).
 
 ## 3. Usuarios y modelo de uso
 
@@ -173,8 +281,8 @@ Identificadores provisionales, pensados para la matriz de trazabilidad con los t
 - **RF-34** El autor ve en el detalle de su petición las decisiones tomadas sobre ella, con su comentario. Ante una devolución, responde editando los campos y reenviando. En el MVP el revisor no formula preguntas libres.
 
 ### Estados y revisión
-- **RF-19** Una petición solo puede enviarse a revisión cuando su última versión está **completa**: ninguna regla obligatoria aplicable tiene resultado «no cumple» en el análisis guardado de esa versión. El envío indica el número de esa versión; si ya no es la última, se rechaza con un conflicto.
-- **RF-20** El revisor puede aceptar (comentario opcional), devolver (comentario obligatorio; la petición pasa a «devuelta» y vuelve a ser editable) o rechazar (comentario obligatorio) una petición en lista para revisión. Un revisor no puede decidir sobre sus propias peticiones, salvo que sea el único revisor del equipo **o que hayan pasado más de 7 días desde el último envío a revisión (`enviada_en`) sin decisión**; en ambos casos la decisión guarda el motivo (`motivo_autodecision`: `UNICO_REVISOR` o `PLAZO`), sea cual sea el resultado. Así ninguna petición queda bloqueada indefinidamente. Como el envío, la decisión indica el número de la versión que el revisor ha visto; si ya no es la última (por ejemplo, porque el autor la retiró, la editó y la reenvió), se rechaza con un conflicto.
+- **RF-19** Una petición solo puede enviarse a revisión cuando su última versión está **completa**: ninguna regla obligatoria aplicable tiene resultado «no cumple» en el análisis guardado de esa versión; si no lo está, el envío se rechaza (422). El envío indica el número de esa versión; si ya no es la última, se rechaza con un conflicto (409).
+- **RF-20** El revisor puede aceptar (comentario opcional), devolver (comentario obligatorio; la petición pasa a «devuelta» y vuelve a ser editable) o rechazar (comentario obligatorio) una petición en lista para revisión. Un revisor no puede decidir sobre sus propias peticiones, salvo que sea el único revisor del equipo **o que hayan pasado más de 7 días desde el último envío a revisión (`enviada_en`) sin decisión**; en ambos casos la decisión guarda el motivo (`motivo_autodecision`: `UNICO_REVISOR` o `PLAZO`), sea cual sea el resultado. Si se cumplen las dos condiciones a la vez, se guarda `UNICO_REVISOR`. Así ninguna petición queda bloqueada indefinidamente. Como el envío, la decisión indica el número de la versión que el revisor ha visto; si ya no es la última (por ejemplo, porque el autor la retiró, la editó y la reenvió), se rechaza con un conflicto.
 - **RF-21** Al aceptar, el revisor puede editar la salida final (título, descripción y criterios o hipótesis), partiendo de la salida compuesta por la plantilla (RF-32).
 - **RF-31** El autor puede cancelar una petición en borrador o devuelta, y retirar de revisión una petición enviada, que vuelve a borrador para volver a editarla.
 - **RF-35** El revisor puede pedir a la IA criterios de aceptación (cambio) o hipótesis y datos a recopilar (incidencia) sobre la última versión de una petición en lista para revisión sobre la que pueda decidir (RF-20) (**modo revisor**, ver 7.5). Se guarda como sugerencia y solo sirve de texto inicial para la salida final.
@@ -340,7 +448,7 @@ La salida se compone **sin IA** con estas plantillas. Los criterios de aceptaci�
 
 **Entradas del compositor:**
 - Los campos de la última versión (en una petición aceptada, la versión decidida), con las opciones impresas por su etiqueta. Los campos vacíos y los de reglas «no aplica» se omiten junto con su línea.
-- Las aclaraciones de **todas** las versiones, en orden de creación.
+- Las aclaraciones de **todas** las versiones, en orden de creación. Si no hay ninguna, el apartado se omite.
 - Como texto inicial de los criterios o hipótesis, los de la última sugerencia válida del revisor sobre esa versión; si no hay, la lista empieza vacía.
 
 **Formato de `salida_final`:** un objeto con tres partes: `titulo` (texto), `descripcion` (texto: todo lo que la plantilla pone entre la línea del título y el encabezado de criterios o hipótesis, incluidas las aclaraciones) y `criterios` (lista de textos: criterios de aceptación o hipótesis y datos a recopilar). Al aceptar se guarda siempre, editada o no; al devolver o rechazar no se guarda. La exportación une las tres partes: el título, la descripción y, al final, el encabezado («Criterios de aceptación» o «Hipótesis y datos a recopilar») con la lista.
@@ -392,8 +500,8 @@ Valores genéricos y razonables para empezar. **Se ajustan durante la implementa
 | Ámbito | Valor inicial |
 |---|---|
 | Contraseña | Mínimo 10 caracteres |
-| Intentos de inicio de sesión | 5 fallidos por email y dirección en 15 minutos; después, bloqueo temporal de 15 minutos |
-| Intentos de registro y de códigos de invitación | 5 fallidos por dirección en 15 minutos; después, bloqueo temporal de 15 minutos |
+| Intentos de inicio de sesión | 5 fallidos por email y dirección en 15 minutos; después, bloqueo temporal de 15 minutos (respuesta 429) |
+| Intentos de registro y de códigos de invitación | 5 fallidos por dirección en 15 minutos; después, bloqueo temporal de 15 minutos (respuesta 429) |
 | Duración de la sesión | 8 horas desde el inicio de sesión, sin renovación con la actividad; después hay que volver a iniciar sesión |
 | Invitaciones | Caducan a los 7 días; un solo uso; código aleatorio de al menos 128 bits |
 | Título | Hasta 120 caracteres |
@@ -735,7 +843,7 @@ flowchart LR
 - La evaluación se ejecuta de forma síncrona al guardar una versión; las sugerencias de IA se piden aparte, bajo demanda, con tiempo máximo.
 
 ### 10.4 Esbozo de API
-Rutas bajo `/v1`. Es un esbozo para dimensionar el backend; **el README documenta solo tres** (cuestión 13). Errores comunes: 404 para todo recurso que el usuario no puede ver, sea de otro equipo o del propio; 409 para conflictos de versión o de estado; 429 al superar un límite de uso de la IA, sin llamar al proveedor y sin guardar nada (6.9).
+Rutas bajo `/v1`. Es un esbozo para dimensionar el backend; **el README documenta solo tres** (cuestión 13). Errores comunes: 404 para todo recurso que el usuario no puede ver, sea de otro equipo o del propio; 409 para conflictos de versión o de estado; 429 al superar un límite de uso de la IA, sin llamar al proveedor y sin guardar nada (6.9). La tabla completa de códigos, incluidos 401, 403 y 422, está en 10.6.
 
 | Método y ruta | Qué hace |
 |---|---|
@@ -765,6 +873,20 @@ Rutas bajo `/v1`. Es un esbozo para dimensionar el backend; **el README document
 6. **Revisión:** salida compuesta, petición de criterios o hipótesis a la IA, edición de la salida final (título, descripción y criterios o hipótesis) y decisión con comentario.
 7. **Exportación:** texto listo para copiar.
 8. **Invitaciones** (revisor): generar y ver códigos.
+
+### 10.6 Semántica de errores (tabla única)
+
+Los códigos de error aparecen repartidos por el documento; esta tabla los reúne para no olvidar ninguno al implementar.
+
+| Código | Cuándo | Ejemplos |
+|---|---|---|
+| **400** | Entrada inválida al guardar o al llamar | Clave de campo desconocida; OPCION fuera de lista; modo autor **sin texto en bruto** (no guarda nada, no cuenta para límites); email ya registrado en el registro (mensaje genérico); código de invitación inválido, usado o caducado (mensaje genérico, sin distinguir la causa) |
+| **401** | Sin sesión, con la sesión caducada (8 horas, 6.9) o con credenciales incorrectas | Cualquier ruta protegida sin una cookie de sesión válida; credenciales incorrectas en el inicio de sesión (mensaje genérico) |
+| **403** | Acción no permitida sobre un recurso que el usuario sí puede ver, o token CSRF ausente o inválido | Un solicitante intenta decidir sobre su propia petición; una petición que modifica datos sin la cabecera CSRF correcta |
+| **404** | Recurso que el usuario no puede ver | Petición de otro equipo; petición del propio equipo que no puede ver (RF-23). Siempre 404, nunca 403, para no filtrar existencia |
+| **409** | Conflicto de versión o de estado | Guardar sobre una versión que ya no es la última; enviar o decidir sobre una versión superada; dos decisiones simultáneas; transición cuyo estado de origen ya cambió |
+| **422** | La petición no cumple el umbral para enviarse a revisión | Envío con alguna regla obligatoria aplicable en «no cumple» (RF-19) |
+| **429** | Límite de uso superado | Cuotas de IA por usuario y hora, equipo y día o instalación y día (no llama al proveedor ni guarda sugerencia); bloqueo temporal tras 5 intentos fallidos de inicio de sesión, registro o código de invitación (6.9) |
 
 ## 11. Stack tecnológico
 
@@ -837,7 +959,7 @@ No incluye despliegue ni llamadas al proveedor real.
 | Contraseñas | Almacenadas con hash Argon2id; nunca en texto plano |
 | Sesiones (decidido, con alternativa) | **Sesión en servidor** (tabla `SESION`): al iniciar sesión se crea una sesión con un token aleatorio que viaja en una cookie `HttpOnly` y `SameSite=Lax` (y `Secure` fuera de local); en la base de datos solo se guarda su hash. Caduca a las 8 horas desde el inicio de sesión, sin renovación con la actividad, y cerrar sesión la invalida en el servidor. Lleva el equipo activo: al iniciar sesión, el de la membresía más antigua. **CSRF:** token aleatorio por sesión, guardado en claro en `SESION`, que el frontend recibe en `GET /auth/yo` (también tras recargar la página) y envía en una cabecera en cada petición que modifica datos; el backend lo compara con el de la sesión. Guardarlo en claro es aceptable porque por sí solo no sirve de nada: toda petición necesita además la cookie `HttpOnly`, que un script no puede leer, y el token de esa cookie sí se guarda solo como hash. Frontend y backend comparten origen mediante el proxy de entrada, en desarrollo y en Docker Compose, así que no se habilita CORS. **Alternativa aceptada si el coste se descontrola:** el mismo token de sesión en `localStorage`, enviado en la cabecera `Authorization`. La sesión sigue en el servidor (cierre y caducidad iguales), la protección CSRF deja de hacer falta y sus pruebas se sustituyen (12.1), con el riesgo documentado de que un script malicioso (XSS) pueda leer el token |
 | Límite de intentos | Inicio de sesión por email y dirección; registro y códigos de invitación por dirección (6.9). La dirección del cliente se toma de `X-Forwarded-For`, escrita por el proxy de entrada, en el que el backend confía como único proxy. Estos contadores se guardan en memoria: es válido con una sola instancia del backend y se reinician al reiniciar el servidor. Los límites de la IA no usan memoria: se calculan contando filas de `SUGERENCIA_IA` (6.9) |
-| Enumeración de cuentas | Ante un email ya registrado, el registro responde con un mensaje genérico. Sin verificación por email no se puede evitar del todo que se deduzca si una cuenta existe, porque el registro o sale bien o falla: es un **riesgo aceptado** en el MVP, frenado por el límite de intentos |
+| Enumeración de cuentas | Ante un email ya registrado, el registro responde 400 con un mensaje genérico (10.6); ante credenciales incorrectas, el inicio de sesión responde 401 con un mensaje genérico. Sin verificación por email no se puede evitar del todo que se deduzca si una cuenta existe, porque el registro o sale bien o falla: es un **riesgo aceptado** en el MVP, frenado por el límite de intentos |
 | Aislamiento de equipos | Repositorios con contexto de equipo obligatorio, tomado de la sesión, y un test que recorre todos los endpoints, falla si hay rutas no registradas y cubre también el acceso dentro del equipo; respuesta 404 (ver 10.3) |
 | Permisos | La matriz de 6.7 se aplica en el backend y se comprueba con tests |
 | Entrada no confiable | El texto de la petición, los campos y las aclaraciones se tratan como datos, con límite de longitud y delimitados cuando se envían a la IA |
@@ -845,7 +967,7 @@ No incluye despliegue ni llamadas al proveedor real.
 | Enlaces | Solo se muestran como enlace los de esquema http o https |
 | Validación de entrada | En todos los endpoints |
 | Secretos | Clave del proveedor de IA fuera del repositorio, también en `scripts/spike/` |
-| Códigos de invitación | Aleatorios de al menos 128 bits, de un solo uso con marcado atómico, con caducidad y límite de intentos |
+| Códigos de invitación | Aleatorios de al menos 128 bits, de un solo uso con marcado atómico, con caducidad y límite de intentos. Un código inválido, usado o caducado responde 400 con un mensaje genérico, sin distinguir la causa (10.6) |
 | Datos | Solo peticiones ficticias en el repositorio, en las pruebas y en `scripts/spike/` |
 
 ## 15. Planificación
@@ -855,7 +977,7 @@ Las **30 horas empiezan a contar desde el inicio del trabajo en el proyecto** (o
 | Entrega | Fecha | Horas | Contenido |
 |---|---|---|---|
 | 1. Documentación técnica | vie 4 dic 2026 | ~9 h | Repo, fork y ramas (1,5 h); **cuenta y clave de Anthropic, subconjunto de evaluación con campos esperados, elección de modelo y esfuerzo midiendo con el script de `scripts/spike/`**, y comprobación inicial del esquema de campos, del prompt y de los tiempos (1,5 h); documentación: ficha, descripción, arquitectura, modelo de datos, historias de usuario y tickets (6 h) |
-| 2. Código funcional | vie 22 ene 2027 | ~11 h | Backend (6 h): cuentas, equipos y membresías, peticiones con versiones, motor que lee las definiciones de reglas tras una interfaz, estados y permisos, interfaz del proveedor de IA; frontend (4 h), con formularios dibujados desde las definiciones; integración (1 h). Docker Compose y CI incluidos |
+| 2. Código funcional | vie 22 ene 2027 | ~11 h | Backend (6 h): cuentas, equipos y membresías, peticiones con versiones, motor que lee las definiciones de reglas tras una interfaz, estados y permisos, interfaz del proveedor de IA; frontend (4 h), con formularios dibujados desde las definiciones; integración (1 h). Docker Compose y CI incluidos (detalle en la oleada 1 de la sección 22) |
 | Final | jue 11 feb 2027 | ~10 h | Tests de los tres niveles y resto del conjunto de evaluación (6 h); guía de ejecución local y apartado de despliegue (1,5 h); evidencia y cierre de `prompts.md` (2,5 h) |
 
 Criterios del plan:
@@ -868,7 +990,7 @@ Criterios del plan:
 
 **Presupuesto:** 30 horas de objetivo, más un margen de hasta 10 horas reservado al núcleo (motor de reglas, estados y transiciones atómicas, aislamiento, versiones y exportación). Es una estimación sin medir; las horas reales de la Entrega 1 se contrastarán con las 9 previstas y, si la desviación supera el 30 %, se replanifica. Orden de recorte cuando se agote el margen: (1) coherencia, título y criterios del modo revisor; (2) preguntas adicionales de la IA, y con ellas las aclaraciones (tabla, pantalla y apartado de la salida); (3) historial como lista simple; (4) E2E con un solo recorrido; (5) límite de IA solo global; (6) comparación de modelos y ajuste fino, manteniendo el adaptador del proveedor real. El adaptador real solo se plantea quitar si en el punto de control del 19 de enero (final de la Entrega 2) quedan menos horas que las necesarias para cerrar los tests.
 
-El margen va aparte: no cambia la tabla del plan ni el total orientativo de 30 horas. Los disparadores de solo añadir (sección 9) quedan fuera de esa lista porque son lo primero que se recorta, antes que el paso (1), sin perder el modelo.
+El orden de construcción, en dos oleadas, está en la sección 22. El margen va aparte: no cambia la tabla del plan ni el total orientativo de 30 horas. Los disparadores de solo añadir (sección 9) quedan fuera de esa lista porque son lo primero que se recorta, antes que el paso (1), sin perder el modelo.
 
 Efecto de cada recorte sobre el resto del documento:
 - **Paso (1):** sin modo revisor, los criterios o hipótesis los escribe el revisor desde una lista vacía (6.8); RF-35 y la fila correspondiente de 6.7 quedan fuera. Sin coherencia ni título, el modo autor queda en relleno de campos y preguntas adicionales.
@@ -965,6 +1087,9 @@ Revisados el 17 de octubre de 2026 mediante lectura de los repositorios (no se e
 | Idioma | Español en el MVP |
 | Sector | Neutro: equipos que desarrollan software de cualquier sector; sin términos, reglas ni ejemplos propios de un sector |
 | Nombre | Umbral, con eslogan y flujo en seis verbos |
+| Códigos de error | 400, 401, 403, 404, 409, 422 y 429, en la tabla única de 10.6 |
+| Autodecisión simultánea | Si coinciden único revisor y plazo, se guarda `UNICO_REVISOR` |
+| Construcción | Dos oleadas (sección 22). La 1, para la Entrega 2: núcleo y seguridad, incluidos el límite de intentos y la confianza en `X-Forwarded-For`. La 2, solo si hay horas y por prioridad: adaptador real de IA con sus cuotas de uso, E2E ampliado (recorrido (b) de 12.1; el (a) va en la 1) y disparadores de solo añadir |
 
 ## 19. Cuestiones abiertas
 
@@ -986,6 +1111,7 @@ Revisados el 17 de octubre de 2026 mediante lectura de los repositorios (no se e
 | 20 | **Decididas por el autor (versión 1.1):** las 11 preguntas de la revisión crítica (origen de la salida, bucle con el revisor, aclaraciones en la salida, comentarios de decisión, visibilidad del revisor, sesión, tope global de IA, claves de campo, presupuesto, script de medición y nombre del equipo) | Producto, resuelta |
 | 21 | **Resuelta:** el texto en bruto es opcional al crear una petición; sin él, los campos se rellenan a mano (RF-16). El modo autor de la IA exige que haya texto (RF-05, RF-08) | Producto, resuelta |
 | 22 | **Resuelta:** la sesión dura 8 horas desde el inicio de sesión, sin renovación con la actividad (6.9, 14) | Seguridad, resuelta |
+| 23 | La plantilla inserta los campos tal cual y la frase de la historia puede quedar poco natural (ver 2.4); el revisor la ajusta antes de aceptar. Pendiente valorar ayudas en el formulario para que los campos se escriban pensando en la frase | Producto |
 
 ## 20. Roadmap posterior al MVP
 
@@ -1003,3 +1129,184 @@ Revisados el 17 de octubre de 2026 mediante lectura de los repositorios (no se e
 12. Reabrir, duplicar o cambiar el tipo de una petición.
 13. Segunda implementación del proveedor de IA para un nivel gratuito o un modelo local (por ejemplo, mediante un punto de acceso compatible con OpenAI), para que cualquiera pueda probar la parte real sin una clave de pago. Habría que medir antes si la calidad de extracción en español es suficiente.
 14. Preguntas libres del revisor al solicitante, con su respuesta guardada como aclaración.
+
+## 21. Escenarios de aceptación (Given/When/Then)
+
+Convierten los requisitos en criterios verificables. Una IA (Claude Code) los traduce casi directos a tests de integración/E2E; una persona los usa como «definición de hecho». Cada escenario referencia los RF para mantener la trazabilidad de 12.3. Es una **selección, no exhaustiva**: la trazabilidad completa entre requisitos y pruebas es la de 12.3 y cubre todos los RF.
+
+### 21.1 Alta y detección de carencias
+
+```gherkin
+Escenario: El solicitante pega una petición de cambio y ve qué le falta   # RF-05, RF-09, RF-12
+  Dado un solicitante con sesión iniciada en su equipo
+  Cuando crea una petición de tipo "cambio" con título, origen "jira" y el texto en bruto del Ejemplo 2
+  Entonces se crea la petición en estado "borrador" con su primera versión y su análisis
+  Y el panel de reglas muestra cada regla obligatoria con su resultado (cumple / no cumple / no aplica)
+  Y por cada regla "no cumple", obligatoria o recomendada, se muestra su pregunta de plantilla
+  Y la puntuación de completitud es visible pero no habilita por sí sola el envío
+```
+
+### 21.2 Relleno asistido por IA (modo autor)
+
+```gherkin
+Escenario: La IA propone campos a partir del texto en bruto            # RF-08, RF-13
+  Dado un borrador de tipo "cambio" cuya última versión tiene texto en bruto
+  Cuando el autor pide sugerencias a la IA en modo autor
+  Entonces la IA devuelve valores propuestos para los campos del tipo, marcados como "sugerencia"
+  Y para los campos de tipo OPCION propone solo un valor de la lista
+  Y puede devolver un aviso de coherencia si el título y el texto se contradicen
+  Y nada se aplica solo: el autor acepta los valores que quiera y, al guardar, se crea una versión nueva
+
+Escenario: El modo autor sin texto en bruto se rechaza sin llamar al proveedor   # RF-08 -> 400
+  Dado un borrador cuya última versión no tiene texto en bruto
+  Cuando el autor pide sugerencias a la IA en modo autor
+  Entonces la petición se rechaza con 400 antes de llamar al proveedor
+  Y no se guarda ninguna sugerencia
+  Y no cuenta para los límites de uso de la IA
+```
+
+### 21.3 Términos vagos
+
+```gherkin
+Escenario: Se avisa de un término vago sin cifra en un campo de texto    # RF-11
+  Dado una versión con el campo "urgencia" = "lo antes posible"
+  Cuando se evalúa la versión
+  Entonces se muestra un aviso de término vago sobre ese campo
+  Pero la puntuación de completitud no cambia
+
+Escenario: Un término vago acompañado de una cifra no se avisa           # RF-11
+  Dado una versión con el campo "urgencia" = "urgente, antes del 30-11-2026"
+  Cuando se evalúa la versión
+  Entonces no se muestra aviso de término vago sobre ese campo
+```
+
+### 21.4 Umbral de envío
+
+```gherkin
+Escenario: No se puede enviar a revisión con una regla obligatoria sin cumplir   # RF-19 -> 422
+  Dado una petición cuya última versión tiene al menos una regla obligatoria aplicable en "no cumple"
+  Cuando el autor intenta enviarla a revisión
+  Entonces el envío se rechaza con 422
+  Y la petición permanece en "borrador" (o "devuelta")
+
+Escenario: Una petición completa pasa a revisión                         # RF-19, RF-36
+  Dado una petición de cambio con todas las reglas obligatorias aplicables en "cumple"
+  Cuando el autor la envía a revisión indicando el número de su última versión
+  Entonces la petición pasa a "lista para revisión"
+  Y se registra la transición y se guarda "enviada_en"
+```
+
+### 21.5 Concurrencia
+
+```gherkin
+Escenario: Guardar sobre una versión que ya no es la última da conflicto  # RF-07 -> 409
+  Dado una petición con la versión 3 como última
+  Y el autor está editando sobre la versión 2
+  Cuando guarda indicando la versión base 2
+  Entonces el guardado se rechaza con 409
+  Y no se crea una versión nueva
+
+Escenario: Dos decisiones simultáneas sobre el mismo envío               # RF-36 -> 409
+  Dado una petición en "lista para revisión" en su versión 4
+  Cuando dos revisores deciden a la vez sobre la versión 4
+  Entonces una decisión prospera y cambia el estado
+  Y la otra se rechaza con 409 sin registrar nada
+
+Escenario: Decidir sobre una versión superada da conflicto            # RF-20 -> 409
+  Dado una petición en "lista para revisión" en su versión 2, que el revisor está viendo
+  Y el autor la retira, la edita (versión 3) y la reenvía
+  Cuando el revisor decide indicando la versión 2
+  Entonces la decisión se rechaza con 409 y no se registra nada
+```
+
+### 21.6 Bucle con el revisor
+
+```gherkin
+Escenario: Devolución con comentario y corrección del autor             # RF-20, RF-34
+  Dado una petición en "lista para revisión"
+  Cuando el revisor la devuelve con un comentario obligatorio
+  Entonces la petición pasa a "devuelta" y vuelve a ser editable por el autor
+  Y el autor ve el comentario en el detalle
+  Cuando el autor edita los campos (nueva versión) y reenvía
+  Entonces la petición vuelve a "lista para revisión"
+```
+
+### 21.7 Autodecisión
+
+```gherkin
+Escenario: El único revisor del equipo decide su propia petición         # RF-20 (UNICO_REVISOR)
+  Dado un equipo con un solo revisor
+  Y una petición propia de ese revisor en "lista para revisión"
+  Cuando el revisor la acepta
+  Entonces la decisión se guarda con motivo_autodecision = "UNICO_REVISOR"
+
+Escenario: Autoaprobación por plazo de 7 días                            # RF-20 (PLAZO)
+  Dado un equipo con más de un revisor
+  Y una petición en "lista para revisión" enviada hace más de 7 días sin decisión
+  Cuando su propio autor-revisor decide sobre ella
+  Entonces la decisión se guarda con motivo_autodecision = "PLAZO"
+
+Escenario: Si coinciden único revisor y plazo, gana UNICO_REVISOR       # RF-20
+  Dado un equipo con un solo revisor
+  Y una petición propia de ese revisor en "lista para revisión" enviada hace más de 7 días
+  Cuando el revisor la acepta
+  Entonces la decisión se guarda con motivo_autodecision = "UNICO_REVISOR"
+```
+
+### 21.8 Aislamiento y límites
+
+```gherkin
+Escenario: Un usuario no accede a datos de otro equipo                   # RF-24 -> 404
+  Dado un usuario del equipo A
+  Cuando pide una petición del equipo B
+  Entonces la respuesta es 404 (igual que si no existiera)
+
+Escenario: Un solicitante no accede a la petición de otro solicitante de su equipo   # RF-23, RF-24 -> 404
+  Dado dos solicitantes del mismo equipo
+  Y una petición en borrador del primero
+  Cuando el segundo pide esa petición
+  Entonces la respuesta es 404
+
+Escenario: Se supera el límite de uso de la IA                          # 6.9 -> 429
+  Dado un usuario que ha agotado su cuota de sugerencias de IA de la hora
+  Cuando pide otra sugerencia
+  Entonces la respuesta es 429 sin llamar al proveedor y sin guardar nada
+
+Escenario: La sesión caduca a las 8 horas aunque haya actividad         # 6.9, 14 -> 401
+  Dado un usuario que inició sesión hace más de 8 horas
+  Cuando hace cualquier petición a la API
+  Entonces la respuesta es 401 y tiene que volver a iniciar sesión
+```
+
+### 21.9 Salida
+
+```gherkin
+Escenario: Exportar una petición aceptada lista para Jira               # RF-22, RF-32
+  Dado una petición aceptada con su "salida_final" guardada en la decisión
+  Cuando el autor o el revisor piden la exportación
+  Entonces se devuelve el texto (título, descripción y criterios o hipótesis) listo para pegar
+```
+
+## 22. Orden de construcción recomendado para implementar con IA
+
+Complementa la planificación por horas de la sección 15 con un **orden de piezas**, pensado para que un agente (Claude Code) avance con TDD y poco riesgo.
+
+1. **Motor de reglas como función pura** (campos + definiciones + fecha de referencia → resultados). Sin red, sin reloj, sin IA. **Primero y con tests exhaustivos**: es el núcleo y lo más barato de verificar.
+2. **Catálogo por defecto como datos** (RI y RC) + hash del catálogo + test de estabilidad de códigos y claves.
+3. **Modelo de datos y migraciones** (petición/versión/análisis, solo-añadir) + repositorios con contexto de equipo obligatorio.
+4. **Cuentas, equipos, invitaciones y sesión con protección CSRF**, con el límite de intentos de inicio de sesión, registro y códigos de invitación, y la confianza en `X-Forwarded-For`.
+5. **Máquina de estados y transiciones atómicas** (con el conflicto 409) + test de concurrencia.
+6. **API** sobre lo anterior (los endpoints de 10.4) + test de integración y de aislamiento por endpoint.
+7. **Interfaz de proveedor de IA** con el **simulado primero** (determinista); el real (Anthropic) como implementación conectable.
+8. **Frontend** con formularios dibujados desde las definiciones.
+9. **Compositor de salida** + exportación.
+
+**Recorrido mínimo de extremo a extremo, pronto.** Antes de completar cada capa conviene tener funcionando un recorrido mínimo de punta a punta (crear una petición, evaluarla y ver el resultado en pantalla), porque la Entrega 2 exige el flujo principal operativo con frontend, backend y base de datos conectados.
+
+**Dos oleadas.** El núcleo se construye primero y el blindaje después:
+- **Oleada 1 (Entrega 2):** motor de reglas, catálogo, modelo de datos, cuentas, equipos, invitaciones y sesión con protección CSRF, límite de intentos (inicio de sesión, registro y códigos de invitación) **junto con** la confianza en `X-Forwarded-For`, estados y transiciones, aislamiento, API, IA con el proveedor simulado, frontend, exportación y el recorrido E2E (a) de 12.1. El límite de intentos y `X-Forwarded-For` van juntos porque, sin esa confianza, todos los usuarios llegan con la IP del proxy y unos pocos fallos bloquearían a todo el mundo.
+- **Oleada 2 (solo si hay horas, antes de la entrega final)**, por prioridad y coherente con el orden de recorte de la sección 15: (1) adaptador del proveedor real de IA junto con sus cuotas de uso; (2) E2E ampliado, es decir, el recorrido (b) de 12.1; (3) disparadores de solo añadir, que son lo primero que se recorta.
+
+Si las horas se agotan, se aplica además el orden de recorte de la sección 15.
+
+Regla de oro para el agente: **cada pieza entra con sus tests**; el motor, los estados y el aislamiento se escriben con el código, no al final (coincide con la sección 15).
