@@ -1,11 +1,11 @@
 # Registro de uso de IA — Umbral
 
-Este archivo recoge una **selección** de los prompts más representativos de la fase de documentación (17 y 18 de octubre de 2026), con un máximo de 3 por sección.
+Este archivo recoge una **selección** de los prompts más representativos de la fase de documentación (del 17 al 19 de octubre de 2026), con un máximo de 3 por sección.
 
 ## Notas generales
 
 - **Herramientas y modelos:**
-  - **Claude Code, app de escritorio**, modelo `claude-sonnet-5-5` con esfuerzo `high`, durante toda la sesión de documentación. El autor intentó cambiar a Opus dentro de esa sesión, pero la transcripción muestra que el cambio no llegó a aplicarse: todos los mensajes del asistente figuran con `claude-sonnet-5-5`.
+  - **Claude Code, app de escritorio**, modelo `claude-sonnet-5-5` con esfuerzo `high` el 17 y el 18 de octubre. El autor intentó cambiar a Opus en esos días, pero la transcripción muestra que el cambio no llegó a aplicarse: todos los mensajes del asistente de esos días figuran con `claude-sonnet-5-5`. El 19 de octubre el cambio a `claude-opus-5-5` sí se aplicó (comprobado en los datos de la sesión); con ese modelo se analizó la revisión externa y se escribió la versión 1.2 del documento (sección 10).
   - **Claude Code, terminal**, para la revisión crítica y la aplicación de cambios (sección 9): modelo `claude-opus-5-5`. Se comprobó en el registro local de la sesión: 121 mensajes del asistente con `claude-opus-5-5` y 1 con `claude-sonnet-5-5` (el primero, una prueba del hook, anterior al cambio de modelo). El esfuerzo `high` lo indica el autor y no consta en el registro.
   - **Gemini**, en una conversación independiente, solo para generar la idea inicial y, más tarde, revisar el documento de producto. El autor indica que el modelo era «Gemini 4 Argon»; no se ha podido comprobar.
 - **Fidelidad:** los prompts están copiados **tal cual**, con sus erratas. Cuando un prompt contenía datos personales o de trabajo del autor, esos fragmentos se han sustituido por `[… omitido por privacidad]`. Los textos pegados de otro agente se han sustituido por `[… omitido por extensión]`.
@@ -24,6 +24,7 @@ Este archivo recoge una **selección** de los prompts más representativos de la
 7. [Pull requests](#7-pull-requests)
 8. [Prompts transversales: preparación del repositorio y del flujo de trabajo](#8-prompts-transversales-preparación-del-repositorio-y-del-flujo-de-trabajo)
 9. [Revisión crítica con otro modelo y aplicación de los cambios](#9-revisión-crítica-con-otro-modelo-y-aplicación-de-los-cambios)
+10. [Revisión humana externa](#10-revisión-humana-externa)
 
 ---
 
@@ -298,3 +299,23 @@ Esta fase se hizo en una **sesión de Claude Code en terminal con `claude-opus-5
 
 - **Resultado:** la sesión encontró un error que ella misma había introducido en la versión 1.1 (el token CSRF se guardaba solo como hash, así que no se podía volver a entregar al recargar la página) y dos detalles menores. Tras corregirlos, una revisión más encontró cinco detalles menores, también aplicados. El documento quedó congelado en la versión 1.1.
 - **Ajuste humano:** el autor repitió la revisión precisamente porque la IA había introducido un error al aplicar los cambios, y aceptó congelar el documento para no entrar en un bucle de revisiones.
+
+---
+
+## 10. Revisión humana externa
+
+Esta revisión **no es un prompt**: la hizo una persona del equipo del autor, su *tech lead*, el 19 de octubre de 2026, sobre la versión 1.1 del documento de producto. Usó sus propias herramientas, que no se documentan aquí; por eso no hay prompts suyos. Se incluye porque es el ajuste humano de más peso de esta fase.
+
+**Qué dijo, en resumen**
+- **Valoración general:** diseño sólido y riguroso (reglas deterministas, una IA que solo asiste, reglas como datos, concurrencia tratada en serio y trazabilidad entre requisitos y pruebas).
+- **Lo que sobra:** demasiada especificación de nivel de producción para un MVP de 30 horas, con el riesgo de gastar las horas en blindaje y documentación en lugar de en código que se vea. Recomendó aplicar el orden de recorte desde el principio, no como plan B.
+- **Lo que falta:** escenarios Given/When/Then, un ejemplo trabajado de principio a fin, un glosario y una tabla única de errores. Señaló lo irónico de que faltaran criterios de aceptación en un producto cuyo propósito es precisamente ese.
+
+**Qué aportó:** una versión del documento con esas cuatro piezas añadidas y un orden de construcción para implementar con IA, sin modificar el resto.
+
+**Cómo se procesó**
+1. **Claude Code, app de escritorio (`claude-opus-5-5`)** comparó su versión con la 1.1 (solo añadía contenido) y contrastó las piezas nuevas con el resto del documento. Compartió el diagnóstico de lo que faltaba y, en parte, el de lo que sobraba: precisar no cuesta horas, implementarlo todo sí. Encontró ocho errores en las piezas nuevas; entre ellos, que el texto exportado del ejemplo no era el que produce la plantilla, lo que destapó un problema real del diseño (cuestión 23 del documento).
+2. El autor tomó tres decisiones (códigos de error 401, 403, 422 y 429; precedencia de `UNICO_REVISOR` en la autodecisión; construcción en dos oleadas) y la sesión de escritorio escribió la versión 1.2 con un script de sustituciones exactas.
+3. **Claude Code, terminal (`claude-opus-5-5`)** analizó la versión 1.2 y encontró siete puntos más. Entre ellos, un riesgo de seguridad en el orden de las oleadas (limitar los intentos de inicio de sesión sin la dirección real del cliente habría bloqueado a todos los usuarios a la vez) y un criterio de aceptación propuesto por la IA que tomaba una decisión de producto que nadie había pedido. La propia sesión de terminal los aplicó con las decisiones del autor (seguridad del inicio de sesión en la primera oleada, mensajes de error genéricos y el revisor corrige ese criterio en el ejemplo).
+
+**Ajuste humano:** el autor pidió una revisión a una persona con criterio técnico sobre un documento que ya había pasado varias revisiones con IA, e incorporó sus aportaciones como excepción a la congelación del documento. El resultado es la versión 1.2.
