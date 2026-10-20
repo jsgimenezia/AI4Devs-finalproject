@@ -1,15 +1,15 @@
 # Registro de uso de IA — Umbral
 
-Este archivo recoge una **selección** de los prompts más representativos de la fase de documentación (del 17 al 19 de octubre de 2026), con un máximo de 3 por sección.
+Este archivo recoge una **selección** de los prompts más representativos de la fase de documentación (del 17 al 20 de octubre de 2026), con un máximo de 3 por sección.
 
 ## Notas generales
 
 - **Herramientas y modelos:**
-  - **Claude Code, app de escritorio**, modelo `claude-sonnet-5-5` con esfuerzo `high` el 17 y el 18 de octubre. El autor intentó cambiar a Opus en esos días, pero la transcripción muestra que el cambio no llegó a aplicarse: todos los mensajes del asistente de esos días figuran con `claude-sonnet-5-5`. El 19 de octubre el cambio a `claude-opus-5-5` sí se aplicó (comprobado en los datos de la sesión); con ese modelo se analizó la revisión externa y se escribió la versión 1.2 del documento (sección 10).
+  - **Claude Code, app de escritorio**, modelo `claude-sonnet-5-5` con esfuerzo `high` el 17 y el 18 de octubre. El autor intentó cambiar a Opus en esos días, pero la transcripción muestra que el cambio no llegó a aplicarse: todos los mensajes del asistente de esos días figuran con `claude-sonnet-5-5`. Desde el 19 de octubre el cambio a `claude-opus-5-5` sí se aplicó (comprobado en los datos de la sesión). Con ese modelo se analizó la revisión externa y se escribió la versión 1.2 del documento (sección 10), y después se definieron las historias de usuario y se escribió la versión 1.3 (sección 5).
   - **Claude Code, terminal**, para la revisión crítica y la aplicación de cambios (sección 9): modelo `claude-opus-5-5`. Se comprobó en el registro local de la sesión: 121 mensajes del asistente con `claude-opus-5-5` y 1 con `claude-sonnet-5-5` (el primero, una prueba del hook, anterior al cambio de modelo). El esfuerzo `high` lo indica el autor y no consta en el registro.
   - **Gemini**, en una conversación independiente, solo para generar la idea inicial y, más tarde, revisar el documento de producto. El autor indica que el modelo era «Gemini 4 Argon»; no se ha podido comprobar.
 - **Fidelidad:** los prompts están copiados **tal cual**, con sus erratas. Cuando un prompt contenía datos personales o de trabajo del autor, esos fragmentos se han sustituido por `[… omitido por privacidad]`. Los textos pegados de otro agente se han sustituido por `[… omitido por extensión]`.
-- **Qué falta:** las secciones 2.3, 2.6, 4, 5, 6 y 7 se rellenarán al redactar esas partes del `readme.md`. Los prompts de esa fase se registran automáticamente con un hook (`.claude/hooks/log-prompt.sh`).
+- **Qué falta:** las secciones 2.3, 2.6, 4, 6 y 7 se rellenarán al redactar esas partes del `readme.md`. Los prompts de esa fase se registran automáticamente con un hook (`.claude/hooks/log-prompt.sh`).
 - **De dónde salen los prompts de la sección 9:** del registro que escribe el hook (`.claude/prompt-log.md`, local y no versionado), con el texto tal como se lanzó.
 - **Dónde está el resultado:** el documento de producto resultante está en [`docs/producto.md`](docs/producto.md).
 
@@ -177,7 +177,41 @@ Este archivo recoge una **selección** de los prompts más representativos de la
 
 ## 5. Historias de usuario
 
-**Prompt 1:** _Pendiente: se completará al redactar esta sección._
+**Contexto.** El documento de producto describía Umbral con 36 requisitos funcionales y no tenía historias de usuario escritas. El 19 de octubre el autor pasó a la sesión de escritorio (Claude Code, `claude-opus-5-5`) una lección nueva del máster sobre el proyecto final y le pidió comprobar si algo chocaba con lo previsto. Entre otros puntos, la IA señaló que la lección recomienda planificar entre 3 y 5 historias imprescindibles y 1 o 2 deseables, y que el documento no tenía esa priorización. Los prompts de esta sección salen de ahí. Se han copiado de la transcripción de esa sesión.
+
+**Prompt 1: cuántas historias hay y cuáles son imprescindibles** (Claude Code, app de escritorio, Opus 5.5)
+
+> una pregunta respecto a esto, cuántas historias tiene umbral? y cuáles serían las 5 historias imprescindibles?
+
+- **Resultado:** la IA explicó que no había historias, sino 36 requisitos, 19 escenarios Given/When/Then y tres historias propuestas para el README que no cubrían las cuentas. Agrupó los requisitos en cinco historias imprescindibles (equipo e invitaciones, registrar una petición y ver qué le falta, completarla y enviarla, revisar y decidir, y exportar) y dos deseables (la IA en modo autor y en modo revisor). Indicó qué requisitos cumplía cada una y cuáles son transversales. Dejó al autor la decisión de si la IA era imprescindible.
+
+**Prompt 2: dónde deben vivir las historias** (Claude Code, app de escritorio, Opus 5.5)
+
+> pero entonces no deberíamos meter también las historias en el documento de producto?
+
+- **Resultado:** la IA recomendó incluirlas en el documento de producto, la fuente de verdad que leerán los agentes, para que el README no tuviera una versión propia de las historias. Propuso hacerlo en una versión 1.3 solo aditiva y agrupar en ella las otras decisiones pendientes de la lección, para descongelar el documento una sola vez.
+
+**Prompt 3: decisiones del autor** (Claude Code, app de escritorio, Opus 5.5)
+
+> me valen las 5 historias, con la IA como deseable por si directamente vamos mal y tenemos que cortar toda esa parte no estar comprometidos
+>
+> respecto a los otros puntos. Punto 1: yo haría la medición en el periodo de la entrega 1 aunque no lo entreguemos en ese momento, creo que es importante tener esa medición temprano para tomar decisiones. Dime qué te parece hacerlo así antes de escribirlo. Punto 3: dime cuál es la decisión, que no me acuerdo de qué iba ese punto
+
+- **Resultado:** el «punto 1» era que la lección define la Entrega 1 como solo documentación, mientras que el plan versionaba en esa rama el script de medición de la IA. El «punto 3» era que el README final debe incluir credenciales de prueba para el evaluador. Para el punto 1, la IA propuso una rama aparte (`spike/medicion-ia`) que no se fusiona con la de la Entrega 1. Para el punto 3, propuso datos de demostración activados por variable de entorno. Con las decisiones del autor escribió la versión 1.3:
+  - las historias en la sección 5;
+  - el paso (7) del orden de recorte, que quita toda la IA;
+  - la medición en la rama aparte;
+  - los datos de demostración en la oleada 1;
+  - las reglas correspondientes en `CLAUDE.md`.
+
+  La IA comprobó que los 36 requisitos quedaban asignados y que los escenarios citados existían.
+- **Ajuste humano:** el autor decidió que la IA del producto fuera deseable y no imprescindible, para poder recortarla entera si el plan se tuerce. También mantuvo la medición durante el periodo de la Entrega 1, aunque no se entregue entonces, porque quería datos pronto para decidir. Después pidió a la sesión de terminal (Claude Code, `claude-opus-5-5`) una revisión a fondo de la versión 1.3. Encontró cuatro detalles menores en lo que había escrito la sesión de escritorio:
+  - los datos de demostración no decían cómo se crean;
+  - ninguna prueba comprobaba que no se cargan por defecto;
+  - no estaba claro con qué usuarios se recorre cada flujo ni desde qué entrega van las credenciales en el README;
+  - la lista de lo que desaparece con el paso (7) estaba incompleta.
+
+  El autor decidió que las credenciales de prueba aparezcan en el README desde la Entrega 2 y que los resultados de la medición vayan en el apartado de tests. También pidió a la terminal que el recorte de la IA se planteara en el punto de control del 19 de enero. Al verificarlo, la sesión de escritorio señaló que así no se podría recortar antes aunque la medición de diciembre saliera mal, lo que iba contra el propósito de medir pronto. El autor lo corrigió: el recorte se plantea en ese punto de control o antes. Por último, la terminal señaló que faltaba definir cuándo «la IA no compensa». Quedó como cuestión abierta (la 24), con el criterio que se fijará antes de medir. También se añadió que, en ese caso, la IA se recorta directamente, sin pasar antes por los demás recortes.
 
 ---
 

@@ -12,10 +12,11 @@ y no lo contradigas. Si algo que te piden choca con él, dilo y pregunta.
 
 - No escribas código de la aplicación (ni backend, ni frontend, ni migraciones).
   Los fragmentos ilustrativos dentro de la documentación sí están permitidos.
-- Excepción: durante la Entrega 1 se permite un script desechable de medición de la IA
-  en `scripts/spike/`. Se versiona en el fork y no cuenta como código de la aplicación.
-  Usa solo casos ficticios y lee la clave de la variable de entorno `ANTHROPIC_API_KEY`,
-  nunca del repositorio.
+- Excepción: el script desechable de medición de la IA en `scripts/spike/`. Solo se
+  escribe en la rama `spike/medicion-ia`, nunca en `feature/entrega-1-JSG`, que es solo
+  documentación: si la rama actual no es `spike/medicion-ia`, no toques `scripts/spike/`.
+  No cuenta como código de la aplicación. Usa solo casos ficticios y lee la clave de la
+  variable de entorno `ANTHROPIC_API_KEY`, nunca del repositorio.
 - Los entregables son `readme.md` y `prompts.md`, en la raíz, con los nombres y en el
   orden de sus plantillas. No los renombres ni cambies el índice. Puedes escribir
   directamente en ellos.
@@ -38,13 +39,16 @@ y no lo contradigas. Si algo que te piden choca con él, dilo y pregunta.
 - Todos los ejemplos de peticiones son ficticios y neutros. No uses datos reales de
   ninguna empresa ni persona, ni nombres de sectores concretos.
 - Nunca escribas claves, contraseñas ni tokens, ni siquiera de ejemplo con aspecto real.
+  Única excepción: las contraseñas de prueba de los usuarios ficticios de los datos de
+  demostración (sección 13 de `docs/producto.md`), que solo valen en local.
 
 ## Git
 
 - No ejecutes `git add`, `commit`, `push`, `switch`, `checkout`, `rebase` ni nada que
   cambie el repositorio. Solo lectura (`status`, `diff`, `log`, `show`).
 - El autor hace los commits. Si crees que algo merece un commit, sugiere el mensaje.
-- Rama de trabajo: `feature/entrega-1-JSG`. No la cambies.
+- Rama de trabajo: `feature/entrega-1-JSG`, y `spike/medicion-ia` solo para el script de
+  medición. No cambies de rama: lo hace el autor.
 
 ## Registro de prompts
 
