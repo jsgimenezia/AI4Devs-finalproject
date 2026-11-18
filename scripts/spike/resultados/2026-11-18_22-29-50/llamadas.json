@@ -1,0 +1,3766 @@
+[
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "E1",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.",
+      "comparativa": "Desde anteayer por la tarde las solicitudes completadas bajan cada día, mientras las iniciadas suben."
+    },
+    "otrasSalidas": {
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.\",\"comparativa\":\"Desde anteayer por la tarde las solicitudes completadas bajan cada día, mientras las iniciadas suben.\"},\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde las solicitudes completadas bajan cada día, mientras las iniciadas suben."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 143,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2769,
+    "costeUsd": 0.006928
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "E1",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.",
+      "continua": "SI",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+    },
+    "otrasSalidas": {
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.\",\"continua\":\"SI\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\"},\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 153,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2384,
+    "costeUsd": 0.007028
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "E1",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.",
+      "continua": "SI",
+      "comparativa": "Desde anteayer por la tarde las solicitudes completadas bajan cada día y las iniciadas suben."
+    },
+    "otrasSalidas": {
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.\",\"continua\":\"SI\",\"comparativa\":\"Desde anteayer por la tarde las solicitudes completadas bajan cada día y las iniciadas suben.\"},\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde las solicitudes completadas bajan cada día y las iniciadas suben."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 147,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 1462,
+    "costeUsd": 0.006968
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C3",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil: la carga pasó de 1,2 s a 4,8 s desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil: la carga pasó de 1,2 s a 4,8 s desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 402,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3421,
+    "costeUsd": 0.009862
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C3",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil: la carga pasa de 1,2 s a 4,8 s desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil: la carga pasa de 1,2 s a 4,8 s desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 402,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2828,
+    "costeUsd": 0.009862
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C3",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s; en la web no se nota el aumento",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend",
+      "alcance": "App móvil (Android e iOS), todos los usuarios de móvil; la web no está afectada",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Aumento del tiempo de carga de la búsqueda en la app móvil (de 1,2 s a 4,8 s)",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s; en la web no se nota el aumento\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend\",\"alcance\":\"App móvil (Android e iOS), todos los usuarios de móvil; la web no está afectada\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Aumento del tiempo de carga de la búsqueda en la app móvil (de 1,2 s a 4,8 s)\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 404,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2959,
+    "costeUsd": 0.009882
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C4",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos: les faltan filas.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuántas filas faltan, o cuántas debería tener un informe completo, en un ejemplo concreto?",
+        "¿Faltan las mismas filas en todos los informes o varía según el cliente o el informe?",
+        "¿El mismo informe se ve completo en pantalla o en otro formato de exportación?"
+      ],
+      "titulo": "Informes mensuales en PDF salen incompletos, con filas que faltan, desde la última actualización",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos: les faltan filas.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"preguntas\":[\"¿Cuántas filas faltan, o cuántas debería tener un informe completo, en un ejemplo concreto?\",\"¿Faltan las mismas filas en todos los informes o varía según el cliente o el informe?\",\"¿El mismo informe se ve completo en pantalla o en otro formato de exportación?\"],\"titulo\":\"Informes mensuales en PDF salen incompletos, con filas que faltan, desde la última actualización\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 289,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2623,
+    "costeUsd": 0.008418
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C4",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, les faltan filas.",
+      "cambios_periodo": "Actualización de la semana pasada, tras la cual aparece el problema.",
+      "alcance": "Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Faltan las mismas filas en todos los informes o varían según el informe o el cliente?",
+        "¿Podéis indicar algún informe o cliente concreto afectado para poder reproducirlo?"
+      ],
+      "titulo": "Informes mensuales exportados en PDF salen incompletos con filas que faltan",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, les faltan filas.\",\"cambios_periodo\":\"Actualización de la semana pasada, tras la cual aparece el problema.\",\"alcance\":\"Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"preguntas\":[\"¿Faltan las mismas filas en todos los informes o varían según el informe o el cliente?\",\"¿Podéis indicar algún informe o cliente concreto afectado para poder reproducirlo?\"],\"titulo\":\"Informes mensuales exportados en PDF salen incompletos con filas que faltan\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 259,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2410,
+    "costeUsd": 0.008118
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C4",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, les faltan filas.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuántas filas faltan en los PDF respecto a lo que se ve en pantalla o en otros formatos de exportación?",
+        "¿Los informes faltan siempre en los mismos clientes o informes, o es aleatorio?"
+      ],
+      "titulo": "Informes mensuales en PDF salen incompletos con filas que faltan",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, les faltan filas.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"preguntas\":[\"¿Cuántas filas faltan en los PDF respecto a lo que se ve en pantalla o en otros formatos de exportación?\",\"¿Los informes faltan siempre en los mismos clientes o informes, o es aleatorio?\"],\"titulo\":\"Informes mensuales en PDF salen incompletos con filas que faltan\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 256,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2132,
+    "costeUsd": 0.008088
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "E2",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones.",
+      "comportamiento_deseado": "La opción de iniciar sesión sin contraseña debe pasar a ser un botón secundario.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuál de los dos botones es hoy el principal y cuál debería quedar como principal tras el cambio?",
+        "¿El título habla de «recuperar contraseña» como botón secundario, pero el texto dice que el secundario debe ser iniciar sesión sin contraseña; cuál de los dos es el correcto?"
+      ],
+      "titulo": "Convertir en secundario el botón de iniciar sesión sin contraseña",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título dice que el botón de recuperar contraseña debe ser secundario, mientras que el texto pide que el secundario sea el de iniciar sesión sin contraseña."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones.\",\"comportamiento_deseado\":\"La opción de iniciar sesión sin contraseña debe pasar a ser un botón secundario.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Cuál de los dos botones es hoy el principal y cuál debería quedar como principal tras el cambio?\",\"¿El título habla de «recuperar contraseña» como botón secundario, pero el texto dice que el secundario debe ser iniciar sesión sin contraseña; cuál de los dos es el correcto?\"],\"titulo\":\"Convertir en secundario el botón de iniciar sesión sin contraseña\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título dice que el botón de recuperar contraseña debe ser secundario, mientras que el texto pide que el secundario sea el de iniciar sesión sin contraseña.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 368,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3645,
+    "costeUsd": 0.009056
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "E2",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones.",
+      "comportamiento_deseado": "La opción de iniciar sesión sin contraseña debe pasar a ser un botón secundario.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿El botón de recuperar contraseña pasaría a ser el botón principal, o solo cambia el de iniciar sesión sin contraseña?",
+        "¿El cambio se aplica a todas las plataformas (web, móvil) o solo a alguna?"
+      ],
+      "titulo": "Convertir en secundario el botón de iniciar sesión sin contraseña",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título habla de que el botón de recuperar contraseña sea secundario, pero el texto dice que el secundario debe ser el de iniciar sesión sin contraseña."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones.\",\"comportamiento_deseado\":\"La opción de iniciar sesión sin contraseña debe pasar a ser un botón secundario.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿El botón de recuperar contraseña pasaría a ser el botón principal, o solo cambia el de iniciar sesión sin contraseña?\",\"¿El cambio se aplica a todas las plataformas (web, móvil) o solo a alguna?\"],\"titulo\":\"Convertir en secundario el botón de iniciar sesión sin contraseña\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título habla de que el botón de recuperar contraseña sea secundario, pero el texto dice que el secundario debe ser el de iniciar sesión sin contraseña.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 344,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2916,
+    "costeUsd": 0.008816
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "E2",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones.",
+      "comportamiento_deseado": "La opción de iniciar sesión sin contraseña debe pasar a ser un botón secundario.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuál de los dos botones es hoy el principal y cuál debería serlo tras el cambio?",
+        "¿El título habla de «recuperar contraseña» como secundario, mientras que el texto pide que sea secundario el inicio de sesión sin contraseña? ¿Cuál de los dos botones debe pasar a ser secundario?"
+      ],
+      "titulo": "Convertir en secundario el botón de iniciar sesión sin contraseña",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título dice que el botón de recuperar contraseña debe ser secundario, pero el texto pide que sea secundario el botón de iniciar sesión sin contraseña y que se favorezca la recuperación de contraseña."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones.\",\"comportamiento_deseado\":\"La opción de iniciar sesión sin contraseña debe pasar a ser un botón secundario.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Cuál de los dos botones es hoy el principal y cuál debería serlo tras el cambio?\",\"¿El título habla de «recuperar contraseña» como secundario, mientras que el texto pide que sea secundario el inicio de sesión sin contraseña? ¿Cuál de los dos botones debe pasar a ser secundario?\"],\"titulo\":\"Convertir en secundario el botón de iniciar sesión sin contraseña\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título dice que el botón de recuperar contraseña debe ser secundario, pero el texto pide que sea secundario el botón de iniciar sesión sin contraseña y que se favorezca la recuperación de contraseña.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 391,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3581,
+    "costeUsd": 0.009286
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C5",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperan medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo la web de administración, en el listado de usuarios.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperan medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo la web de administración, en el listado de usuarios.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 361,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3239,
+    "costeUsd": 0.009176
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C5",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No se espera medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo la web de administración, en el listado de usuarios.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No se espera medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo la web de administración, en el listado de usuarios.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 361,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2544,
+    "costeUsd": 0.009176
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C5",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Añadir un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Hoy copian los datos a mano para sus auditorías trimestrales; el cambio es para cumplir con las auditorías.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperan medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Listado de usuarios de la web de administración.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Añadir un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Hoy copian los datos a mano para sus auditorías trimestrales; el cambio es para cumplir con las auditorías.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperan medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Listado de usuarios de la web de administración.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 361,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2488,
+    "costeUsd": 0.009176
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C6",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué parte del producto o en qué buscador se produce el problema?",
+        "¿Puedes dar algún ejemplo concreto de una búsqueda lenta o de algo que existe y no aparece?"
+      ],
+      "titulo": "Mejorar la velocidad y los resultados del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\"},\"preguntas\":[\"¿En qué parte del producto o en qué buscador se produce el problema?\",\"¿Puedes dar algún ejemplo concreto de una búsqueda lenta o de algo que existe y no aparece?\"],\"titulo\":\"Mejorar la velocidad y los resultados del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": false
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 166,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2685,
+    "costeUsd": 0.00688
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C6",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué parte del producto o en qué buscador se produce el problema?",
+        "¿Puedes dar algún ejemplo de una búsqueda que no encuentre algo que sí existe?"
+      ],
+      "titulo": "Mejorar la velocidad y los resultados del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\"},\"preguntas\":[\"¿En qué parte del producto o en qué buscador se produce el problema?\",\"¿Puedes dar algún ejemplo de una búsqueda que no encuentre algo que sí existe?\"],\"titulo\":\"Mejorar la velocidad y los resultados del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": false
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 161,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2427,
+    "costeUsd": 0.00683
+  },
+  {
+    "configuracion": "sonnet-5-5-low",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "low",
+    "caso": "C6",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué parte del producto o en qué buscador se produce el problema?",
+        "¿Puedes dar algún ejemplo concreto de una búsqueda lenta o de algo que existe y no aparece?"
+      ],
+      "titulo": "Mejorar la lentitud y los resultados incompletos del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\"},\"preguntas\":[\"¿En qué parte del producto o en qué buscador se produce el problema?\",\"¿Puedes dar algún ejemplo concreto de una búsqueda lenta o de algo que existe y no aparece?\"],\"titulo\":\"Mejorar la lentitud y los resultados incompletos del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": false
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 170,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2678,
+    "costeUsd": 0.00692
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "E1",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué paso, pantalla o zona del proceso de solicitudes se produce el abandono?",
+        "¿Qué número de solicitudes completadas e iniciadas se registra ahora y cuál es el habitual?"
+      ],
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.\",\"fecha_inicio\":\"\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\"},\"preguntas\":[\"¿En qué paso, pantalla o zona del proceso de solicitudes se produce el abandono?\",\"¿Qué número de solicitudes completadas e iniciadas se registra ahora y cuál es el habitual?\"],\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 236,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3017,
+    "costeUsd": 0.007858
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "E1",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué paso o pantalla concreta del proceso se abandonan las solicitudes?",
+        "¿Quién es el responsable del área que lo comentó y cómo se le puede contactar?"
+      ],
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.\",\"fecha_inicio\":\"\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\"},\"preguntas\":[\"¿En qué paso o pantalla concreta del proceso se abandonan las solicitudes?\",\"¿Quién es el responsable del área que lo comentó y cómo se le puede contactar?\"],\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 227,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 1899,
+    "costeUsd": 0.007768
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "E1",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué paso o pantalla concreta del proceso se abandonan las solicitudes?",
+        "¿Cómo puede contactarse con el responsable del área que lo comentó?"
+      ],
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician.\",\"fecha_inicio\":\"\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\"},\"preguntas\":[\"¿En qué paso o pantalla concreta del proceso se abandonan las solicitudes?\",\"¿Cómo puede contactarse con el responsable del área que lo comentó?\"],\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 223,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 1993,
+    "costeUsd": 0.007728
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C3",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil: la carga pasa de 1,2 s a 4,8 s desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil: la carga pasa de 1,2 s a 4,8 s desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 402,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2901,
+    "costeUsd": 0.009862
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C3",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend",
+      "alcance": "App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Aumento del tiempo de carga de la pantalla de búsqueda en la app móvil (de 1,2 s a 4,8 s)",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend\",\"alcance\":\"App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Aumento del tiempo de carga de la pantalla de búsqueda en la app móvil (de 1,2 s a 4,8 s)\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 397,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3002,
+    "costeUsd": 0.009812
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C3",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil: la carga pasó de 1,2 s a 4,8 s desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"El tiempo medio de carga de la pantalla de búsqueda en la app móvil pasó de 1,2 s a 4,8 s.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"App móvil (Android e iOS), todos los usuarios de móvil; en la web no se nota.\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil: la carga pasó de 1,2 s a 4,8 s desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 402,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2922,
+    "costeUsd": 0.009862
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C4",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, les faltan filas",
+      "cambios_periodo": "Actualización de la semana pasada",
+      "alcance": "Informes mensuales exportados en PDF; unos cuantos clientes se han quejado",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuántas filas faltan aproximadamente en un informe afectado respecto a las que debería tener?",
+        "¿Hay algún informe concreto o ejemplo del que se pueda partir para reproducir el problema?"
+      ],
+      "titulo": "Informes mensuales en PDF salen incompletos con filas que faltan tras la actualización",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, les faltan filas\",\"cambios_periodo\":\"Actualización de la semana pasada\",\"alcance\":\"Informes mensuales exportados en PDF; unos cuantos clientes se han quejado\",\"resultado_esperado\":\"INVESTIGAR\"},\"preguntas\":[\"¿Cuántas filas faltan aproximadamente en un informe afectado respecto a las que debería tener?\",\"¿Hay algún informe concreto o ejemplo del que se pueda partir para reproducir el problema?\"],\"titulo\":\"Informes mensuales en PDF salen incompletos con filas que faltan tras la actualización\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 254,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2232,
+    "costeUsd": 0.008068
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C4",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, les faltan filas.",
+      "cambios_periodo": "Actualización de la semana pasada, desde la cual ocurre el problema.",
+      "alcance": "Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Faltan filas en todos los informes PDF o solo en algunos (por tamaño, cliente o tipo de informe)?",
+        "¿Los mismos informes se ven completos en pantalla o en otro formato de exportación?",
+        "¿Qué clientes han reportado el problema y qué informe concreto han exportado?"
+      ],
+      "titulo": "Informes mensuales exportados en PDF salen incompletos, con filas ausentes",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, les faltan filas.\",\"cambios_periodo\":\"Actualización de la semana pasada, desde la cual ocurre el problema.\",\"alcance\":\"Informes mensuales exportados en PDF; unos cuantos clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"preguntas\":[\"¿Faltan filas en todos los informes PDF o solo en algunos (por tamaño, cliente o tipo de informe)?\",\"¿Los mismos informes se ven completos en pantalla o en otro formato de exportación?\",\"¿Qué clientes han reportado el problema y qué informe concreto han exportado?\"],\"titulo\":\"Informes mensuales exportados en PDF salen incompletos, con filas ausentes\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 299,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2806,
+    "costeUsd": 0.008518
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C4",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, les faltan filas.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Informes mensuales exportados en PDF; varios clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuántas filas faltan en los informes afectados respecto a lo esperado, o en qué filas ocurre el corte?",
+        "¿Ocurre con todos los informes mensuales o solo con algunos clientes o informes concretos?"
+      ],
+      "titulo": "Informes mensuales en PDF salen incompletos, con filas que faltan, desde la última actualización",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, les faltan filas.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Informes mensuales exportados en PDF; varios clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"preguntas\":[\"¿Cuántas filas faltan en los informes afectados respecto a lo esperado, o en qué filas ocurre el corte?\",\"¿Ocurre con todos los informes mensuales o solo con algunos clientes o informes concretos?\"],\"titulo\":\"Informes mensuales en PDF salen incompletos, con filas que faltan, desde la última actualización\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 262,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2263,
+    "costeUsd": 0.008148
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "E2",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones.",
+      "comportamiento_deseado": "La opción de iniciar sesión sin contraseña debe ser un botón secundario.",
+      "actor": "Usuarios que no recuerdan su contraseña al iniciar sesión.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué botón debe quedar como principal en la pantalla de inicio de sesión?",
+        "¿Cómo se llama exactamente cada uno de los dos botones actuales: «recuperar contraseña» o «iniciar sesión sin contraseña»?"
+      ],
+      "titulo": "Convertir el botón de iniciar sesión sin contraseña en botón secundario",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título habla de un botón «recuperar contraseña» como secundario, pero el texto pide que el secundario sea el de iniciar sesión sin contraseña."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones.\",\"comportamiento_deseado\":\"La opción de iniciar sesión sin contraseña debe ser un botón secundario.\",\"actor\":\"Usuarios que no recuerdan su contraseña al iniciar sesión.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Qué botón debe quedar como principal en la pantalla de inicio de sesión?\",\"¿Cómo se llama exactamente cada uno de los dos botones actuales: «recuperar contraseña» o «iniciar sesión sin contraseña»?\"],\"titulo\":\"Convertir el botón de iniciar sesión sin contraseña en botón secundario\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título habla de un botón «recuperar contraseña» como secundario, pero el texto pide que el secundario sea el de iniciar sesión sin contraseña.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 372,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3364,
+    "costeUsd": 0.009096
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "E2",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones.",
+      "comportamiento_deseado": "La opción de iniciar sesión sin contraseña debe ser un botón secundario.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué dos botones aparecen hoy exactamente en la pantalla de inicio de sesión y cuál debería ser el principal?",
+        "¿La petición busca que el botón de recuperar contraseña pase a ser el principal, o solo que el de iniciar sesión sin contraseña pase a ser secundario?"
+      ],
+      "titulo": "Hacer secundario el botón de iniciar sesión sin contraseña",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título habla de que el botón de recuperar contraseña sea secundario, pero el texto pide que el botón de iniciar sesión sin contraseña sea el secundario."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones.\",\"comportamiento_deseado\":\"La opción de iniciar sesión sin contraseña debe ser un botón secundario.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Qué dos botones aparecen hoy exactamente en la pantalla de inicio de sesión y cuál debería ser el principal?\",\"¿La petición busca que el botón de recuperar contraseña pase a ser el principal, o solo que el de iniciar sesión sin contraseña pase a ser secundario?\"],\"titulo\":\"Hacer secundario el botón de iniciar sesión sin contraseña\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título habla de que el botón de recuperar contraseña sea secundario, pero el texto pide que el botón de iniciar sesión sin contraseña sea el secundario.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 360,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3068,
+    "costeUsd": 0.008976
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "E2",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones.",
+      "comportamiento_deseado": "La opción de iniciar sesión sin contraseña debe ser un botón secundario.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué dos botones aparecen hoy exactamente al iniciar sesión y cuál debería ser el botón principal?",
+        "¿El título habla de «recuperar contraseña» y el texto de «iniciar sesión sin contraseña»: son la misma opción o dos botones distintos?"
+      ],
+      "titulo": "Convertir en secundario el botón de iniciar sesión sin contraseña",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título dice que el botón de recuperar contraseña debe ser secundario, pero el texto dice que el secundario debe ser el de iniciar sesión sin contraseña."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones.\",\"comportamiento_deseado\":\"La opción de iniciar sesión sin contraseña debe ser un botón secundario.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Qué dos botones aparecen hoy exactamente al iniciar sesión y cuál debería ser el botón principal?\",\"¿El título habla de «recuperar contraseña» y el texto de «iniciar sesión sin contraseña»: son la misma opción o dos botones distintos?\"],\"titulo\":\"Convertir en secundario el botón de iniciar sesión sin contraseña\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título dice que el botón de recuperar contraseña debe ser secundario, pero el texto dice que el secundario debe ser el de iniciar sesión sin contraseña.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 354,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3277,
+    "costeUsd": 0.008916
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C5",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Añadir un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Hoy copian los datos a mano para sus auditorías trimestrales; es necesario para cumplir con las auditorías.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperan medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo la web de administración, en el listado de usuarios.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Hay un límite máximo de usuarios que deba soportar la exportación?",
+        "¿Qué columnas debe incluir el CSV?"
+      ],
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Añadir un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Hoy copian los datos a mano para sus auditorías trimestrales; es necesario para cumplir con las auditorías.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperan medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo la web de administración, en el listado de usuarios.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"preguntas\":[\"¿Hay un límite máximo de usuarios que deba soportar la exportación?\",\"¿Qué columnas debe incluir el CSV?\"],\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 419,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3797,
+    "costeUsd": 0.009756
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C5",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No se espera medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo la web de administración, en el listado de usuarios.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No se espera medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo la web de administración, en el listado de usuarios.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 361,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2474,
+    "costeUsd": 0.009176
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C5",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperan medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo la web de administración, en el listado de usuarios.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV en la web de administración",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Hoy copian los datos a mano para sus auditorías trimestrales; se necesita para cumplir con las auditorías.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperan medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo la web de administración, en el listado de usuarios.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV en la web de administración\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 367,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2421,
+    "costeUsd": 0.009236
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C6",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué parte del producto o en qué buscador ocurre el problema (por ejemplo, en qué sección o plataforma)?",
+        "¿Puedes dar ejemplos concretos de búsquedas lentas o que no devuelvan resultados que sí existen?"
+      ],
+      "titulo": "Mejorar la velocidad y la precisión de los resultados del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\"},\"preguntas\":[\"¿En qué parte del producto o en qué buscador ocurre el problema (por ejemplo, en qué sección o plataforma)?\",\"¿Puedes dar ejemplos concretos de búsquedas lentas o que no devuelvan resultados que sí existen?\"],\"titulo\":\"Mejorar la velocidad y la precisión de los resultados del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": false
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 192,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2456,
+    "costeUsd": 0.00714
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C6",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué parte o productos se usa el buscador al que se refiere la petición?",
+        "¿Con qué búsquedas concretas ha ocurrido que no se encuentren resultados existentes?"
+      ],
+      "titulo": "Mejorar la velocidad y los resultados del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\"},\"preguntas\":[\"¿En qué parte o productos se usa el buscador al que se refiere la petición?\",\"¿Con qué búsquedas concretas ha ocurrido que no se encuentren resultados existentes?\"],\"titulo\":\"Mejorar la velocidad y los resultados del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": false
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 163,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2733,
+    "costeUsd": 0.00685
+  },
+  {
+    "configuracion": "sonnet-5-5-medium",
+    "modelo": "claude-sonnet-5-5",
+    "esfuerzo": "medium",
+    "caso": "C6",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿En qué parte del producto o en qué buscador se produce el problema?",
+        "¿Puedes dar un ejemplo concreto de una búsqueda que no encuentra algo que sí existe?"
+      ],
+      "titulo": "Mejorar la velocidad y fiabilidad del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\"},\"preguntas\":[\"¿En qué parte del producto o en qué buscador se produce el problema?\",\"¿Puedes dar un ejemplo concreto de una búsqueda que no encuentra algo que sí existe?\"],\"titulo\":\"Mejorar la velocidad y fiabilidad del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": false
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 165,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2011,
+    "costeUsd": 0.00687
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "E1",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.",
+      "detectado_por": "El responsable del área, según comenta el texto."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué entiende por solicitudes iniciadas y completadas: qué pasos o pantallas delimitan cada una?",
+        "¿Cuál es el valor actual y el de referencia de la métrica de solicitudes completadas?",
+        "¿Desde qué fecha exacta empezó la bajada?",
+        "¿Continúa la tendencia en el momento de esta petición?",
+        "¿Qué cambios, despliegues o eventos hubo en el periodo?",
+        "¿Qué productos, áreas, grupos de usuarios o plataformas están afectados?",
+        "¿Qué se espera: investigar, corregir o informar?",
+        "¿Cómo contactar a la persona que detectó el problema?",
+        "¿Qué urgencia tiene y qué impacto supone?",
+        "¿Puede compartir un enlace a datos de apoyo?"
+      ],
+      "titulo": "Bajan las solicitudes completadas desde anteayer por la tarde",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\",\"fecha_inicio\":\"\",\"comparativa\":\"\",\"alcance\":\"\",\"detectado_por\":\"El responsable del área, según comenta el texto.\",\"urgencia\":\"\",\"enlace_datos\":\"\"},\"preguntas\":[\"¿Qué entiende por solicitudes iniciadas y completadas: qué pasos o pantallas delimitan cada una?\",\"¿Cuál es el valor actual y el de referencia de la métrica de solicitudes completadas?\",\"¿Desde qué fecha exacta empezó la bajada?\",\"¿Continúa la tendencia en el momento de esta petición?\",\"¿Qué cambios, despliegues o eventos hubo en el periodo?\",\"¿Qué productos, áreas, grupos de usuarios o plataformas están afectados?\",\"¿Qué se espera: investigar, corregir o informar?\",\"¿Cómo contactar a la persona que detectó el problema?\",\"¿Qué urgencia tiene y qué impacto supone?\",\"¿Puede compartir un enlace a datos de apoyo?\"],\"titulo\":\"Bajan las solicitudes completadas desde anteayer por la tarde\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2749,
+    "tokensSalida": 433,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2908,
+    "costeUsd": 0.0004914
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "E1",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes completadas, mientras sube el de las que se inician.",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas.",
+      "detectado_por": "Responsable del área (comunicado a quien escribe la petición); sin datos de contacto en el texto."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué métrica y qué pantalla o paso del proceso de solicitud se usan para medir las solicitudes completadas e iniciadas?",
+        "¿Cuál es el valor actual y el valor de referencia de la métrica de solicitudes completadas?",
+        "¿Desde qué fecha exacta empieza la caída?",
+        "¿Continúa la tendencia a la fecha de hoy?",
+        "¿Hubo despliegues, cambios de configuración o eventos externos en el periodo?",
+        "¿Qué productos, áreas, grupos de usuarios, plataformas o dispositivos están afectados?",
+        "¿Qué se espera del equipo: investigar, corregir o informar?",
+        "¿Quién detectó el problema y cómo se le puede contactar?",
+        "¿Cuál es la urgencia y su impacto?",
+        "¿Hay datos de apoyo disponibles (enlace a un panel o informe)?"
+      ],
+      "titulo": "Bajan las solicitudes completadas desde anteayer por la tarde",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes completadas, mientras sube el de las que se inician.\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas.\",\"detectado_por\":\"Responsable del área (comunicado a quien escribe la petición); sin datos de contacto en el texto.\"},\"preguntas\":[\"¿Qué métrica y qué pantalla o paso del proceso de solicitud se usan para medir las solicitudes completadas e iniciadas?\",\"¿Cuál es el valor actual y el valor de referencia de la métrica de solicitudes completadas?\",\"¿Desde qué fecha exacta empieza la caída?\",\"¿Continúa la tendencia a la fecha de hoy?\",\"¿Hubo despliegues, cambios de configuración o eventos externos en el periodo?\",\"¿Qué productos, áreas, grupos de usuarios, plataformas o dispositivos están afectados?\",\"¿Qué se espera del equipo: investigar, corregir o informar?\",\"¿Quién detectó el problema y cómo se le puede contactar?\",\"¿Cuál es la urgencia y su impacto?\",\"¿Hay datos de apoyo disponibles (enlace a un panel o informe)?\"],\"titulo\":\"Bajan las solicitudes completadas desde anteayer por la tarde\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 476,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2999,
+    "costeUsd": 0.0005129
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "E1",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas.",
+      "alcance": "Solicitudes del proceso de solicitudes (completadas e iniciadas)."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué métrica exacta se usa para contar solicitudes completadas e iniciadas, y en qué pantalla o paso se produce la caída?",
+        "¿Cuál es el valor actual y el valor de referencia de la métrica de solicitudes completadas?",
+        "¿Qué cambios, despliegues o eventos se produjeron desde anteayer por la tarde?",
+        "¿Quién detectó la incidencia y cómo se le puede contactar?",
+        "¿Cuál es la urgencia y su impacto?",
+        "¿Hay datos de apoyo o un enlace a ellos?"
+      ],
+      "titulo": "Bajan cada día las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas.\",\"alcance\":\"Solicitudes del proceso de solicitudes (completadas e iniciadas).\",\"urgencia\":\"\",\"enlace_datos\":\"\"},\"preguntas\":[\"¿Qué métrica exacta se usa para contar solicitudes completadas e iniciadas, y en qué pantalla o paso se produce la caída?\",\"¿Cuál es el valor actual y el valor de referencia de la métrica de solicitudes completadas?\",\"¿Qué cambios, despliegues o eventos se produjeron desde anteayer por la tarde?\",\"¿Quién detectó la incidencia y cómo se le puede contactar?\",\"¿Cuál es la urgencia y su impacto?\",\"¿Hay datos de apoyo o un enlace a ellos?\"],\"titulo\":\"Bajan cada día las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": false,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas."
+      },
+      {
+        "campo": "alcance",
+        "valor": "Solicitudes del proceso de solicitudes (completadas e iniciadas)."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 382,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2706,
+    "costeUsd": 0.00046590000000000005
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C3",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) sube de 1,2 s a 4,8 s; en la web no se nota",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend",
+      "alcance": "App móvil (Android e iOS); afecta a todos los usuarios de móvil. En web no se nota",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué pantalla o flujo exacto de búsqueda se ve afectado y en qué versión de la app móvil ocurre?",
+        "¿Hay alguna relación confirmada entre el despliegue de la versión 5.2 del backend y la subida de tiempos de carga?"
+      ],
+      "titulo": "Búsqueda lenta en la app móvil desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) sube de 1,2 s a 4,8 s; en la web no se nota\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend\",\"alcance\":\"App móvil (Android e iOS); afecta a todos los usuarios de móvil. En web no se nota\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"preguntas\":[\"¿Qué pantalla o flujo exacto de búsqueda se ve afectado y en qué versión de la app móvil ocurre?\",\"¿Hay alguna relación confirmada entre el despliegue de la versión 5.2 del backend y la subida de tiempos de carga?\"],\"titulo\":\"Búsqueda lenta en la app móvil desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 495,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2728,
+    "costeUsd": 0.0005396
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C3",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) pasa de 1,2 s a 4,8 s; en la web no se nota.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "Todos los usuarios de la app móvil (Android e iOS).",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuál es la causa del aumento de tiempo de carga tras el despliegue de la versión 5.2 del backend?",
+        "¿Se ha confirmado que el despliegue de la versión 5.2 del backend es el origen del problema?"
+      ],
+      "titulo": "Búsqueda lenta en la app móvil desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) pasa de 1,2 s a 4,8 s; en la web no se nota.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"Todos los usuarios de la app móvil (Android e iOS).\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"preguntas\":[\"¿Cuál es la causa del aumento de tiempo de carga tras el despliegue de la versión 5.2 del backend?\",\"¿Se ha confirmado que el despliegue de la versión 5.2 del backend es el origen del problema?\"],\"titulo\":\"Búsqueda lenta en la app móvil desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 475,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2740,
+    "costeUsd": 0.0005296
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C3",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS), que pasa de 1,2 s a 4,8 s; en la web no se nota",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend",
+      "alcance": "App móvil (Android e iOS); afecta a todos los usuarios de móvil. En la web no se nota",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué pasa en la pantalla de búsqueda de la app móvil con la versión 5.2 del backend y cómo se relaciona con el aumento del tiempo de carga?",
+        "¿Cuál es el número de usuarios móviles afectados?"
+      ],
+      "titulo": "Búsqueda lenta en la app móvil desde el 03/11/2026",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS), que pasa de 1,2 s a 4,8 s; en la web no se nota\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend\",\"alcance\":\"App móvil (Android e iOS); afecta a todos los usuarios de móvil. En la web no se nota\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"preguntas\":[\"¿Qué pasa en la pantalla de búsqueda de la app móvil con la versión 5.2 del backend y cómo se relaciona con el aumento del tiempo de carga?\",\"¿Cuál es el número de usuarios móviles afectados?\"],\"titulo\":\"Búsqueda lenta en la app móvil desde el 03/11/2026\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 497,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2718,
+    "costeUsd": 0.0005406
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C4",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, con filas que faltan.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR",
+      "urgencia": "Varios clientes se han quejado."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Desde qué fecha exacta empezó el problema?",
+        "¿El problema ocurre con todos los informes mensuales o solo con algunos?",
+        "¿Quién detectó la incidencia y cómo se le puede contactar?",
+        "¿Cuál es el valor actual y el de referencia de la métrica afectada (por ejemplo, número de filas exportadas)?",
+        "¿El problema continúa en este momento?",
+        "¿Hay algún enlace a datos de apoyo, como ejemplos de informes incompletos?"
+      ],
+      "titulo": "Informes mensuales en PDF incompletos tras la actualización de la semana pasada",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, con filas que faltan.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\",\"urgencia\":\"Varios clientes se han quejado.\"},\"preguntas\":[\"¿Desde qué fecha exacta empezó el problema?\",\"¿El problema ocurre con todos los informes mensuales o solo con algunos?\",\"¿Quién detectó la incidencia y cómo se le puede contactar?\",\"¿Cuál es el valor actual y el de referencia de la métrica afectada (por ejemplo, número de filas exportadas)?\",\"¿El problema continúa en este momento?\",\"¿Hay algún enlace a datos de apoyo, como ejemplos de informes incompletos?\"],\"titulo\":\"Informes mensuales en PDF incompletos tras la actualización de la semana pasada\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": false,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "urgencia",
+        "valor": "Varios clientes se han quejado."
+      }
+    ],
+    "tokensEntrada": 2764,
+    "tokensSalida": 369,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2780,
+    "costeUsd": 0.00046090000000000004
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C4",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, con filas que faltan.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR",
+      "urgencia": "Varios clientes se han quejado."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Desde qué fecha exacta empezó el problema?",
+        "¿Continúa el problema en este momento?",
+        "¿Qué valor muestra la métrica afectada y cuál es el valor esperado?",
+        "¿Quién detectó el problema y cómo se le puede contactar?",
+        "¿Hay un enlace a datos de apoyo, como ejemplos de informes incompletos?"
+      ],
+      "titulo": "Informes mensuales en PDF salen incompletos tras la actualización",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, con filas que faltan.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\",\"urgencia\":\"Varios clientes se han quejado.\"},\"preguntas\":[\"¿Desde qué fecha exacta empezó el problema?\",\"¿Continúa el problema en este momento?\",\"¿Qué valor muestra la métrica afectada y cuál es el valor esperado?\",\"¿Quién detectó el problema y cómo se le puede contactar?\",\"¿Hay un enlace a datos de apoyo, como ejemplos de informes incompletos?\"],\"titulo\":\"Informes mensuales en PDF salen incompletos tras la actualización\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": false,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "urgencia",
+        "valor": "Varios clientes se han quejado."
+      }
+    ],
+    "tokensEntrada": 2764,
+    "tokensSalida": 319,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2789,
+    "costeUsd": 0.0004359
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C4",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales exportados en PDF salen incompletos, con filas que faltan.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Informes mensuales exportados en PDF; varios clientes han presentado quejas.",
+      "resultado_esperado": "INVESTIGAR",
+      "urgencia": "Varios clientes se han quejado."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuál es el valor actual y el valor de referencia de la métrica afectada (por ejemplo, número de filas exportadas frente a las esperadas)?",
+        "¿Desde qué fecha exacta aparece el problema?",
+        "¿Continúa el problema en el momento de la petición?",
+        "¿Cómo se compara con los días o periodos anteriores a la actualización?",
+        "¿Quién detectó la incidencia y cómo se le puede contactar?",
+        "¿Hay algún enlace a datos de apoyo, como ejemplos de informes incompletos?"
+      ],
+      "titulo": "Informes mensuales en PDF salen incompletos tras la actualización",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales exportados en PDF salen incompletos, con filas que faltan.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Informes mensuales exportados en PDF; varios clientes han presentado quejas.\",\"resultado_esperado\":\"INVESTIGAR\",\"urgencia\":\"Varios clientes se han quejado.\"},\"preguntas\":[\"¿Cuál es el valor actual y el valor de referencia de la métrica afectada (por ejemplo, número de filas exportadas frente a las esperadas)?\",\"¿Desde qué fecha exacta aparece el problema?\",\"¿Continúa el problema en el momento de la petición?\",\"¿Cómo se compara con los días o periodos anteriores a la actualización?\",\"¿Quién detectó la incidencia y cómo se le puede contactar?\",\"¿Hay algún enlace a datos de apoyo, como ejemplos de informes incompletos?\"],\"titulo\":\"Informes mensuales en PDF salen incompletos tras la actualización\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": false,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "urgencia",
+        "valor": "Varios clientes se han quejado."
+      }
+    ],
+    "tokensEntrada": 2764,
+    "tokensSalida": 376,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2737,
+    "costeUsd": 0.0004644
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "E2",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña tiene el mismo peso visual que el principal.",
+      "comportamiento_deseado": "Que el botón de iniciar sesión sin contraseña sea un botón secundario.",
+      "actor": "Usuarios que no recuerdan su contraseña al iniciar sesión.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Se puede medir el éxito con una cifra, por ejemplo el número de usuarios que recuperan su contraseña?",
+        "¿Qué productos, áreas o plataformas se ven afectados por el cambio?",
+        "¿Hay alguna referencia de diseño con el enlace del botón secundario?",
+        "¿Hay una fecha o urgencia para este cambio, y por qué?"
+      ],
+      "titulo": "Botón recuperar contraseña como secundario",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña tiene el mismo peso visual que el principal.\",\"comportamiento_deseado\":\"Que el botón de iniciar sesión sin contraseña sea un botón secundario.\",\"actor\":\"Usuarios que no recuerdan su contraseña al iniciar sesión.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Se puede medir el éxito con una cifra, por ejemplo el número de usuarios que recuperan su contraseña?\",\"¿Qué productos, áreas o plataformas se ven afectados por el cambio?\",\"¿Hay alguna referencia de diseño con el enlace del botón secundario?\",\"¿Hay una fecha o urgencia para este cambio, y por qué?\"],\"titulo\":\"Botón recuperar contraseña como secundario\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 379,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2685,
+    "costeUsd": 0.0004583
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "E2",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña se presenta como principal.",
+      "comportamiento_deseado": "El botón de iniciar sesión sin contraseña debe ser secundario.",
+      "actor": "Usuarios que no recuerdan su contraseña al iniciar sesión.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Cuál es la métrica o cifra que permitiría medir si más usuarios recuperan su contraseña?",
+        "¿Qué productos, áreas o plataformas están afectados por el cambio?",
+        "¿Hay alguna urgencia o fecha objetivo para este cambio, y por qué?",
+        "¿Existe una referencia de diseño (enlace) para el botón?"
+      ],
+      "titulo": "Botón de iniciar sesión sin contraseña como secundario",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña se presenta como principal.\",\"comportamiento_deseado\":\"El botón de iniciar sesión sin contraseña debe ser secundario.\",\"actor\":\"Usuarios que no recuerdan su contraseña al iniciar sesión.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Cuál es la métrica o cifra que permitiría medir si más usuarios recuperan su contraseña?\",\"¿Qué productos, áreas o plataformas están afectados por el cambio?\",\"¿Hay alguna urgencia o fecha objetivo para este cambio, y por qué?\",\"¿Existe una referencia de diseño (enlace) para el botón?\"],\"titulo\":\"Botón de iniciar sesión sin contraseña como secundario\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 362,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2502,
+    "costeUsd": 0.00044980000000000004
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "E2",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña tiene el mismo peso que el principal.",
+      "comportamiento_deseado": "El botón de iniciar sesión sin contraseña pasa a ser un botón secundario.",
+      "actor": "Usuarios que no recuerdan su contraseña.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué cifra mediría que más usuarios recuperan su contraseña o inician sesión, o por qué no se puede medir?",
+        "¿Qué plataformas y áreas del producto se ven afectadas por el cambio de botón?",
+        "¿Hay alguna referencia de diseño (enlace) que muestre el botón secundario?",
+        "¿Hay alguna fecha o urgencia para este cambio, y con qué justificación?"
+      ],
+      "titulo": "Botón recuperar contraseña como secundario",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña tiene el mismo peso que el principal.\",\"comportamiento_deseado\":\"El botón de iniciar sesión sin contraseña pasa a ser un botón secundario.\",\"actor\":\"Usuarios que no recuerdan su contraseña.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿Qué cifra mediría que más usuarios recuperan su contraseña o inician sesión, o por qué no se puede medir?\",\"¿Qué plataformas y áreas del producto se ven afectadas por el cambio de botón?\",\"¿Hay alguna referencia de diseño (enlace) que muestre el botón secundario?\",\"¿Hay alguna fecha o urgencia para este cambio, y con qué justificación?\"],\"titulo\":\"Botón recuperar contraseña como secundario\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 378,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2099,
+    "costeUsd": 0.0004578
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C5",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Añadir un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes.",
+      "motivo": "Copian hoy los datos a mano para sus auditorías trimestrales.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No se espera medir nada concreto; es para cumplir con las auditorías.",
+      "alcance": "Solo en la web de administración.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Necesario antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué plataformas están incluidas además de la web de administración, si las hay?"
+      ],
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Añadir un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes.\",\"motivo\":\"Copian hoy los datos a mano para sus auditorías trimestrales.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No se espera medir nada concreto; es para cumplir con las auditorías.\",\"alcance\":\"Solo en la web de administración.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Necesario antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"preguntas\":[\"¿Qué plataformas están incluidas además de la web de administración, si las hay?\"],\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 387,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2454,
+    "costeUsd": 0.00047180000000000003
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C5",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Añadir un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Cumplir con las auditorías trimestrales, que hoy requieren copiar los datos a mano.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No se espera medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo en la web de administración.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Necesario antes del 2026-12-15, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué formato de columnas o campos debe tener el CSV exportado?",
+        "¿El volumen de usuarios de las cuentas grandes plantea requisitos de rendimiento o de tamaño máximo de exportación?"
+      ],
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Añadir un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Cumplir con las auditorías trimestrales, que hoy requieren copiar los datos a mano.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No se espera medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo en la web de administración.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Necesario antes del 2026-12-15, cuando empieza la próxima auditoría.\"},\"preguntas\":[\"¿Qué formato de columnas o campos debe tener el CSV exportado?\",\"¿El volumen de usuarios de las cuentas grandes plantea requisitos de rendimiento o de tamaño máximo de exportación?\"],\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 442,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2148,
+    "costeUsd": 0.0004993
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C5",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Añadir un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes.",
+      "motivo": "Copian hoy los datos a mano para sus auditorías trimestrales.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No se espera medir nada concreto; es para cumplir con las auditorías.",
+      "alcance": "Solo en la web de administración.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Necesario antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué plataformas están incluidas además de la web de administración, si alguna?"
+      ],
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Añadir un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes.\",\"motivo\":\"Copian hoy los datos a mano para sus auditorías trimestrales.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No se espera medir nada concreto; es para cumplir con las auditorías.\",\"alcance\":\"Solo en la web de administración.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Necesario antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"preguntas\":[\"¿Qué plataformas están incluidas además de la web de administración, si alguna?\"],\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 387,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 1944,
+    "costeUsd": 0.00047180000000000003
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C6",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra resultados que sí existen.",
+      "actor": "Usuarios que utilizan el buscador.",
+      "urgencia": "Cuanto antes, según el texto del solicitante."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué comportamiento concreto debe tener el buscador tras el cambio?",
+        "¿Qué motivo de negocio justifica el cambio?",
+        "¿Se puede medir el éxito con una cifra (por ejemplo, tiempo de respuesta o porcentaje de búsquedas sin resultado)?",
+        "¿Qué productos, áreas o plataformas se ven afectados?",
+        "¿Afecta el cambio a la interfaz del buscador?",
+        "¿Existe una referencia de diseño con enlace?",
+        "¿Por qué es urgente y qué fecha límite existe, si la hay?"
+      ],
+      "titulo": "Mejorar la lentitud y los resultados del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra resultados que sí existen.\",\"actor\":\"Usuarios que utilizan el buscador.\",\"urgencia\":\"Cuanto antes, según el texto del solicitante.\"},\"preguntas\":[\"¿Qué comportamiento concreto debe tener el buscador tras el cambio?\",\"¿Qué motivo de negocio justifica el cambio?\",\"¿Se puede medir el éxito con una cifra (por ejemplo, tiempo de respuesta o porcentaje de búsquedas sin resultado)?\",\"¿Qué productos, áreas o plataformas se ven afectados?\",\"¿Afecta el cambio a la interfaz del buscador?\",\"¿Existe una referencia de diseño con enlace?\",\"¿Por qué es urgente y qué fecha límite existe, si la hay?\"],\"titulo\":\"Mejorar la lentitud y los resultados del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "actor",
+        "valor": "Usuarios que utilizan el buscador."
+      }
+    ],
+    "tokensEntrada": 2610,
+    "tokensSalida": 340,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2586,
+    "costeUsd": 0.000431
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C6",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra resultados que sí existen.",
+      "urgencia": "Cuanto antes, según el solicitante."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué comportamiento concreto debería tener el buscador en lugar del actual?",
+        "¿Qué usuarios o grupos se ven afectados por la lentitud y los fallos de búsqueda?",
+        "¿Cuál es el motivo de negocio de la mejora?",
+        "¿Se puede medir el éxito con una cifra, por ejemplo tiempo de respuesta o porcentaje de búsquedas sin resultado?",
+        "¿Qué productos, áreas o plataformas usan el buscador?",
+        "¿Afecta la mejora a la interfaz del buscador?",
+        "¿Existe una referencia de diseño con enlace?"
+      ],
+      "titulo": "Mejorar la lentitud y los fallos de búsqueda del buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra resultados que sí existen.\",\"actor\":\"\",\"urgencia\":\"Cuanto antes, según el solicitante.\"},\"preguntas\":[\"¿Qué comportamiento concreto debería tener el buscador en lugar del actual?\",\"¿Qué usuarios o grupos se ven afectados por la lentitud y los fallos de búsqueda?\",\"¿Cuál es el motivo de negocio de la mejora?\",\"¿Se puede medir el éxito con una cifra, por ejemplo tiempo de respuesta o porcentaje de búsquedas sin resultado?\",\"¿Qué productos, áreas o plataformas usan el buscador?\",\"¿Afecta la mejora a la interfaz del buscador?\",\"¿Existe una referencia de diseño con enlace?\"],\"titulo\":\"Mejorar la lentitud y los fallos de búsqueda del buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 339,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2629,
+    "costeUsd": 0.0004305
+  },
+  {
+    "configuracion": "haiku-5-5-low",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "low",
+    "caso": "C6",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra resultados que sí existen.",
+      "urgencia": "Cuanto antes, según el solicitante."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué comportamiento concreto debe tener el buscador tras el cambio?",
+        "¿Qué usuarios o roles usan el buscador y se ven afectados?",
+        "¿Cuál es el motivo de negocio de la mejora?",
+        "¿Se puede medir el éxito con una cifra (por ejemplo, tiempo de respuesta o porcentaje de búsquedas sin resultados)?",
+        "¿Qué productos, áreas o plataformas se ven afectados?",
+        "¿Afecta el cambio a la interfaz del buscador?",
+        "¿Existe una referencia de diseño con enlace?",
+        "¿Por qué es urgente y qué fecha límite hay?"
+      ],
+      "titulo": "Mejorar el buscador: lentitud y resultados no encontrados",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra resultados que sí existen.\",\"actor\":\"\",\"urgencia\":\"Cuanto antes, según el solicitante.\"},\"preguntas\":[\"¿Qué comportamiento concreto debe tener el buscador tras el cambio?\",\"¿Qué usuarios o roles usan el buscador y se ven afectados?\",\"¿Cuál es el motivo de negocio de la mejora?\",\"¿Se puede medir el éxito con una cifra (por ejemplo, tiempo de respuesta o porcentaje de búsquedas sin resultados)?\",\"¿Qué productos, áreas o plataformas se ven afectados?\",\"¿Afecta el cambio a la interfaz del buscador?\",\"¿Existe una referencia de diseño con enlace?\",\"¿Por qué es urgente y qué fecha límite hay?\"],\"titulo\":\"Mejorar el buscador: lentitud y resultados no encontrados\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 357,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2376,
+    "costeUsd": 0.0004395
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "E1",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.",
+      "comparativa": "Desde anteayer por la tarde, cada día baja el número de solicitudes completadas.",
+      "detectado_por": "El responsable del área, según comenta el solicitante."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué métrica exacta se usa para medir las solicitudes completadas e iniciadas, y en qué pantalla o paso del proceso se mide?",
+        "¿Cuáles son los valores actuales y de referencia de la métrica, con sus unidades?",
+        "¿Desde qué fecha exacta empezó la bajada?",
+        "¿Continúa la bajada en el momento de la petición?",
+        "¿Hubo despliegues, cambios de configuración o eventos externos en el periodo?",
+        "¿Qué productos, áreas o grupos de usuarios y qué plataformas o dispositivos se ven afectados?",
+        "¿Qué se espera: investigar la causa, corregirla o solo informar?",
+        "¿Cómo contactar a la persona que detectó el problema y cuál es la urgencia y su impacto?",
+        "¿Hay algún enlace a datos de apoyo?"
+      ],
+      "titulo": "Bajan las solicitudes completadas mientras suben las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\",\"comparativa\":\"Desde anteayer por la tarde, cada día baja el número de solicitudes completadas.\",\"detectado_por\":\"El responsable del área, según comenta el solicitante.\"},\"preguntas\":[\"¿Qué métrica exacta se usa para medir las solicitudes completadas e iniciadas, y en qué pantalla o paso del proceso se mide?\",\"¿Cuáles son los valores actuales y de referencia de la métrica, con sus unidades?\",\"¿Desde qué fecha exacta empezó la bajada?\",\"¿Continúa la bajada en el momento de la petición?\",\"¿Hubo despliegues, cambios de configuración o eventos externos en el periodo?\",\"¿Qué productos, áreas o grupos de usuarios y qué plataformas o dispositivos se ven afectados?\",\"¿Qué se espera: investigar la causa, corregirla o solo informar?\",\"¿Cómo contactar a la persona que detectó el problema y cuál es la urgencia y su impacto?\",\"¿Hay algún enlace a datos de apoyo?\"],\"titulo\":\"Bajan las solicitudes completadas mientras suben las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde, cada día baja el número de solicitudes completadas."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 450,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2911,
+    "costeUsd": 0.0004999000000000001
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "E1",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.",
+      "comparativa": "Desde anteayer por la tarde, baja cada día."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué pantalla o paso del proceso de solicitud está afectado?",
+        "¿Cuál es el valor actual y el de referencia de solicitudes completadas, con su unidad?",
+        "¿Desde qué fecha exacta empezó el descenso?",
+        "¿Continúa el descenso en este momento?",
+        "¿Hubo despliegues, cambios de configuración o eventos externos en el periodo?",
+        "¿Qué producto, área o grupo de usuarios está afectado, y en qué plataforma o dispositivo?",
+        "¿Qué se espera: investigar, corregir o informar?",
+        "¿Quién detectó la incidencia y cómo se le puede contactar?",
+        "¿Cuál es la urgencia y su impacto?",
+        "¿Hay algún enlace a datos de apoyo?"
+      ],
+      "titulo": "Descenso diario de solicitudes completadas con aumento de las iniciadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\",\"comparativa\":\"Desde anteayer por la tarde, baja cada día.\",\"urgencia\":\"\",\"enlace_datos\":\"\"},\"preguntas\":[\"¿Qué pantalla o paso del proceso de solicitud está afectado?\",\"¿Cuál es el valor actual y el de referencia de solicitudes completadas, con su unidad?\",\"¿Desde qué fecha exacta empezó el descenso?\",\"¿Continúa el descenso en este momento?\",\"¿Hubo despliegues, cambios de configuración o eventos externos en el periodo?\",\"¿Qué producto, área o grupo de usuarios está afectado, y en qué plataforma o dispositivo?\",\"¿Qué se espera: investigar, corregir o informar?\",\"¿Quién detectó la incidencia y cómo se le puede contactar?\",\"¿Cuál es la urgencia y su impacto?\",\"¿Hay algún enlace a datos de apoyo?\"],\"titulo\":\"Descenso diario de solicitudes completadas con aumento de las iniciadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde, baja cada día."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 404,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2892,
+    "costeUsd": 0.00047690000000000005
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "E1",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.",
+      "comparativa": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas.",
+      "alcance": "Solicitudes (proceso de completar solicitudes).",
+      "detectado_por": "El responsable del área, según comenta el solicitante."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué valor actual y de referencia tiene la métrica de solicitudes completadas?",
+        "¿Cuándo empezó exactamente la caída, y continúa a fecha de hoy?",
+        "¿Ha habido despliegues, cambios de configuración o eventos externos en el periodo?",
+        "¿Qué se espera: investigar, corregir o solo informar?",
+        "¿Cuál es la urgencia y su impacto?",
+        "¿Dónde está el enlace a los datos de apoyo?",
+        "¿Cómo contactar a la persona que lo detectó?"
+      ],
+      "titulo": "Bajan las solicitudes completadas",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Baja cada día el número de solicitudes completadas, mientras sube el de las iniciadas.\",\"comparativa\":\"Desde anteayer por la tarde baja cada día el número de solicitudes completadas.\",\"alcance\":\"Solicitudes (proceso de completar solicitudes).\",\"detectado_por\":\"El responsable del área, según comenta el solicitante.\"},\"preguntas\":[\"¿Qué valor actual y de referencia tiene la métrica de solicitudes completadas?\",\"¿Cuándo empezó exactamente la caída, y continúa a fecha de hoy?\",\"¿Ha habido despliegues, cambios de configuración o eventos externos en el periodo?\",\"¿Qué se espera: investigar, corregir o solo informar?\",\"¿Cuál es la urgencia y su impacto?\",\"¿Dónde está el enlace a los datos de apoyo?\",\"¿Cómo contactar a la persona que lo detectó?\"],\"titulo\":\"Bajan las solicitudes completadas\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": false,
+      "comparativa": false,
+      "cambios_periodo": true,
+      "alcance": false,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [
+      {
+        "campo": "comparativa",
+        "valor": "Desde anteayer por la tarde baja cada día el número de solicitudes completadas."
+      },
+      {
+        "campo": "alcance",
+        "valor": "Solicitudes (proceso de completar solicitudes)."
+      }
+    ],
+    "tokensEntrada": 2749,
+    "tokensSalida": 360,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2554,
+    "costeUsd": 0.00045490000000000005
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C3",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS), que pasa de 1,2 s a 4,8 s; en la web no se nota.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "Todos los usuarios de la app móvil (Android e iOS); en la web no se nota.",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS), que pasa de 1,2 s a 4,8 s; en la web no se nota.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"Todos los usuarios de la app móvil (Android e iOS); en la web no se nota.\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 1092,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4710,
+    "costeUsd": 0.0008381
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C3",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) pasó de 1,2 s a 4,8 s; en la web no se nota.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "Usuarios de la app móvil (Android e iOS); en la web no se nota.",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) pasó de 1,2 s a 4,8 s; en la web no se nota.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"Usuarios de la app móvil (Android e iOS); en la web no se nota.\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 1010,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4476,
+    "costeUsd": 0.0007971
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C3",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) pasa de 1,2 s a 4,8 s; en la web no se nota.",
+      "valor_actual": "4,8 s",
+      "valor_referencia": "1,2 s",
+      "fecha_inicio": "2026-11-03",
+      "continua": "SI",
+      "comparativa": "La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.",
+      "cambios_periodo": "Esa misma mañana se desplegó la versión 5.2 del backend.",
+      "alcance": "Todos los usuarios de la app móvil (Android e iOS).",
+      "resultado_esperado": "CORREGIR",
+      "detectado_por": "Equipo de soporte (soporte@ejemplo.example)",
+      "urgencia": "Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.",
+      "enlace_datos": "https://metricas.example/busqueda-carga"
+    },
+    "otrasSalidas": {
+      "titulo": "Búsqueda lenta en la app móvil",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Tiempo medio de carga de la pantalla de búsqueda en la app móvil (Android e iOS) pasa de 1,2 s a 4,8 s; en la web no se nota.\",\"valor_actual\":\"4,8 s\",\"valor_referencia\":\"1,2 s\",\"fecha_inicio\":\"2026-11-03\",\"continua\":\"SI\",\"comparativa\":\"La semana anterior el tiempo era estable, entre 1,1 y 1,3 s.\",\"cambios_periodo\":\"Esa misma mañana se desplegó la versión 5.2 del backend.\",\"alcance\":\"Todos los usuarios de la app móvil (Android e iOS).\",\"resultado_esperado\":\"CORREGIR\",\"detectado_por\":\"Equipo de soporte (soporte@ejemplo.example)\",\"urgencia\":\"Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil.\",\"enlace_datos\":\"https://metricas.example/busqueda-carga\"},\"titulo\":\"Búsqueda lenta en la app móvil\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": true,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2921,
+    "tokensSalida": 1058,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4938,
+    "costeUsd": 0.0008211000000000001
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C4",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales que se exportan en PDF salen con filas que faltan.",
+      "cambios_periodo": "Actualización de la semana pasada.",
+      "alcance": "Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "titulo": "Informes mensuales en PDF salen incompletos",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales que se exportan en PDF salen con filas que faltan.\",\"cambios_periodo\":\"Actualización de la semana pasada.\",\"alcance\":\"Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"titulo\":\"Informes mensuales en PDF salen incompletos\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 732,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4185,
+    "costeUsd": 0.0006424000000000001
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C4",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales que se exportan en PDF salen incompletos, con filas que faltan.",
+      "cambios_periodo": "Actualización realizada la semana pasada.",
+      "alcance": "Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "titulo": "Informes PDF incompletos",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales que se exportan en PDF salen incompletos, con filas que faltan.\",\"cambios_periodo\":\"Actualización realizada la semana pasada.\",\"alcance\":\"Clientes que exportan informes mensuales en PDF; varios clientes se han quejado.\",\"resultado_esperado\":\"INVESTIGAR\"},\"titulo\":\"Informes PDF incompletos\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": true,
+      "alcance": true,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 870,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4717,
+    "costeUsd": 0.0007114
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C4",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "observacion": "Los informes mensuales que se exportan en PDF salen con filas que faltan.",
+      "resultado_esperado": "INVESTIGAR"
+    },
+    "otrasSalidas": {
+      "titulo": "Informes mensuales en PDF salen con filas que faltan",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"observacion\":\"Los informes mensuales que se exportan en PDF salen con filas que faltan.\",\"resultado_esperado\":\"INVESTIGAR\",\"enlace_datos\":\"\"},\"titulo\":\"Informes mensuales en PDF salen con filas que faltan\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "observacion": true,
+      "valor_actual": true,
+      "valor_referencia": true,
+      "fecha_inicio": true,
+      "continua": true,
+      "comparativa": true,
+      "cambios_periodo": false,
+      "alcance": false,
+      "resultado_esperado": true,
+      "detectado_por": false,
+      "urgencia": true,
+      "enlace_datos": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2764,
+    "tokensSalida": 728,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4403,
+    "costeUsd": 0.0006404000000000001
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "E2",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Hay dos botones al iniciar sesión, y el de iniciar sesión sin contraseña no es secundario.",
+      "comportamiento_deseado": "El botón de iniciar sesión sin contraseña debe ser secundario.",
+      "actor": "Usuarios que no recuerdan su contraseña.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "titulo": "Botón de iniciar sesión sin contraseña como secundario",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título habla de un botón de recuperar contraseña, mientras que el texto se refiere al botón de iniciar sesión sin contraseña."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Hay dos botones al iniciar sesión, y el de iniciar sesión sin contraseña no es secundario.\",\"comportamiento_deseado\":\"El botón de iniciar sesión sin contraseña debe ser secundario.\",\"actor\":\"Usuarios que no recuerdan su contraseña.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"titulo\":\"Botón de iniciar sesión sin contraseña como secundario\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título habla de un botón de recuperar contraseña, mientras que el texto se refiere al botón de iniciar sesión sin contraseña.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 1122,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 5729,
+    "costeUsd": 0.0008298
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "E2",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña está al mismo nivel que el otro.",
+      "comportamiento_deseado": "El botón de iniciar sesión sin contraseña debe ser un botón secundario.",
+      "actor": "Usuarios que inician sesión y no recuerdan su contraseña.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿El botón de iniciar sesión sin contraseña es el mismo que el de recuperar contraseña que menciona el título?"
+      ],
+      "titulo": "Botón de iniciar sesión sin contraseña como secundario",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Al iniciar sesión hay dos botones, y el de iniciar sesión sin contraseña está al mismo nivel que el otro.\",\"comportamiento_deseado\":\"El botón de iniciar sesión sin contraseña debe ser un botón secundario.\",\"actor\":\"Usuarios que inician sesión y no recuerdan su contraseña.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"preguntas\":[\"¿El botón de iniciar sesión sin contraseña es el mismo que el de recuperar contraseña que menciona el título?\"],\"titulo\":\"Botón de iniciar sesión sin contraseña como secundario\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 1040,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 5320,
+    "costeUsd": 0.0007888
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "E2",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Hoy hay dos botones al iniciar sesión.",
+      "comportamiento_deseado": "El botón de iniciar sesión sin contraseña debería ser secundario.",
+      "motivo": "Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.",
+      "afecta_interfaz": "SI"
+    },
+    "otrasSalidas": {
+      "titulo": "Botón de inicio de sesión sin contraseña como secundario",
+      "coherencia": {
+        "hayContradiccion": true,
+        "explicacion": "El título habla del botón de recuperar contraseña, mientras que el texto pide que sea secundario el botón de iniciar sesión sin contraseña, que son acciones distintas."
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Hoy hay dos botones al iniciar sesión.\",\"comportamiento_deseado\":\"El botón de iniciar sesión sin contraseña debería ser secundario.\",\"motivo\":\"Que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada.\",\"afecta_interfaz\":\"SI\"},\"titulo\":\"Botón de inicio de sesión sin contraseña como secundario\",\"coherencia\":{\"hayContradiccion\":true,\"explicacion\":\"El título habla del botón de recuperar contraseña, mientras que el texto pide que sea secundario el botón de iniciar sesión sin contraseña, que son acciones distintas.\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": false,
+      "motivo": true,
+      "tiene_metrica": false,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2688,
+    "tokensSalida": 1293,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 6386,
+    "costeUsd": 0.0009153
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C5",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Botón «Exportar a CSV» en el listado de usuarios que descarga todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Cumplir con las auditorías trimestrales, para las que hoy copian los datos a mano.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperan medir nada concreto; es para cumplir con las auditorías.",
+      "alcance": "Solo en la web de administración.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Necesario antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Botón «Exportar a CSV» en el listado de usuarios que descarga todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Cumplir con las auditorías trimestrales, para las que hoy copian los datos a mano.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperan medir nada concreto; es para cumplir con las auditorías.\",\"alcance\":\"Solo en la web de administración.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Necesario antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 918,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4212,
+    "costeUsd": 0.0007373
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C5",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.",
+      "comportamiento_deseado": "Botón «Exportar a CSV» en el listado de usuarios que descarga todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Cumplir con las auditorías trimestrales, que hoy se hacen copiando los datos a mano.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperan medir nada concreto: es para cumplir con las auditorías.",
+      "alcance": "Solo en la web de administración.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50.\",\"comportamiento_deseado\":\"Botón «Exportar a CSV» en el listado de usuarios que descarga todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Cumplir con las auditorías trimestrales, que hoy se hacen copiando los datos a mano.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperan medir nada concreto: es para cumplir con las auditorías.\",\"alcance\":\"Solo en la web de administración.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 954,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4088,
+    "costeUsd": 0.0007553
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C5",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50, y hoy copian los datos a mano para sus auditorías trimestrales.",
+      "comportamiento_deseado": "Añadir un botón \"Exportar a CSV\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.",
+      "actor": "Administradores de cuentas grandes",
+      "motivo": "Cumplir con las auditorías trimestrales.",
+      "tiene_metrica": "NO",
+      "motivo_sin_metrica": "No esperamos medir nada concreto; es para cumplir con las auditorías.",
+      "alcance": "Solo en la web de administración, en el listado de usuarios.",
+      "afecta_interfaz": "SI",
+      "referencia_diseno": "https://diseno.example/export-csv",
+      "urgencia": "Antes del 15/12/2026, cuando empieza la próxima auditoría."
+    },
+    "otrasSalidas": {
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"Los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50, y hoy copian los datos a mano para sus auditorías trimestrales.\",\"comportamiento_deseado\":\"Añadir un botón \\\"Exportar a CSV\\\" en el listado de usuarios que descargue todos los usuarios con los filtros aplicados.\",\"actor\":\"Administradores de cuentas grandes\",\"motivo\":\"Cumplir con las auditorías trimestrales.\",\"tiene_metrica\":\"NO\",\"motivo_sin_metrica\":\"No esperamos medir nada concreto; es para cumplir con las auditorías.\",\"alcance\":\"Solo en la web de administración, en el listado de usuarios.\",\"afecta_interfaz\":\"SI\",\"referencia_diseno\":\"https://diseno.example/export-csv\",\"urgencia\":\"Antes del 15/12/2026, cuando empieza la próxima auditoría.\"},\"titulo\":\"Exportar el listado de usuarios a CSV\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": true,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2783,
+    "tokensSalida": 1096,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 4547,
+    "costeUsd": 0.0008263
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C6",
+    "ejecucion": 1,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen.",
+      "urgencia": "cuanto antes"
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué tipo de contenido es el que el buscador no encuentra y en qué momento ocurre?"
+      ],
+      "titulo": "Mejorar el buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\",\"urgencia\":\"cuanto antes\"},\"preguntas\":[\"¿Qué tipo de contenido es el que el buscador no encuentra y en qué momento ocurre?\"],\"titulo\":\"Mejorar el buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 541,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3615,
+    "costeUsd": 0.0005315
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C6",
+    "ejecucion": 2,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra resultados que sí existen.",
+      "urgencia": "Cuanto antes (sin fecha concreta)."
+    },
+    "otrasSalidas": {
+      "preguntas": [
+        "¿Qué tipo de búsquedas fallan o tardan más (qué se busca y dónde)?",
+        "¿Cuál es el comportamiento deseado concreto: qué debe hacer el buscador de forma distinta?",
+        "¿Quién usa el buscador y a quién afecta el problema?",
+        "¿Cuál es el motivo de negocio de la mejora?",
+        "¿Se puede medir el éxito con una cifra (por ejemplo, tiempo de respuesta o porcentaje de búsquedas sin resultado)?",
+        "¿Qué productos, áreas o plataformas están afectados?",
+        "¿La mejora afecta a la interfaz del buscador?",
+        "¿Existe una referencia de diseño o enlace?"
+      ],
+      "titulo": "Mejorar el buscador: lentitud y resultados que no aparecen",
+      "coherencia": {
+        "hayContradiccion": false,
+        "explicacion": ""
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra resultados que sí existen.\",\"actor\":\"\",\"urgencia\":\"Cuanto antes (sin fecha concreta).\"},\"preguntas\":[\"¿Qué tipo de búsquedas fallan o tardan más (qué se busca y dónde)?\",\"¿Cuál es el comportamiento deseado concreto: qué debe hacer el buscador de forma distinta?\",\"¿Quién usa el buscador y a quién afecta el problema?\",\"¿Cuál es el motivo de negocio de la mejora?\",\"¿Se puede medir el éxito con una cifra (por ejemplo, tiempo de respuesta o porcentaje de búsquedas sin resultado)?\",\"¿Qué productos, áreas o plataformas están afectados?\",\"¿La mejora afecta a la interfaz del buscador?\",\"¿Existe una referencia de diseño o enlace?\"],\"titulo\":\"Mejorar el buscador: lentitud y resultados que no aparecen\",\"coherencia\":{\"hayContradiccion\":false,\"explicacion\":\"\"}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 377,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 2572,
+    "costeUsd": 0.0004495
+  },
+  {
+    "configuracion": "haiku-5-5-medium",
+    "modelo": "claude-haiku-5-5",
+    "esfuerzo": "medium",
+    "caso": "C6",
+    "ejecucion": 3,
+    "valida": true,
+    "motivoInvalida": null,
+    "detalleInvalida": null,
+    "stopReason": "end_turn",
+    "respuesta": {
+      "comportamiento_actual": "El buscador es muy lento y a veces no encuentra cosas que sí existen.",
+      "urgencia": "Cuanto antes, según el texto de la petición."
+    },
+    "otrasSalidas": {
+      "titulo": "Mejorar el buscador",
+      "coherencia": {
+        "hayContradiccion": false
+      }
+    },
+    "respuestaBruta": "{\"campos\":{\"comportamiento_actual\":\"El buscador es muy lento y a veces no encuentra cosas que sí existen.\",\"urgencia\":\"Cuanto antes, según el texto de la petición.\"},\"titulo\":\"Mejorar el buscador\",\"coherencia\":{\"hayContradiccion\":false}}",
+    "aciertos": {
+      "comportamiento_actual": true,
+      "comportamiento_deseado": true,
+      "actor": true,
+      "motivo": true,
+      "tiene_metrica": true,
+      "metrica_exito": true,
+      "motivo_sin_metrica": true,
+      "alcance": false,
+      "afecta_interfaz": true,
+      "referencia_diseno": true,
+      "urgencia": true
+    },
+    "invenciones": [],
+    "valoresSinEsperado": [],
+    "tokensEntrada": 2610,
+    "tokensSalida": 535,
+    "tokensCacheEscritura": 0,
+    "tokensCacheLectura": 0,
+    "tiempoMs": 3683,
+    "costeUsd": 0.0005285
+  }
+]
