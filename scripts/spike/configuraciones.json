@@ -1,0 +1,18 @@
+{
+  "_nota": "Configuraciones aprobadas por el autor el 2026-11-18. En modo real el script solo ejecuta las configuraciones con \"aprobada\": true. Valores de espera, reintentos y max_tokens según docs/producto.md 6.9.",
+  "maxTokens": 8000,
+  "esperaMaximaMs": 60000,
+  "reintentos": 1,
+  "ejecucionesPorCaso": 3,
+  "limiteGastoUsd": 3,
+  "fechaReferencia": "2026-11-18",
+  "zonaHoraria": "Europe/Madrid",
+  "configuraciones": [
+    { "id": "opus-5-5-low", "modelo": "claude-opus-5-5", "esfuerzo": "low", "aprobada": true },
+    { "id": "opus-5-5-medium", "modelo": "claude-opus-5-5", "esfuerzo": "medium", "aprobada": true },
+    { "id": "sonnet-5-5-low", "modelo": "claude-sonnet-5-5", "esfuerzo": "low", "aprobada": true },
+    { "id": "sonnet-5-5-medium", "modelo": "claude-sonnet-5-5", "esfuerzo": "medium", "aprobada": true },
+    { "id": "haiku-5-5-low", "modelo": "claude-haiku-5-5", "esfuerzo": "low", "aprobada": true },
+    { "id": "haiku-5-5-medium", "modelo": "claude-haiku-5-5", "esfuerzo": "medium", "aprobada": true }
+  ]
+}

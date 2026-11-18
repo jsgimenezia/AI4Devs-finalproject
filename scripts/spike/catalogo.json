@@ -1,0 +1,29 @@
+{
+  "_nota": "Copia de las reglas de docs/producto.md (6.2 y 6.3) que necesita la medición. Si cambian allí, se actualizan aquí a mano. Parámetros por defecto de 6.9: minCaracteres 10 en TEXTO; noFutura en RI-04.",
+  "reglas": [
+    { "codigo": "RI-01", "tipoPeticion": "INCIDENCIA", "campoClave": "observacion", "etiqueta": "Qué se observa: la métrica y el paso, la pantalla o la zona afectada", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-02", "tipoPeticion": "INCIDENCIA", "campoClave": "valor_actual", "etiqueta": "Valor actual de la métrica", "comprobacion": "CIFRA", "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-03", "tipoPeticion": "INCIDENCIA", "campoClave": "valor_referencia", "etiqueta": "Valor de referencia de la métrica", "comprobacion": "CIFRA", "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-04", "tipoPeticion": "INCIDENCIA", "campoClave": "fecha_inicio", "etiqueta": "Fecha de inicio", "comprobacion": "FECHA_ABSOLUTA", "noFutura": true, "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-05", "tipoPeticion": "INCIDENCIA", "campoClave": "continua", "etiqueta": "¿Continúa?", "comprobacion": "OPCION", "opciones": ["SI", "NO", "DESCONOCIDO"], "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-06", "tipoPeticion": "INCIDENCIA", "campoClave": "comparativa", "etiqueta": "Comparativa con días o periodos anteriores", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-07", "tipoPeticion": "INCIDENCIA", "campoClave": "cambios_periodo", "etiqueta": "Cambios o eventos en el periodo (despliegues, cambios de configuración, eventos externos), o indicación de que se desconoce", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-08", "tipoPeticion": "INCIDENCIA", "campoClave": "alcance", "etiqueta": "Alcance: producto, área o grupo de usuarios afectado, y plataforma o dispositivo si procede", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-09", "tipoPeticion": "INCIDENCIA", "campoClave": "resultado_esperado", "etiqueta": "Qué se espera", "comprobacion": "OPCION", "opciones": ["INVESTIGAR", "CORREGIR", "INFORMAR"], "severidad": "OBLIGATORIA" },
+    { "codigo": "RI-10", "tipoPeticion": "INCIDENCIA", "campoClave": "detectado_por", "etiqueta": "Quién lo detectó y cómo contactarle", "comprobacion": "TEXTO", "severidad": "RECOMENDADA" },
+    { "codigo": "RI-11", "tipoPeticion": "INCIDENCIA", "campoClave": "urgencia", "etiqueta": "Urgencia con su impacto", "comprobacion": "TEXTO", "severidad": "RECOMENDADA" },
+    { "codigo": "RI-12", "tipoPeticion": "INCIDENCIA", "campoClave": "enlace_datos", "etiqueta": "Enlace a datos de apoyo", "comprobacion": "ENLACE", "severidad": "RECOMENDADA" },
+
+    { "codigo": "RC-01", "tipoPeticion": "CAMBIO", "campoClave": "comportamiento_actual", "etiqueta": "Comportamiento actual descrito", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-02", "tipoPeticion": "CAMBIO", "campoClave": "comportamiento_deseado", "etiqueta": "Comportamiento deseado descrito: qué hacer exactamente", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-03", "tipoPeticion": "CAMBIO", "campoClave": "actor", "etiqueta": "Quién lo necesita o a quién afecta (rol o grupo de usuarios)", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-04", "tipoPeticion": "CAMBIO", "campoClave": "motivo", "etiqueta": "Motivo de negocio", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-05", "tipoPeticion": "CAMBIO", "campoClave": "tiene_metrica", "etiqueta": "¿Se puede medir el éxito con una cifra?", "comprobacion": "OPCION", "opciones": ["SI", "NO"], "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-06", "tipoPeticion": "CAMBIO", "campoClave": "metrica_exito", "etiqueta": "Métrica de éxito con su cifra", "comprobacion": "CIFRA", "aplicaSi": { "campo": "tiene_metrica", "valor": "SI" }, "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-07", "tipoPeticion": "CAMBIO", "campoClave": "motivo_sin_metrica", "etiqueta": "Motivo por el que no se puede medir", "comprobacion": "TEXTO", "aplicaSi": { "campo": "tiene_metrica", "valor": "NO" }, "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-08", "tipoPeticion": "CAMBIO", "campoClave": "alcance", "etiqueta": "Alcance: productos, áreas o grupos de usuarios afectados, y plataformas si procede", "comprobacion": "TEXTO", "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-09", "tipoPeticion": "CAMBIO", "campoClave": "afecta_interfaz", "etiqueta": "¿Afecta a la interfaz?", "comprobacion": "OPCION", "opciones": ["SI", "NO"], "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-10", "tipoPeticion": "CAMBIO", "campoClave": "referencia_diseno", "etiqueta": "Referencia de diseño (enlace)", "comprobacion": "ENLACE", "aplicaSi": { "campo": "afecta_interfaz", "valor": "SI" }, "severidad": "OBLIGATORIA" },
+    { "codigo": "RC-11", "tipoPeticion": "CAMBIO", "campoClave": "urgencia", "etiqueta": "Urgencia o fecha, con justificación", "comprobacion": "TEXTO", "severidad": "RECOMENDADA" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "umbral-spike-medicion-ia",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Script desechable de medición de la IA de Umbral (rama spike/medicion-ia).",
+  "type": "module",
+  "scripts": {
+    "seco": "tsx medir.ts --seco",
+    "medir": "tsx medir.ts --real",
+    "modelos": "tsx medir.ts --modelos",
+    "comprobar": "tsx comprobar.ts",
+    "tipos": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.10.0",
+    "zod": "4.6.7"
+  }
+}

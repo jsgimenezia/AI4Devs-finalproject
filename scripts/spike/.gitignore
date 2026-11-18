@@ -1,0 +1,3 @@
+node_modules/
+# Resultados del modo en seco: simulados, no se versionan.
+resultados/seco-*/

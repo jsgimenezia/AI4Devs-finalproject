@@ -1,0 +1,122 @@
+{
+  "_nota": "Subconjunto de evaluación del periodo de la Entrega 1 (docs/producto.md, 12.2). Casos ficticios. Una cadena vacía en «esperado» significa que el texto no contiene el dato o que el campo no aplica.",
+  "casos": [
+    {
+      "id": "E1",
+      "tipo": "INCIDENCIA",
+      "titulo": "Bajan las solicitudes completadas",
+      "texto": "Desde anteayer por la tarde baja cada día el número de solicitudes que se completan, mientras sube el de las que se inician. Me lo ha comentado el responsable del área.",
+      "esperado": {
+        "observacion": "Baja el número de solicitudes completadas mientras sube el de iniciadas",
+        "valor_actual": "",
+        "valor_referencia": "",
+        "fecha_inicio": "",
+        "continua": "SI",
+        "comparativa": "",
+        "cambios_periodo": "",
+        "alcance": "",
+        "resultado_esperado": "",
+        "detectado_por": "El responsable del área",
+        "urgencia": "",
+        "enlace_datos": ""
+      }
+    },
+    {
+      "id": "C3",
+      "tipo": "INCIDENCIA",
+      "titulo": "Búsqueda lenta en la app móvil",
+      "texto": "El 03/11/2026, a partir de las 10:00, el tiempo medio de carga de la pantalla de búsqueda pasó de 1,2 s a 4,8 s en la app móvil (Android e iOS); en la web no se nota. Sigue igual a día de hoy. La semana anterior el tiempo era estable, entre 1,1 y 1,3 s. Esa misma mañana se desplegó la versión 5.2 del backend. Lo detectó el equipo de soporte (soporte@ejemplo.example). Hay que corregirlo cuanto antes porque afecta a todos los usuarios de móvil. Gráfica: https://metricas.example/busqueda-carga",
+      "esperado": {
+        "observacion": "Tiempo medio de carga de la pantalla de búsqueda",
+        "valor_actual": "4,8 s",
+        "valor_referencia": "1,2 s",
+        "fecha_inicio": "2026-11-03",
+        "continua": "SI",
+        "comparativa": "La semana anterior era estable, entre 1,1 y 1,3 s",
+        "cambios_periodo": "Despliegue de la versión 5.2 del backend",
+        "alcance": "App móvil, Android e iOS; la web no",
+        "resultado_esperado": "CORREGIR",
+        "detectado_por": "Equipo de soporte, soporte@ejemplo.example",
+        "urgencia": "Cuanto antes, afecta a todos los usuarios de móvil",
+        "enlace_datos": "https://metricas.example/busqueda-carga"
+      }
+    },
+    {
+      "id": "C4",
+      "tipo": "INCIDENCIA",
+      "titulo": "Informes PDF incompletos",
+      "texto": "Hola, los informes mensuales que se exportan en PDF salen incompletos, les faltan filas, desde la actualización de la semana pasada. Unos cuantos clientes se han quejado. ¿Lo podéis mirar?",
+      "esperado": {
+        "observacion": "Los informes mensuales en PDF salen sin algunas filas",
+        "valor_actual": "",
+        "valor_referencia": "",
+        "fecha_inicio": "",
+        "continua": "",
+        "comparativa": "",
+        "cambios_periodo": "Actualización de la semana pasada",
+        "alcance": "Clientes que exportan informes mensuales en PDF",
+        "resultado_esperado": "INVESTIGAR",
+        "detectado_por": "Quejas de varios clientes",
+        "urgencia": "",
+        "enlace_datos": ""
+      }
+    },
+    {
+      "id": "E2",
+      "tipo": "CAMBIO",
+      "titulo": "Botón recuperar contraseña como secundario",
+      "texto": "El botón de iniciar sesión sin contraseña debería ser secundario. Hoy hay dos botones al iniciar sesión y queremos que más usuarios recuperen su contraseña si no la recuerdan, para que tengan sesión iniciada; por tanto la opción de iniciar sesión sin contraseña debería ser un botón secundario.",
+      "esperado": {
+        "comportamiento_actual": "Hay dos botones al iniciar sesión",
+        "comportamiento_deseado": "El botón de iniciar sesión sin contraseña pasa a ser secundario",
+        "actor": "Usuarios que no recuerdan su contraseña",
+        "motivo": "Que más usuarios recuperen la contraseña y queden con sesión iniciada",
+        "tiene_metrica": "SI",
+        "metrica_exito": "",
+        "motivo_sin_metrica": "",
+        "alcance": "Pantalla de inicio de sesión",
+        "afecta_interfaz": "SI",
+        "referencia_diseno": "",
+        "urgencia": ""
+      }
+    },
+    {
+      "id": "C5",
+      "tipo": "CAMBIO",
+      "titulo": "Exportar el listado de usuarios a CSV",
+      "texto": "Ahora los administradores solo pueden ver el listado de usuarios en pantalla, de 50 en 50. Queremos un botón \"Exportar a CSV\" en ese listado que descargue todos los usuarios con los filtros aplicados. Lo piden los administradores de cuentas grandes, que hoy copian los datos a mano para sus auditorías trimestrales. No esperamos medir nada concreto: es para cumplir con las auditorías. Solo en la web de administración. Diseño: https://diseno.example/export-csv. Lo necesitan antes del 15/12/2026, cuando empieza la próxima auditoría.",
+      "esperado": {
+        "comportamiento_actual": "El listado de usuarios solo se ve en pantalla, de 50 en 50",
+        "comportamiento_deseado": "Botón \"Exportar a CSV\" que descarga todos los usuarios con los filtros aplicados",
+        "actor": "Administradores de cuentas grandes",
+        "motivo": "Cumplir con las auditorías trimestrales sin copiar los datos a mano",
+        "tiene_metrica": "NO",
+        "metrica_exito": "",
+        "motivo_sin_metrica": "Es para cumplir con las auditorías",
+        "alcance": "Web de administración",
+        "afecta_interfaz": "SI",
+        "referencia_diseno": "https://diseno.example/export-csv",
+        "urgencia": "Antes del 15/12/2026, cuando empieza la auditoría"
+      }
+    },
+    {
+      "id": "C6",
+      "tipo": "CAMBIO",
+      "titulo": "Mejorar el buscador",
+      "texto": "El buscador es muy lento y a veces no encuentra cosas que sí existen. Habría que mejorarlo cuanto antes.",
+      "esperado": {
+        "comportamiento_actual": "El buscador es lento y a veces no encuentra lo que existe",
+        "comportamiento_deseado": "",
+        "actor": "",
+        "motivo": "",
+        "tiene_metrica": "",
+        "metrica_exito": "",
+        "motivo_sin_metrica": "",
+        "alcance": "El buscador",
+        "afecta_interfaz": "",
+        "referencia_diseno": "",
+        "urgencia": "Cuanto antes"
+      }
+    }
+  ]
+}
