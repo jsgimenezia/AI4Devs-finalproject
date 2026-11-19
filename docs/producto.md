@@ -1,9 +1,9 @@
 # Documento de producto — Umbral: validador y asistente de peticiones
 
 > **Nombre del producto:** Umbral — *Unclear Messages Become Ready, Actionable and Listed*.
-> **Versión:** 1.7 (base para empezar a implementar) · **Fecha:** 19 de noviembre de 2026
+> **Versión:** 1.8 (base para empezar a implementar) · **Fecha:** 19 de noviembre de 2026 · **Congelado:** a partir de esta versión solo se cambia como excepción documentada en el historial
 > **Autor:** Javier (JSG) · **Contexto:** Proyecto final del Máster AI4Devs (LIDR Academy)
-> **Estado:** **cerrados por el autor:** alcance, stack, catálogo de reglas de los dos tipos de petición (códigos, campos y comprobaciones), estados y transiciones, permisos, sesión y aislamiento. **Provisionales:** las severidades de las reglas (6.2 y 6.3), los valores iniciales de 6.9 (algunos marcados «a medir») y la API y el diseño detallado. **Decididos tras medir:** modelo y esfuerzo de la IA, `claude-sonnet-5-5` con esfuerzo `low`, como desviación documentada del criterio (12.2).
+> **Estado:** **cerrados por el autor:** alcance, stack, catálogo de reglas de los dos tipos de petición (códigos, campos y comprobaciones), estados y transiciones, permisos, sesión y aislamiento. **Provisionales:** las severidades de las reglas (6.2 y 6.3), los valores iniciales de 6.9 y la API y el diseño detallado. **Decididos tras medir:** modelo y esfuerzo de la IA, `claude-sonnet-5-5` con esfuerzo `low`, como desviación documentada del criterio (12.2).
 
 > **Nota (versión 1.2, 19 de octubre de 2026).** Esta versión incorpora una revisión externa que añadió un **glosario** (sección 0),
 > un **ejemplo de principio a fin** (2.4), una **tabla única de errores** (10.6), **escenarios Given/When/Then** (21)
@@ -33,6 +33,7 @@
 | 1.5 | Resultados de la medición (12.2): las cinco configuraciones medidas cumplen el criterio y la IA compensa. Desviación documentada: se elige `claude-sonnet-5-5` con esfuerzo `low` en lugar de Haiku 5.5 `low`, que elegía el criterio, porque Haiku no detecta la contradicción del Ejemplo 2 y repite en sus preguntas las de las reglas. Condición (4) de coherencia para las próximas mediciones. Cuestión 2 resuelta y cuestión 25 abierta (etiqueta de RI-06) |
 | 1.6 | Revisión externa de un compañero. La decisión indica también el `enviada_en` que vio el revisor, para detectar una retirada y un reenvío sin versión nueva (por ejemplo, tras añadir una aclaración), con su escenario en 21.5 y su test en 12.1. Regla general para acciones no permitidas: 403 por el rol o la relación con la petición y 409 por el estado, comprobando en el orden 404, 403 y 409; se aplica a las sugerencias. Los avisos de términos vagos se recalculan en cada lectura con un único servicio. El proxy de entrada forma parte del primer recorrido de extremo a extremo |
 | 1.7 | Sesión: se adopta ya la alternativa prevista en la sección 14, por el riesgo de desviación en una planificación justa. El token de sesión viaja en la cabecera `Authorization` y el frontend lo guarda en `localStorage`; desaparecen la cookie, la protección CSRF y la columna `csrf_token`, y las pruebas de CSRF pasan a ser de la cabecera. La sesión sigue en el servidor, con el mismo cierre, caducidad y equipo activo. Riesgo de XSS aceptado y descrito en 14. El proxy se mantiene por `X-Forwarded-For` y para no necesitar CORS |
+| 1.8 | Versión final antes de implementar, congelada. Espera, reintentos y `max_tokens` de 6.9 pasan de «a medir» a medidos. El modo autor del producto parte de las instrucciones medidas (`spike-autor-2`) y, si cambian, se vuelve a medir; el modo revisor no se midió. Diagramas Mermaid comprobados: los tres se dibujan sin errores |
 
 No constan versiones 0.8 ni 0.9. El detalle de cada versión está en el historial de git.
 
@@ -524,7 +525,7 @@ Hipótesis y datos a recopilar:
 ```
 
 ### 6.9 Valores iniciales por defecto
-Valores genéricos y razonables para empezar. **Se ajustan durante la implementación** si resultan inadecuados; ninguno es un compromiso de producto. Los marcados «a medir» se fijan en la comprobación inicial (sección 15).
+Valores genéricos y razonables para empezar. **Se ajustan durante la implementación** si resultan inadecuados; ninguno es un compromiso de producto. La espera, los reintentos y `max_tokens` se fijaron midiendo en la comprobación inicial (12.2).
 
 | Ámbito | Valor inicial |
 |---|---|
@@ -542,9 +543,9 @@ Valores genéricos y razonables para empezar. **Se ajustan durante la implementa
 | Autoaprobación por plazo | 7 días en «lista para revisión» |
 | Sugerencias de IA | Hasta 10 intentos por usuario y hora, 100 por equipo y día y 200 por instalación y día (este último, configurable por variable de entorno). «Hora» son los últimos 60 minutos, en ventana deslizante; «día» es el día natural en Europe/Madrid. Cuentan los intentos, incluidos los descartados. Al superar un límite, la API responde 429 sin llamar al proveedor y sin guardar nada |
 | Contadores de los límites | Los de la IA se calculan contando filas de `SUGERENCIA_IA`, que ya guardan cada intento. Los de inicio de sesión, registro y códigos de invitación se guardan en memoria: válido con una sola instancia del backend; se reinician al reiniciar el servidor |
-| Espera máxima a la IA | 60 segundos en total por llamada, reintentos incluidos, sin streaming en el MVP. A medir |
-| Reintentos del SDK (`maxRetries`) | 0 o 1, dentro de los 60 segundos totales. A medir |
-| Límite de salida de la IA (`max_tokens`) | En torno a 8.000. A medir. Es un tope, no un consumo: si la salida lo alcanza queda incompleta y se descarta, y el razonamiento del modelo cuenta dentro de él |
+| Espera máxima a la IA | 60 segundos en total por llamada, reintentos incluidos, sin streaming en el MVP. Medido: con Sonnet 5.5 `low`, la llamada más lenta tardó 3,6 s (12.2) |
+| Reintentos del SDK (`maxRetries`) | 1, dentro de los 60 segundos totales (medido, 12.2) |
+| Límite de salida de la IA (`max_tokens`) | 8.000 (medido: con Sonnet 5.5 `low`, la salida media fue de unos 300 tokens, 12.2). Es un tope, no un consumo: si la salida lo alcanza queda incompleta y se descarta, y el razonamiento del modelo cuenta dentro de él |
 | Esfuerzo de la IA | `low`, con el modelo `claude-sonnet-5-5` (medido, 12.2) |
 | Valores de relleno (TEXTO) | «n/a», «na», «-», «.», «?», «tbd», «xxx», «pendiente», comparados en minúsculas y sin acentos |
 | Vocabulario de términos vagos | «mejorar», «mejora», «mejoras», «optimizar», «optimización», «arreglar», «arreglo», «rápido», «más rápido», «lento», «lo antes posible», «cuanto antes», «urgente», «asap», «revisar», «algunos», «varios», «a veces» |
@@ -577,7 +578,7 @@ Todo es **sugerencia**: se muestra marcado como tal, quien la pide decide qué a
 - **Etiqueta visible «Simulado»:** la interfaz marca así cada sugerencia del proveedor simulado y muestra un aviso general cuando el sistema funciona sin clave, para que nadie tome una respuesta simulada por la de un modelo.
 - Los **prompts** están versionados y cada sugerencia guarda qué proveedor y qué versión del prompt se usaron.
 - **Proveedor real: Anthropic**, mediante la API de Claude y el SDK oficial para TypeScript (`@anthropic-ai/sdk`). La salida se pide con el modo de salida estructurada del SDK, a partir de un esquema Zod construido con las definiciones de campos del tipo (objeto fijo, ver 7.5), y se valida de nuevo en el backend.
-- **Modelo y esfuerzo (decididos el 18 de noviembre de 2026):** **`claude-sonnet-5-5` con esfuerzo `low`**, tras medir Opus, Sonnet y Haiku 5.5 con el subconjunto de evaluación y el script desechable de `scripts/spike/` (rama `spike/medicion-ia`, sección 15). Es una desviación documentada del criterio de 12.2, que elegía Haiku 5.5 `low`; el motivo y los resultados están en 12.2. Son configuración: pueden cambiarse sin tocar el diseño.
+- **Modelo y esfuerzo (decididos el 18 de noviembre de 2026):** **`claude-sonnet-5-5` con esfuerzo `low`**, tras medir Opus, Sonnet y Haiku 5.5 con el subconjunto de evaluación y el script desechable de `scripts/spike/` (rama `spike/medicion-ia`, sección 15). Es una desviación documentada del criterio de 12.2, que elegía Haiku 5.5 `low`; el motivo y los resultados están en 12.2. Son configuración: pueden cambiarse sin tocar el diseño. **Las instrucciones del modo autor del producto parten de las medidas (`spike-autor-2`, en `scripts/spike/src/prompt.ts` de la rama `spike/medicion-ia`)**; si cambian, se vuelve a medir con el criterio de 12.2 antes de darlas por buenas. El modo revisor no se ha medido: es la historia deseable S2 y lo primero que se recorta (sección 15).
 - **Tiempos y reintentos:** espera máxima de 60 segundos en total por llamada, reintentos incluidos, sin streaming en el MVP; reintentos del SDK a 0 o 1; `max_tokens` en torno a 8.000. Los tres valores se miden en la comprobación inicial (6.9).
 - **Credenciales:** la clave se lee de la variable de entorno `ANTHROPIC_API_KEY`; nunca se versiona. El archivo de ejemplo solo lleva un marcador. Sin clave, el sistema usa el proveedor simulado.
 - **Fallos controlados:** un rechazo del modelo (`stop_reason: refusal`), una salida truncada, una salida que no cumple el esquema, un tiempo agotado, un límite de velocidad o un fallo de conexión se tratan igual: se guarda la sugerencia como descartada con su motivo, se informa de que la IA no está disponible y el flujo sigue sin ella. Con tiempo agotado, el motivo es `TIEMPO_AGOTADO` y los tokens quedan a null.
@@ -1124,7 +1125,7 @@ Revisados el 17 de octubre de 2026 mediante lectura de los repositorios (no se e
 | Comentarios de decisión | Obligatorios al devolver y al rechazar; opcionales al aceptar |
 | Sesión | En servidor (tabla `SESION`), con el token en `localStorage` enviado en la cabecera `Authorization` y proxy de mismo origen; sin CSRF. Decidido en la versión 1.7, cuando era la alternativa, con el riesgo de XSS aceptado (14) |
 | Aislamiento | Repositorios con contexto de equipo obligatorio y test por endpoint que falla si hay rutas sin registrar, con segunda dimensión dentro del equipo; siempre 404 |
-| Límites de IA | 10 por usuario y hora, 100 por equipo y día y 200 por instalación y día (configurable; hora = últimos 60 minutos en ventana deslizante; día natural en Europe/Madrid; 429 al superarlos); espera total de 60 s con reintentos incluidos, sin streaming, reintentos 0 o 1 y `max_tokens` en torno a 8.000, todo a medir |
+| Límites de IA | 10 por usuario y hora, 100 por equipo y día y 200 por instalación y día (configurable; hora = últimos 60 minutos en ventana deslizante; día natural en Europe/Madrid; 429 al superarlos); espera total de 60 s con reintentos incluidos, sin streaming, 1 reintento y `max_tokens` de 8.000, medidos (12.2) |
 | Script de medición | `scripts/spike/` en la rama `spike/medicion-ia`, no en la de la Entrega 1; se mide durante el periodo de la Entrega 1 y el script se entrega con la Entrega 2. Desechable, solo casos ficticios y clave por variable de entorno |
 | Historias de usuario | Cinco imprescindibles (H1 a H5) y dos deseables (S1 y S2, la IA), en la sección 5; la IA puede recortarse entera (paso (7) de la sección 15), en el punto de control del 19 de enero o antes, si la medición del periodo de la Entrega 1 muestra que no compensa |
 | Criterio de la IA | Compensa si alguna configuración, en tres ejecuciones por caso, no inventa cifras ni fechas, acierta al menos el 70 % del relleno, no pasa de 60 s por llamada y no pasa de 0,05 USD de coste medio por llamada; se elige la más barata (12.2). Aplicado el 18 de noviembre: cumplen todas y se elige Sonnet 5.5 `low` en lugar de Haiku 5.5 `low`, como desviación documentada; condición (4) de coherencia añadida para las próximas mediciones |
