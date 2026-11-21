@@ -553,13 +553,134 @@ Escenario: Un revisor no ve los borradores ajenos que nunca se han enviado
 
 ## 6. Tickets de Trabajo
 
-> Documenta 3 de los tickets de trabajo principales del desarrollo, uno de backend, uno de frontend, y uno de bases de datos. Da todo el detalle requerido para desarrollar la tarea de inicio a fin teniendo en cuenta las buenas prácticas al respecto. 
+Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. Siguen el orden de construcción previsto: primero los datos, después el motor de reglas y la API, y por último la interfaz. Las estimaciones son orientativas: salen del plan del documento (sección 15), que reserva unas 6 h al backend, incluida la base de datos, y unas 4 h al frontend.
 
 **Ticket 1**
 
+**[BD-1] Modelo de datos, migraciones y acceso con contexto de equipo**
+
+- **Tipo:** base de datos.
+- **Historias:** es el cimiento de todas; en especial H2 y H3.
+- **Prioridad:** imprescindible; es lo primero que se construye junto con el motor de reglas.
+- **Estimación:** parte de las 6 h de backend.
+- **Depende de:** nada. **Bloquea:** BE-1 y el resto de la API.
+
+**Descripción.** Crear con Prisma el esquema de la sección 3 en PostgreSQL, con sus migraciones versionadas, y una capa de acceso a datos que obligue a indicar siempre el equipo. Es la pieza que más cuesta cambiar cuando ya hay datos guardados, por eso se hace bien desde el principio.
+
+**Tareas:**
+1. Esquema de Prisma con las 13 entidades de la sección 3: tipos, claves primarias `uuid` y claves foráneas.
+2. Restricciones de unicidad:
+   - `USUARIO.email`, `SESION.token_hash` e `INVITACION.codigo`;
+   - las parejas (`usuario_id`, `equipo_id`) en `MEMBRESIA` y (`peticion_id`, `numero`) en `VERSION_PETICION`;
+   - `ANALISIS.version_id`, que es 1:1.
+3. Enumeraciones con los valores cerrados de la sección 3: rol, tipo, origen, estado de la petición, resultado de la regla, modo y estado de la sugerencia, motivo de descarte, resultado de la decisión y motivo de autodecisión.
+4. Migración inicial, que se aplica sobre una base de datos vacía.
+5. Migración con los **disparadores de solo añadir**, que rechazan `UPDATE` y `DELETE` en las siete tablas de historial. Es lo primero que se recorta si falta tiempo; en ese caso, la garantía queda en la capa de acceso a datos.
+6. Capa de acceso a datos (repositorios):
+   - cada método recibe el equipo de la sesión como parámetro obligatorio;
+   - las tablas de solo añadir no tienen métodos de modificación ni de borrado;
+   - la invitación se marca como usada con una actualización condicionada a que siga sin usar y sin caducar, en la misma transacción que crea el usuario.
+7. Base de datos de prueba para los tests de integración, con datos ficticios.
+
+**Criterios de aceptación:**
+- [ ] Las migraciones se aplican sobre una base de datos vacía y crean las 13 tablas con sus restricciones.
+- [ ] Insertar dos versiones de la misma petición con el mismo número falla por la restricción de unicidad.
+- [ ] Un `UPDATE` o un `DELETE` sobre cualquiera de las tablas de solo añadir falla. Si se recortan los disparadores, se comprueba en su lugar que la capa de acceso no ofrece esos métodos.
+- [ ] Registrar dos usuarios con el mismo email falla por la restricción de unicidad.
+- [ ] Un mismo código de invitación usado en dos registros simultáneos solo prospera una vez.
+- [ ] Una consulta con el contexto del equipo A no devuelve nunca datos del equipo B, ni siquiera con un usuario que tenga membresías en los dos.
+
+**Requisitos:** RF-04, RF-07, RF-24, RF-28, RF-29 y RF-36.
+
 **Ticket 2**
 
+**[BE-1] Motor de reglas y evaluación al guardar una versión**
+
+- **Tipo:** backend.
+- **Historias:** H2 y H3.
+- **Prioridad:** imprescindible; es el núcleo del producto.
+- **Estimación:** parte de las 6 h de backend.
+- **Depende de:** BD-1. **Bloquea:** FE-1 y el envío a revisión.
+
+**Descripción.** El motor de reglas decide qué le falta a una petición. Es una **función pura**: recibe los campos, las definiciones de las reglas y la fecha de referencia, y devuelve el resultado de cada regla, sin acceder a la red, al reloj ni a la IA. Alrededor del motor, la API guarda cada versión nueva y su análisis en una sola operación.
+
+**Tareas:**
+1. Catálogo por defecto como configuración tipada, leído a través de una interfaz: las 12 reglas de incidencia (RI-01 a RI-12) y las 11 de cambio (RC-01 a RC-11), con un hash del catálogo calculado al arrancar.
+2. Las cinco comprobaciones de la sección 6.5 del documento:
+   - `TEXTO`: mínimo de 10 caracteres y sin valores de relleno;
+   - `CIFRA`: al menos un número escrito con dígitos;
+   - `FECHA_ABSOLUTA`: formato AAAA-MM-DD y, si la regla lo indica, no futura;
+   - `ENLACE`: solo http o https;
+   - `OPCION`: solo valores de la lista.
+3. Condición de aplicabilidad: una regla cuya condición no se cumple da «no aplica» y no cuenta.
+4. Puntuación (obligatorias aplicables cumplidas entre obligatorias aplicables, de 0 a 100), condición de «completa» y avisos de términos vagos.
+5. `POST /v1/peticiones`: crea la petición con su primera versión y su análisis.
+6. `POST /v1/peticiones/:id/versiones`:
+   - valida los campos;
+   - comprueba que el número base es el último (si no, 409) y que el estado permite editar (si no, 409);
+   - crea en una sola transacción la versión, el análisis y los resultados, cada resultado con una copia de su regla;
+   - devuelve el análisis con los avisos.
+7. `GET /v1/reglas?tipo=`: devuelve las definiciones que usa el frontend para dibujar el formulario.
+
+**Criterios de aceptación:**
+- [ ] Cada comprobación tiene tests unitarios con casos que cumplen y que no cumplen, incluida «no futura» con la fecha de referencia fijada en el test.
+- [ ] Con los campos de la versión 2 del ejemplo del documento (2.4), el motor da 9 reglas obligatorias aplicables, 6 cumplidas y una **puntuación de 67**, con RC-07 «no aplica».
+- [ ] El motor da el mismo resultado con una fuente de reglas en memoria distinta de la configuración, porque depende solo de la interfaz.
+- [ ] Guardar sobre la última versión crea la siguiente con su análisis. Guardar sobre una versión anterior devuelve 409 y no crea nada.
+- [ ] Una clave de campo desconocida o una opción fuera de la lista devuelven 400.
+- [ ] Guardar en una petición aceptada, rechazada o cancelada devuelve 409.
+- [ ] Una petición de otro equipo devuelve 404.
+- [ ] Cada resultado guarda la copia de su regla y el análisis guarda el hash del catálogo.
+
+**Fuera de este ticket:** la IA (S1 y S2), el envío a revisión y las decisiones.
+
+**Requisitos:** RF-05, RF-06, RF-07, RF-09 a RF-12, RF-15 y RF-25 a RF-28.
+
 **Ticket 3**
+
+**[FE-1] Formulario dinámico y panel de reglas**
+
+- **Tipo:** frontend.
+- **Historias:** H2 y H3.
+- **Prioridad:** imprescindible.
+- **Estimación:** parte de las 4 h de frontend.
+- **Depende de:** BE-1. Puede empezar contra una API simulada que devuelva definiciones y análisis de ejemplo.
+
+**Descripción.** Pantalla de detalle y edición de una petición (pantalla 4 de 1.3). El formulario no está escrito campo a campo: se dibuja a partir de las definiciones que devuelve la API, con un componente por tipo de comprobación. Junto al formulario, un panel muestra el resultado de cada regla, su pregunta si no se cumple, la puntuación y los avisos de términos vagos.
+
+**Tareas:**
+1. Cliente de la API que envía el token de sesión en la cabecera `Authorization`.
+2. Un componente por tipo de comprobación:
+   - `TEXTO`: área de texto;
+   - `CIFRA`: campo de texto;
+   - `FECHA_ABSOLUTA`: campo de fecha, que admite también DD/MM/AAAA;
+   - `ENLACE`: campo de URL;
+   - `OPCION`: desplegable con las etiquetas de las opciones.
+3. Formulario generado desde `GET /v1/reglas?tipo=`. Los campos cuya condición no se cumple se muestran como «no aplica».
+4. Guardar con el número de la versión sobre la que se trabaja y mostrar el análisis devuelto.
+5. Panel de reglas: resultado de cada regla, pregunta de plantilla de las no cumplidas, puntuación, avisos de términos vagos e indicador de «completa».
+6. Gestión de errores:
+   - 400: el error se muestra junto al campo;
+   - 409: se avisa de que hay una versión más reciente y se ofrece recargarla;
+   - 401: se vuelve al inicio de sesión.
+
+**Criterios de aceptación:**
+- [ ] Con las definiciones del tipo *cambio*, se dibujan sus 11 campos, cada uno con el componente de su comprobación.
+- [ ] Al elegir «sí» en «¿Se puede medir el éxito con una cifra?», la métrica de éxito pasa a aplicar y el motivo para no medir pasa a «no aplica», y al revés al elegir «no».
+- [ ] Tras guardar, el panel muestra la nueva puntuación y las preguntas de las reglas que siguen sin cumplirse.
+- [ ] Un conflicto (409) no se presenta como un error genérico: el aviso dice que hay una versión más reciente.
+- [ ] Los enlaces solo se muestran como enlace si son http o https, y ningún valor introducido por un usuario se inserta como HTML sin escapar.
+- [ ] Tests de componentes para cada tipo de comprobación y el tramo correspondiente del recorrido E2E.
+
+**Fuera de este ticket:** las sugerencias de la IA y su etiqueta «Simulado» (S1), la pantalla de revisión (H4) y la exportación (H5).
+
+**Requisitos:** RF-06, RF-10, RF-11, RF-12 y RF-27.
+
+**Definición de hecho (común a los tres tickets):**
+- Los criterios de aceptación pasan como tests automáticos.
+- La integración continua está en verde: tipos, lint y tests.
+- Se cumple la definición de hecho de las historias (sección 5).
+- El cambio llega en una pull request propia, que se documentará en la sección 7.
 
 ---
 
