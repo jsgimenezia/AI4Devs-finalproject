@@ -158,28 +158,222 @@ Las dos deseables son la IA. Como la herramienta funciona completa sin ella, pue
 ## 2. Arquitectura del Sistema
 
 ### **2.1. Diagrama de arquitectura:**
-> Usa el formato que consideres más adecuado para representar los componentes principales de la aplicación y las tecnologías utilizadas. Explica si sigue algún patrón predefinido, justifica por qué se ha elegido esta arquitectura, y destaca los beneficios principales que aportan al proyecto y justifican su uso, así como sacrificios o déficits que implica.
 
+```mermaid
+flowchart LR
+    U[Usuario<br/>navegador] -->|HTTP local| PX[Proxy de entrada<br/>mismo origen]
+    PX -->|estáticos| FE[Frontend<br/>React + Vite]
+    PX -->|API REST /v1| BE[Backend<br/>NestJS]
+    BE --> DB[(PostgreSQL)]
+    BE --> RE[Motor de reglas<br/>determinista]
+    BE -->|interfaz ProveedorIA| IA{Proveedor}
+    IA --> SIM[Simulado<br/>tests y demo]
+    IA --> REAL[Anthropic<br/>por variables de entorno]
+```
+
+**Patrón.** Es un **monolito modular por capas**: un único backend organizado en módulos por dominio (cuentas, equipos, peticiones, reglas, análisis, revisión, exportación e IA), cada uno con las capas controlador, servicio y acceso a datos. Hay dos puntos que dependen de interfaces y no de implementaciones concretas, al estilo de los puertos y adaptadores:
+- **la fuente de las reglas:** hoy es configuración, y mañana podrá ser una tabla por equipo;
+- **el proveedor de IA:** simulado o real.
+
+El frontend es una aplicación de una sola página que habla con la API REST versionada (`/v1`). Todo vive en un repositorio único con tres paquetes: backend, frontend y uno compartido.
+
+**Por qué esta arquitectura:**
+- **Tamaño y plazo.** Un MVP individual de unas 30 horas no necesita microservicios. Un monolito se arranca con un comando, se prueba entero y se entiende de un vistazo.
+- **Un solo lenguaje.** TypeScript en todo el proyecto. El paquete compartido define una sola vez los esquemas de los campos y de la salida de la IA, y los usan el backend y el frontend.
+- **El núcleo es determinista y fácil de probar.** El motor de reglas es una función pura: recibe los campos, las definiciones y la fecha de referencia, y no depende de la red, del reloj ni de la IA. Se prueba con tests unitarios exhaustivos y da siempre el mismo resultado.
+- **Desarrollo con IA.** Módulos con límites claros, tipos estrictos y especificación precisa reducen lo que un agente de código tiene que inventar.
+
+**Beneficios:**
+- La IA se puede quitar o cambiar sin tocar el dominio.
+- Las reglas podrán pasar a base de datos sin cambiar el motor.
+- El aislamiento entre equipos se impone en un único sitio: la capa de acceso a datos.
+- Los formularios se dibujan desde las definiciones de las reglas, así que no pueden desalinearse.
+
+**Sacrificios y déficits:**
+- **Una sola instancia del backend.** Los contadores del límite de intentos de inicio de sesión viven en memoria: no sirven con varias instancias y se reinician al reiniciar el servidor.
+- **Cambiar una regla exige desplegar.** En el MVP no hay pantalla para editar reglas, porque viven en configuración.
+- **Riesgo de XSS aceptado.** El token de sesión se guarda en el navegador (`localStorage`) en lugar de en una cookie `HttpOnly` (ver 2.5).
+- **Sin escalado ni alta disponibilidad.** El sistema solo se ejecuta en local.
+- **La evaluación es síncrona.** Se calcula al guardar cada versión. Vale para el volumen de un equipo, no para cargas grandes.
 
 ### **2.2. Descripción de componentes principales:**
 
-> Describe los componentes más importantes, incluyendo la tecnología utilizada
+| Componente | Tecnología | Responsabilidad |
+|---|---|---|
+| Proxy de entrada | Servidor web ligero en un contenedor | Da un único punto de entrada: sirve el frontend y reenvía `/v1` al backend, así que navegador, frontend y API comparten origen y no hace falta CORS. Escribe la dirección del cliente en `X-Forwarded-For`, de la que depende el límite de intentos |
+| Frontend | React + Vite, TypeScript | Pantallas de 1.3; formulario dibujado desde las definiciones de reglas, con un componente por tipo de comprobación |
+| Backend | NestJS, TypeScript | API REST, autenticación y sesiones, permisos por rol, aislamiento por equipo y flujo de estados con transiciones atómicas |
+| Motor de reglas | TypeScript, dentro del backend | Evalúa los campos de cada versión con el catálogo de reglas, leído a través de una interfaz |
+| Compositor de salida | TypeScript, dentro del backend | Compone la historia de usuario o el ticket de investigación con plantillas deterministas |
+| Paquete compartido | TypeScript + Zod | Esquemas de los campos y de la salida de la IA, y tipos comunes. El backend es el que manda; el frontend repite la validación solo para la experiencia de usuario |
+| Servicio de IA | TypeScript, dentro del backend | Prepara la llamada según el modo (autor o revisor), valida la respuesta contra su esquema y aplica los límites de uso, la espera máxima y los reintentos |
+| Proveedor de IA | Interfaz con dos implementaciones | **Simulado:** determinista, por defecto, para tests y demostración. **Real:** Anthropic con su SDK oficial de TypeScript y salida estructurada; modelo `claude-sonnet-5-5` con esfuerzo `low`, elegido midiendo (ver 2.6) |
+| Base de datos | PostgreSQL + Prisma | Persistencia, migraciones versionadas y disparadores de solo añadir (sección 3) |
+
+**Stack tecnológico:**
+
+| Capa | Tecnología | Motivo |
+|---|---|---|
+| Lenguaje | TypeScript en todo el proyecto | Un solo lenguaje; los tipos detectan errores del código generado por IA |
+| Frontend | React + Vite | Estándar de mercado, con mucho código de referencia |
+| Backend | NestJS (Node.js) | Estructura modular y capas claras |
+| Base de datos | PostgreSQL | Relacional, con integridad referencial y soporte de JSON |
+| ORM y migraciones | Prisma | Esquema declarativo y migraciones versionadas |
+| Validación | Zod, en el paquete compartido | Un único esquema para campos y salida de la IA |
+| Tests | Vitest o Jest (unitarios), Supertest (integración), Playwright (E2E) | Cubren los tres niveles con TypeScript |
+| Contenedores | Docker Compose | El mismo arranque en cualquier máquina |
+| Integración continua | GitHub Actions | Ejecuta los tests en cada cambio |
+| IA | SDK oficial de Anthropic para TypeScript | Salida estructurada con esquema |
+| Desarrollo con IA | Claude Code, con `CLAUDE.md` y hooks | Práctica del máster; los prompts se registran en `prompts.md` |
+
+Las versiones concretas se fijarán al crear el código.
 
 ### **2.3. Descripción de alto nivel del proyecto y estructura de ficheros**
 
-> Representa la estructura del proyecto y explica brevemente el propósito de las carpetas principales, así como si obedece a algún patrón o arquitectura específica.
+Repositorio único con tres paquetes. Estructura prevista; los nombres de las carpetas son orientativos y se fijarán al crear el código en la Entrega 2:
+
+```text
+/
+├── backend/              API en NestJS
+│   ├── src/
+│   │   ├── cuentas/      registro, sesión, invitaciones
+│   │   ├── equipos/      equipos y membresías
+│   │   ├── peticiones/   peticiones, versiones, estados y transiciones
+│   │   ├── reglas/       catálogo como configuración e interfaz de lectura
+│   │   ├── analisis/     motor de reglas y puntuación
+│   │   ├── revision/     decisiones y salida final
+│   │   ├── exportacion/  compositor de salida y texto para Jira
+│   │   └── ia/           servicio de IA y proveedores simulado y real
+│   ├── prisma/           esquema, migraciones y datos de demostración
+│   └── test/             tests de integración
+├── frontend/             aplicación React + Vite
+├── compartido/           esquemas Zod y tipos comunes
+├── e2e/                  tests de Playwright
+├── proxy/                configuración del proxy de entrada
+├── docs/producto.md      documento de producto: la fuente de verdad
+├── docker-compose.yml
+├── .github/workflows/    integración continua
+├── CLAUDE.md             reglas de trabajo para el agente de código
+├── readme.md
+└── prompts.md
+```
+
+**Organización:**
+- **El backend sigue la estructura modular de NestJS**, un módulo por dominio, cada uno con sus capas.
+- **Las dependencias van en un solo sentido:** el dominio no conoce ni la fuente de las reglas ni el proveedor de IA, porque los recibe a través de interfaces.
+- **El script de medición de la IA** (`scripts/spike/`) vive en la rama `spike/medicion-ia` y se incorporará con la Entrega 2.
 
 ### **2.4. Infraestructura y despliegue**
 
-> Detalla la infraestructura del proyecto, incluyendo un diagrama en el formato que creas conveniente, y explica el proceso de despliegue que se sigue
+```mermaid
+flowchart TB
+    subgraph Equipo local con Docker Compose
+        PX[Proxy de entrada] --> FE[Frontend]
+        PX --> BE[Backend]
+        BE --> DB[(PostgreSQL)]
+    end
+    NAV[Navegador] --> PX
+    BE -.->|opcional, con ANTHROPIC_API_KEY| ANT[API de Anthropic]
+    subgraph GitHub
+        GH[Repositorio] --> CI[GitHub Actions<br/>lint, tipos y tests]
+    end
+```
+
+**Infraestructura:**
+- **Contenedores:** `docker compose up` levantará cuatro, el proxy de entrada, el frontend, el backend y PostgreSQL. No hace falta ninguna clave de IA.
+- **IA real:** es la única dependencia externa, y es opcional. Se activa definiendo `ANTHROPIC_API_KEY` en el entorno.
+- **Configuración:** se describe en un archivo de ejemplo de variables de entorno, versionado y sin secretos.
+
+**Despliegue:**
+- **Sin URL pública.** La entrega final se ejecuta en local, con la guía de 1.4 comprobada en un directorio limpio.
+- **Evidencia:** capturas o vídeo del sistema funcionando, indicando si las respuestas de la IA proceden del proveedor simulado o del real.
+- **Servidor:** en la entrega final se documentará cómo se llevaría a un servidor, sin ejecutarlo.
+
+**Integración continua:** un flujo de GitHub Actions en cada *push* y cada pull request:
+1. instala las dependencias;
+2. pasa el lint y la comprobación de tipos;
+3. ejecuta los tests unitarios y el conjunto de evaluación con el proveedor simulado;
+4. ejecuta los tests de integración con un servicio PostgreSQL;
+5. ejecuta los tests E2E, si el tiempo de ejecución lo permite;
+6. mide la cobertura de verdad, sin umbrales prometidos.
+
+No despliega ni llama al proveedor real.
 
 ### **2.5. Seguridad**
 
-> Enumera y describe las prácticas de seguridad principales que se han implementado en el proyecto, añadiendo ejemplos si procede
+Prácticas previstas:
+
+- **Contraseñas:** se guardan con hash Argon2id, con un mínimo de 10 caracteres.
+- **Sesión en el servidor:**
+  - al iniciar sesión se crea un token aleatorio, y en la base de datos solo se guarda su hash;
+  - el frontend lo guarda en `localStorage` y lo envía en la cabecera `Authorization` en cada petición;
+  - la sesión caduca a las 8 horas sin renovarse con la actividad, y cerrar sesión la invalida en el servidor.
+- **Riesgo aceptado: XSS.** Un script malicioso que llegara a ejecutarse en la página podría leer el token, cosa que una cookie `HttpOnly` impediría.
+  - **Por qué se acepta:** el sistema solo se ejecuta en local y la planificación va justa. La cookie con protección CSRF añadía trabajo y pruebas sin mejorar las garantías de la sesión en el servidor.
+  - **Lo que lo reduce:** React escapa el contenido, el frontend no inserta HTML sin escapar, el texto de las peticiones y la salida de la IA se tratan como datos, y solo se muestran como enlace las URL http o https.
+  - **Mejora anotada:** una política de seguridad de contenido (CSP) en el proxy.
+- **Límite de intentos:** 5 intentos fallidos en 15 minutos bloquean temporalmente (429) el inicio de sesión (por email y dirección), el registro y los códigos de invitación (por dirección). La dirección del cliente se toma de `X-Forwarded-For` solo cuando la petición llega del proxy de entrada. Sin eso, todos los usuarios compartirían la dirección del proxy y unos pocos fallos bloquearían a todo el mundo.
+- **Mensajes genéricos:** un email ya registrado, unas credenciales incorrectas o un código de invitación no válido reciben un mensaje que no distingue la causa. Sin verificación por email no se puede evitar del todo que se deduzca si una cuenta existe; es un riesgo aceptado, frenado por el límite de intentos.
+- **Aislamiento entre equipos:**
+  - las consultas pasan por repositorios que exigen el equipo de la sesión;
+  - un recurso que el usuario no puede ver responde siempre 404, sea de otro equipo o del propio, para no revelar que existe;
+  - un test recorre todos los endpoints y falla si aparece una ruta que no esté incluida en él.
+- **Permisos por rol:** la matriz de permisos se aplica en el backend. Por ejemplo, un revisor no decide sobre sus propias peticiones salvo en los casos de autodecisión. Las acciones no permitidas responden 403 por el rol y 409 por el estado.
+- **Códigos de invitación:** aleatorios de al menos 128 bits, de un solo uso, con caducidad de 7 días y marcado atómico.
+- **IA y entrada no confiable:**
+  - el texto de las peticiones va delimitado como dato no confiable, con instrucciones al modelo de no seguir lo que contenga;
+  - la salida se valida contra un esquema cerrado y nunca se ejecuta;
+  - hay límites de uso por usuario, por equipo y global (429), y un tope de gasto en la cuenta del proveedor.
+- **Secretos:** la clave de la IA nunca entra en el repositorio; se lee de una variable de entorno.
+- **Datos:** el repositorio y los tests solo usan datos ficticios. Los datos de demostración, con credenciales de prueba, solo se cargan si lo activa una variable de entorno.
 
 ### **2.6. Tests**
 
-> Describe brevemente algunos de los tests realizados
+> Los tests de la aplicación están **previstos**: se escribirán con el código, a partir de la Entrega 2. La **medición de la IA**, en cambio, **ya se ha hecho** y sus resultados están al final de este apartado.
+
+**Niveles de prueba previstos:**
+- **Unitarios (Vitest o Jest):**
+  - cada tipo de comprobación, con casos que cumplen y que no cumplen, y cada regla del catálogo;
+  - puntuación y condición de «completa», transiciones permitidas y prohibidas, y matriz de permisos;
+  - autodecisión, con un reloj inyectable para el plazo de 7 días;
+  - plantillas de salida y validación de los esquemas de la IA.
+- **Integración (Supertest contra PostgreSQL real):**
+  - registro e invitaciones, incluido un código usado en dos registros simultáneos;
+  - sesión: inicio, cierre, caducidad a las 8 horas y token en la cabecera `Authorization`;
+  - conflictos de versión y de estado (409), y transiciones concurrentes;
+  - disparadores de solo añadir;
+  - aislamiento entre equipos en todos los endpoints;
+  - límites de la IA (429) y fallo de la IA sin bloquear el flujo;
+  - datos de demostración que no se cargan sin su variable.
+- **E2E (Playwright), dos recorridos:**
+  - **(a) Equipo con un solo revisor:** registrarse, pegar una petición, completarla, enviarla, aceptarla como único revisor y exportarla.
+  - **(b) Equipo con dos revisores:** devolución con comentario, corrección, reenvío, aceptación y exportación.
+
+**Conjunto de evaluación:** de 10 a 15 peticiones ficticias con los valores esperados de cada campo. En la integración continua se ejecuta con el proveedor simulado, que prueba la tubería pero no la calidad de ningún modelo.
+
+**Trazabilidad:** cada requisito y cada regla se enlazará con al menos un test y con el comando que lo ejecuta.
+
+**Medición de la IA (hecha el 18 de noviembre de 2026):**
+- **Qué se midió:** el modo autor, con 6 peticiones ficticias, 3 ejecuciones por caso y 18 llamadas por configuración.
+- **Criterio, fijado antes de medir:**
+  - cero cifras o fechas inventadas;
+  - al menos un 70 % de aciertos en los campos;
+  - ninguna llamada por encima de 60 s;
+  - coste medio de 0,05 USD por llamada como máximo.
+- **Dónde está:** el script y los resultados, en la rama `spike/medicion-ia`.
+
+| Configuración | Aciertos | Cifras o fechas inventadas | Tiempo máximo | Coste por llamada | Detecta la contradicción del ejemplo |
+|---|---|---|---|---|---|
+| Opus 5.5, esfuerzo bajo | 91,8 % | 0 | 33,5 s | 0,019 USD | 3 de 3 |
+| **Sonnet 5.5, esfuerzo bajo** | **87,9 %** | **0** | **3,6 s** | **0,008 USD** | **3 de 3** |
+| Sonnet 5.5, esfuerzo medio | 87,4 % | 0 | 3,8 s | 0,009 USD | 3 de 3 |
+| Haiku 5.5, esfuerzo bajo | 88,9 % | 0 | 3,0 s | 0,0005 USD | 0 de 3 |
+| Haiku 5.5, esfuerzo medio | 88,9 % | 0 | 6,4 s | 0,0007 USD | 2 de 3 |
+
+**Resultado:**
+- **La IA compensa:** las cinco configuraciones cumplen el criterio.
+- **Decisión: Sonnet 5.5 con esfuerzo bajo, como desviación documentada.** El criterio elegía la más barata, Haiku con esfuerzo bajo. Pero el criterio solo puntuaba los campos, y la revisión manual mostró que Haiku no detecta la contradicción entre título y texto del ejemplo y repite preguntas que ya hacen las reglas.
+- **Limitación:** con 6 casos, la medición sirve para decidir en este MVP, no como garantía de calidad.
 
 ---
 
