@@ -375,13 +375,179 @@ erDiagram
 
 ## 5. Historias de Usuario
 
-> Documenta 3 de las historias de usuario principales utilizadas durante el desarrollo, teniendo en cuenta las buenas prácticas de producto al respecto.
+El MVP tiene siete historias (1.2): cinco imprescindibles (H1 a H5) y dos deseables (S1 y S2, la IA). Aquí se detallan las tres que forman el núcleo del producto: **H2, H3 y H4**. Los criterios de aceptación salen de los requisitos funcionales (RF-xx) y de los escenarios de [`docs/producto.md`](docs/producto.md), sección 21.
 
 **Historia de Usuario 1**
 
+**H2. Registrar una petición y ver qué le falta**
+
+> **Como** solicitante, **quiero** registrar una petición y ver qué le falta, **para** saber qué completar antes de enviarla.
+
+- **Prioridad:** imprescindible.
+- **Contexto:** hoy las peticiones llegan incompletas y el equipo descubre lo que falta después, por correo o en reuniones. Esta historia adelanta ese momento: en cuanto se registra la petición, el solicitante ve qué datos necesita el equipo y cuáles faltan.
+- **Incluye:**
+  - alta con título (obligatorio, hasta 120 caracteres), tipo (incidencia o cambio), origen y texto en bruto (opcional, hasta 10.000 caracteres);
+  - campos estructurados del tipo, en un formulario que se dibuja a partir de las definiciones de las reglas;
+  - evaluación con las reglas del tipo, puntuación de completitud, una pregunta por cada regla no cumplida y avisos de términos vagos.
+- **No incluye:** las sugerencias de la IA (historia deseable S1), cambiar el tipo después de crear la petición y los archivos adjuntos.
+- **Depende de:** H1 (cuenta y equipo) y el catálogo de reglas.
+
+**Criterios de aceptación:**
+
+```gherkin
+Escenario: Registrar una petición y ver qué le falta
+  Dado un solicitante con sesión iniciada en su equipo
+  Cuando crea una petición de tipo "cambio" con título, origen "jira" y un texto en bruto
+  Entonces se crea en estado "borrador" con su primera versión y su análisis
+  Y el panel muestra cada regla del tipo con su resultado (cumple, no cumple o no aplica)
+  Y por cada regla que no se cumple se muestra su pregunta de plantilla
+  Y la puntuación de completitud es visible, pero no basta por sí sola para enviar
+
+Escenario: Crear una petición sin texto en bruto
+  Dado un solicitante con sesión iniciada
+  Cuando crea una petición con título, tipo y origen, pero sin texto en bruto
+  Entonces se crea en "borrador" y puede rellenar los campos a mano
+
+Escenario: Título ausente o demasiado largo
+  Dado un solicitante con sesión iniciada
+  Cuando intenta crear una petición sin título o con un título de más de 120 caracteres
+  Entonces la petición no se crea y se le indica el error
+
+Escenario: Término vago sin cifra
+  Dada una versión con el campo "urgencia" igual a "lo antes posible"
+  Cuando se evalúa
+  Entonces se avisa del término vago en ese campo
+  Pero la puntuación no cambia
+
+Escenario: Término vago acompañado de una cifra
+  Dada una versión con el campo "urgencia" igual a "urgente, antes del 30-11-2026"
+  Cuando se evalúa
+  Entonces no se avisa de ningún término vago en ese campo
+```
+
+- **Requisitos:** RF-05, RF-06, RF-09, RF-10, RF-11, RF-12, RF-27 y RF-30.
+
 **Historia de Usuario 2**
 
+**H3. Completar la petición y enviarla a revisión**
+
+> **Como** solicitante, **quiero** completar mi petición, ver cómo mejora y enviarla a revisión cuando esté completa, **para** que el equipo la valore.
+
+- **Prioridad:** imprescindible.
+- **Contexto:** es el bucle de aclaración que hoy ocurre por correo. Cada respuesta del solicitante queda registrada como una versión nueva, de modo que se ve cómo mejora la petición, y el envío solo es posible cuando la petición cumple lo mínimo que el equipo necesita.
+- **Incluye:**
+  - responder a las preguntas rellenando los campos;
+  - una versión nueva por cada guardado, evaluada de nuevo;
+  - el historial de versiones con su puntuación;
+  - el envío a revisión, que solo es posible si se cumplen todas las reglas obligatorias;
+  - retirar la petición de revisión y cancelarla.
+- **No incluye:** las preguntas adicionales de la IA y sus aclaraciones (historia deseable S1).
+- **Depende de:** H2.
+
+**Criterios de aceptación:**
+
+```gherkin
+Escenario: Responder a una pregunta crea una versión nueva
+  Dada una petición en "borrador" cuya última versión es la 1 y tiene la regla de métrica sin cumplir
+  Cuando el autor rellena la métrica de éxito y guarda indicando la versión 1
+  Entonces se crea la versión 2, se evalúa de nuevo y la regla de métrica pasa a "cumple"
+  Y el historial muestra la puntuación de las versiones 1 y 2
+
+Escenario: Guardar sobre una versión que ya no es la última
+  Dada una petición cuya última versión es la 3
+  Cuando el autor guarda indicando la versión 2
+  Entonces el guardado se rechaza con un conflicto (409) y no se crea ninguna versión
+
+Escenario: No se puede enviar con una regla obligatoria sin cumplir
+  Dada una petición cuya última versión tiene al menos una regla obligatoria en "no cumple"
+  Cuando el autor intenta enviarla a revisión
+  Entonces el envío se rechaza (422)
+  Y la petición sigue en "borrador" o en "devuelta"
+
+Escenario: Una petición completa pasa a revisión
+  Dada una petición con todas las reglas obligatorias aplicables en "cumple"
+  Cuando el autor la envía indicando el número de su última versión
+  Entonces pasa a "lista para revisión"
+  Y se registran la transición y la fecha de envío
+
+Escenario: Retirar una petición de revisión
+  Dada una petición en "lista para revisión"
+  Cuando su autor la retira
+  Entonces vuelve a "borrador" y puede editarla de nuevo
+```
+
+- **Requisitos:** RF-07, RF-17 (respuesta rellenando campos), RF-18, RF-19, RF-31 y RF-36.
+
 **Historia de Usuario 3**
+
+**H4. Revisar y decidir**
+
+> **Como** revisor, **quiero** ver las peticiones enviadas y aceptarlas, devolverlas o rechazarlas con un comentario, **para** que solo entre trabajo claro.
+
+- **Prioridad:** imprescindible.
+- **Contexto:** el revisor es quien decide si una petición está lista para el equipo. Que una petición cumpla las reglas significa que tiene los datos, no que estén bien. Esa calidad la juzga una persona, que puede devolverla con un comentario, rechazarla o aceptarla y ajustar la redacción final.
+- **Incluye:**
+  - el listado de las peticiones del equipo que se han enviado alguna vez, con filtros por estado y tipo y el tiempo que llevan esperando;
+  - la vista previa de la salida compuesta;
+  - aceptar (con comentario opcional y la salida final editable), devolver o rechazar (con comentario obligatorio);
+  - la autodecisión cuando el revisor es el único del equipo o la petición lleva más de 7 días sin decisión;
+  - la protección frente a decidir sobre algo que ya no es lo que se vio.
+- **No incluye:** los criterios de aceptación propuestos por la IA (historia deseable S2) y las preguntas libres del revisor al solicitante, que quedan fuera del MVP.
+- **Depende de:** H3.
+
+**Criterios de aceptación:**
+
+```gherkin
+Escenario: Devolver con comentario y corrección del autor
+  Dada una petición en "lista para revisión"
+  Cuando el revisor la devuelve con un comentario
+  Entonces la petición pasa a "devuelta" y vuelve a ser editable por su autor
+  Y el autor ve el comentario en el detalle
+  Cuando el autor edita los campos y la reenvía
+  Entonces vuelve a "lista para revisión"
+
+Escenario: Devolver o rechazar sin comentario
+  Dada una petición en "lista para revisión"
+  Cuando el revisor intenta devolverla o rechazarla sin comentario
+  Entonces la decisión se rechaza como entrada inválida y no se registra nada
+
+Escenario: Aceptar con la salida final editada
+  Dada una petición en "lista para revisión" que el revisor puede decidir
+  Cuando la acepta editando el título, la descripción y los criterios de la salida
+  Entonces la petición pasa a "aceptada"
+  Y la salida final que se guarda es la editada, que es la que se exportará
+
+Escenario: El único revisor del equipo decide su propia petición
+  Dado un equipo con un solo revisor
+  Y una petición propia de ese revisor en "lista para revisión"
+  Cuando la acepta
+  Entonces la decisión se guarda con el motivo de autodecisión "UNICO_REVISOR"
+
+Escenario: Dos decisiones simultáneas sobre la misma petición
+  Dada una petición en "lista para revisión"
+  Cuando dos revisores deciden a la vez
+  Entonces una decisión prospera
+  Y la otra se rechaza con un conflicto (409) sin registrar nada
+
+Escenario: Decidir tras una retirada y un reenvío sin versión nueva
+  Dada una petición en "lista para revisión" en su versión 3, que el revisor está viendo
+  Y su autor la retira, añade una aclaración (sigue en la versión 3) y la reenvía
+  Cuando el revisor decide indicando la versión 3 y la fecha de envío que vio
+  Entonces la decisión se rechaza con un conflicto (409) y no se registra nada
+
+Escenario: Un revisor no ve los borradores ajenos que nunca se han enviado
+  Dado un borrador de un solicitante que nunca se ha enviado a revisión
+  Cuando un revisor del mismo equipo lo pide
+  Entonces la respuesta es 404, como si no existiera
+```
+
+- **Requisitos:** RF-20, RF-21, RF-23, RF-34 y RF-36.
+
+**Definición de hecho (común a las tres historias):**
+- Los escenarios anteriores pasan como tests automáticos (de integración o E2E).
+- Cada requisito de la historia está enlazado con al menos un test.
+- El aislamiento entre equipos se comprueba en todas las rutas nuevas.
+- Lo que el README afirma de la historia está verificado, no solo previsto.
 
 ---
 
