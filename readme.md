@@ -67,12 +67,12 @@ Dos ejemplos ficticios del tipo de petición que llega:
 
 **Funcionalidades:**
 
-1. **Cuentas y equipos.** Quien se registra crea un equipo y queda como revisor. Después invita a otras personas con un código de un solo uso que lleva asociado el rol. La sesión se guarda en el servidor y caduca a las 8 horas.
+1. **Cuentas y equipos.** Quien se registra crea un equipo y queda como revisor. Después invita a otras personas con un código de un solo uso que lleva asociado el rol. La sesión se guarda en el servidor y caduca a las 8 horas; el frontend envía su token en la cabecera `Authorization`, sin cookies (ver 2.5).
 2. **Alta de una petición.** Título, tipo (*incidencia o anomalía*, o *cambio o mejora*), origen (correo, reunión, Jira u otro) y, si se tiene, el texto en bruto.
 3. **Campos estructurados por tipo.** Cada tipo tiene sus campos: qué se observa, valores actual y de referencia, fecha de inicio, alcance, comportamiento actual y deseado, motivo, métrica de éxito, enlace a diseño… Los formularios se dibujan a partir de las definiciones de las reglas, no campo a campo. Se usan enlaces, no archivos adjuntos.
 4. **Evaluación con reglas deterministas.** Doce reglas para incidencias y once para cambios, cada una sobre un campo y con una comprobación de un conjunto cerrado: texto obligatorio, contiene una cifra, fecha absoluta, enlace válido u opción de una lista. Da una **puntuación de completitud** visible y avisa de términos vagos («lo antes posible», «mejorar») cuando no van acompañados de una cifra.
 5. **Preguntas y bucle de aclaración.** Por cada regla que no se cumple, una pregunta de plantilla. El solicitante responde rellenando el campo, y cada guardado crea una **versión nueva** que se vuelve a evaluar. El historial muestra cómo evoluciona la puntuación.
-6. **Umbral de envío.** La petición solo puede enviarse a revisión cuando cumple todas las reglas obligatorias. La puntuación informa, pero lo que decide es esa condición.
+6. **Umbral de envío.** La petición solo puede enviarse a revisión cuando cumple todas las reglas obligatorias que le aplican. La puntuación informa, pero lo que decide es esa condición.
 7. **Revisión.** El revisor acepta, devuelve con un comentario (y la petición vuelve a ser editable) o rechaza con un comentario. Antes de aceptar puede editar la salida final. Un revisor no decide sobre sus propias peticiones, salvo que sea el único revisor del equipo o que lleven más de 7 días sin decisión.
 8. **Salida y exportación.** Una plantilla determinista compone una **historia de usuario** (para los cambios) o un **ticket de investigación** (para las incidencias), que se exporta como texto listo para pegar en Jira.
 9. **Asistencia con IA (opcional).** En **modo autor**, propone valores para los campos a partir del texto, preguntas adicionales, un título y un aviso si el título y el texto se contradicen. En **modo revisor**, propone criterios de aceptación o hipótesis. Todo se muestra como sugerencia y nunca se aplica solo. Sin clave, funciona con un **proveedor simulado**, marcado como «Simulado» en la interfaz. El proveedor real es Anthropic, con el modelo `claude-sonnet-5-5`, elegido midiendo varios modelos: ninguno inventó cifras ni fechas (detalle en `docs/producto.md`, 12.2).
@@ -190,7 +190,7 @@ El frontend es una aplicación de una sola página que habla con la API REST ver
 - Los formularios se dibujan desde las definiciones de las reglas, así que no pueden desalinearse.
 
 **Sacrificios y déficits:**
-- **Una sola instancia del backend.** Los contadores del límite de intentos de inicio de sesión viven en memoria: no sirven con varias instancias y se reinician al reiniciar el servidor.
+- **Una sola instancia del backend.** Los contadores del límite de intentos (inicio de sesión, registro y códigos de invitación) viven en memoria: no sirven con varias instancias y se reinician al reiniciar el servidor.
 - **Cambiar una regla exige desplegar.** En el MVP no hay pantalla para editar reglas, porque viven en configuración.
 - **Riesgo de XSS aceptado.** El token de sesión se guarda en el navegador (`localStorage`) en lugar de en una cookie `HttpOnly` (ver 2.5).
 - **Sin escalado ni alta disponibilidad.** El sistema solo se ejecuta en local.
@@ -646,7 +646,7 @@ paths:
                         campo_clave: metrica_exito
                         severidad: OBLIGATORIA
                         estado: NO_APLICA
-                        pregunta: null
+                        pregunta: ¿Con qué cifra se medirá el éxito?   # texto de ejemplo; se guarda siempre, pero solo se muestra si no se cumple
                     avisos_terminos_vagos: []
         '400': { $ref: '#/components/responses/EntradaInvalida' }
         '401': { $ref: '#/components/responses/NoAutenticado' }
@@ -940,8 +940,7 @@ components:
         estado: { type: string, enum: [CUMPLE, NO_CUMPLE, NO_APLICA] }
         pregunta:
           type: string
-          nullable: true
-          description: Pregunta de plantilla; se muestra cuando la regla no se cumple.
+          description: Copia de la pregunta de plantilla. Se guarda en todos los resultados, pero solo se muestra al usuario cuando la regla no se cumple.
 
     Decidir:
       oneOf:
@@ -978,7 +977,7 @@ components:
       required: [titulo, descripcion, criterios]
       description: Lo que se exportará. Parte de la salida compuesta y el revisor puede editarla.
       properties:
-        titulo: { type: string, maxLength: 120 }
+        titulo: { type: string }
         descripcion: { type: string }
         criterios:
           type: array
