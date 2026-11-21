@@ -563,7 +563,445 @@ erDiagram
 
 ## 4. Especificación de la API
 
-> Si tu backend se comunica a través de API, describe los endpoints principales (máximo 3) en formato OpenAPI. Opcionalmente puedes añadir un ejemplo de petición y de respuesta para mayor claridad
+La API es REST, va bajo `/v1` y usa JSON. Estos son los tres endpoints que sostienen el flujo principal: crear una petición, completarla versión a versión y decidir sobre ella. Todos exigen el token de sesión en la cabecera `Authorization`. El resto de rutas está en [`docs/producto.md`](docs/producto.md), sección 10.4.
+
+> Especificación prevista, no implementada. La forma exacta de las respuestas puede ajustarse en la Entrega 2; lo que no cambia son las reglas de negocio y los códigos de error.
+
+**Códigos de error comunes:**
+
+| Código | Cuándo |
+|---|---|
+| 400 | Entrada inválida: falta un dato, sobra una clave de campo, una opción no está en la lista o un texto supera su longitud |
+| 401 | Sin cabecera `Authorization`, o con un token no válido, cerrado o caducado |
+| 403 | El usuario puede ver la petición, pero su rol o su relación con ella no le permiten la acción |
+| 404 | La petición no existe o el usuario no puede verla: es de otro equipo o es un borrador ajeno. Nunca se distingue entre los dos casos |
+| 409 | Conflicto: la versión indicada ya no es la última, la petición no está en un estado que permita la acción o ha cambiado entre la lectura y la escritura |
+| 422 | La petición no cumple las reglas obligatorias para enviarse a revisión |
+
+Se comprueba en este orden: primero si el usuario puede ver la petición (404), luego si su rol se lo permite (403) y por último si el estado lo permite (409).
+
+```yaml
+openapi: 3.0.3
+info:
+  title: Umbral API
+  version: 0.1.0
+  description: Endpoints principales del flujo de una petición (especificación prevista).
+servers:
+  - url: /v1
+security:
+  - sesion: []
+
+paths:
+  /peticiones:
+    post:
+      summary: Crear una petición
+      description: >
+        Crea la petición en estado BORRADOR, con su primera versión (sin campos)
+        y el análisis de esa versión. Puede hacerlo cualquier miembro del equipo activo.
+      operationId: crearPeticion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CrearPeticion' }
+            example:
+              titulo: Botón recuperar contraseña como secundario
+              tipo: CAMBIO
+              origen: JIRA
+              texto_origen: >-
+                El botón de iniciar sesión sin contraseña debería ser secundario.
+                Hoy hay dos botones al iniciar sesión y queremos que más usuarios
+                recuperen su contraseña si no la recuerdan…
+      responses:
+        '201':
+          description: Petición creada con su primera versión y su análisis.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Peticion' }
+              example:
+                id: 7f0c2b9e-4d1a-4c55-9a3e-2b8f6c1d0e47
+                tipo: CAMBIO
+                origen: JIRA
+                estado: BORRADOR
+                creada_en: '2026-11-21T10:00:00+01:00'
+                enviada_en: null
+                ultima_version:
+                  numero: 1
+                  titulo: Botón recuperar contraseña como secundario
+                  texto_origen: El botón de iniciar sesión sin contraseña debería ser secundario…
+                  campos: {}
+                  analisis:
+                    puntuacion: 0
+                    completa: false
+                    version_catalogo: 3b5d…
+                    resultados:          # se muestran 2 de los 11
+                      - regla_codigo: RC-01
+                        regla_etiqueta: Comportamiento actual descrito
+                        campo_clave: comportamiento_actual
+                        severidad: OBLIGATORIA
+                        estado: NO_CUMPLE
+                        pregunta: ¿Cómo funciona hoy?   # texto de ejemplo
+                      - regla_codigo: RC-06
+                        regla_etiqueta: Métrica de éxito con su cifra
+                        campo_clave: metrica_exito
+                        severidad: OBLIGATORIA
+                        estado: NO_APLICA
+                        pregunta: null
+                    avisos_terminos_vagos: []
+        '400': { $ref: '#/components/responses/EntradaInvalida' }
+        '401': { $ref: '#/components/responses/NoAutenticado' }
+
+  /peticiones/{id}/versiones:
+    post:
+      summary: Guardar una versión nueva
+      description: >
+        Guarda los campos como una versión nueva y la evalúa con las reglas del tipo.
+        Solo el autor, con la petición en BORRADOR o DEVUELTA. numero_base es la versión
+        sobre la que se ha trabajado: si ya existe una posterior, responde 409 y no crea nada.
+        La versión, el análisis y los resultados se crean en una sola transacción.
+      operationId: guardarVersion
+      parameters:
+        - $ref: '#/components/parameters/IdPeticion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/GuardarVersion' }
+            example:
+              numero_base: 1
+              titulo: Hacer secundario el botón de iniciar sesión sin contraseña
+              texto_origen: El botón de iniciar sesión sin contraseña debería ser secundario…
+              campos:
+                comportamiento_actual: Hay dos botones en el inicio de sesión
+                comportamiento_deseado: El botón de iniciar sesión sin contraseña debe ser secundario
+                actor: Usuarios que no recuerdan su contraseña
+                motivo: Que más usuarios recuperen la contraseña y queden con sesión iniciada
+                tiene_metrica: SI
+                afecta_interfaz: SI
+      responses:
+        '201':
+          description: Versión creada y evaluada.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Version' }
+              example:
+                numero: 2
+                titulo: Hacer secundario el botón de iniciar sesión sin contraseña
+                campos: { tiene_metrica: SI, afecta_interfaz: SI }   # abreviado
+                analisis:
+                  puntuacion: 67        # 6 de 9 reglas obligatorias aplicables
+                  completa: false
+                  version_catalogo: 3b5d…
+                  resultados:            # se muestra 1 de los 11
+                    - regla_codigo: RC-06
+                      regla_etiqueta: Métrica de éxito con su cifra
+                      campo_clave: metrica_exito
+                      severidad: OBLIGATORIA
+                      estado: NO_CUMPLE
+                      pregunta: ¿Con qué cifra se medirá el éxito?   # texto de ejemplo
+                  avisos_terminos_vagos: []
+        '400': { $ref: '#/components/responses/EntradaInvalida' }
+        '401': { $ref: '#/components/responses/NoAutenticado' }
+        '403': { $ref: '#/components/responses/AccionNoPermitida' }
+        '404': { $ref: '#/components/responses/NoEncontrada' }
+        '409': { $ref: '#/components/responses/Conflicto' }
+
+  /peticiones/{id}/decision:
+    post:
+      summary: Decidir sobre una petición en revisión
+      description: >
+        Acepta, devuelve o rechaza una petición en LISTA_PARA_REVISION. El revisor indica
+        la versión que ha visto y el enviada_en del envío que ha visto: si la versión ya
+        no es la última, o si la petición se ha retirado y reenviado desde entonces,
+        responde 409 y no registra nada. Un revisor no decide sobre sus propias peticiones,
+        salvo que sea el único del equipo o que lleven más de 7 días sin decisión; en ese
+        caso la decisión guarda motivo_autodecision.
+      operationId: decidir
+      parameters:
+        - $ref: '#/components/parameters/IdPeticion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Decidir' }
+            examples:
+              aceptar:
+                value:
+                  resultado: ACEPTADA
+                  numero_version: 3
+                  enviada_en: '2026-11-21T10:30:00+01:00'
+                  salida_final:
+                    titulo: Hacer secundario el botón de iniciar sesión sin contraseña
+                    descripcion: >-
+                      Como usuarios que no recuerdan su contraseña, queremos que el botón
+                      de iniciar sesión sin contraseña sea secundario…
+                    criterios:
+                      - El botón de iniciar sesión sin contraseña se muestra con estilo secundario en web y móvil.
+                      - El botón de iniciar sesión sin contraseña deja de mostrarse con estilo primario; el resto de la pantalla no cambia.
+              devolver:
+                value:
+                  resultado: DEVUELTA
+                  numero_version: 3
+                  enviada_en: '2026-11-21T10:30:00+01:00'
+                  comentario: Falta indicar si el cambio aplica también a la app móvil.
+      responses:
+        '201':
+          description: Decisión registrada; la petición pasa al estado correspondiente.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Decision' }
+              example:
+                id: 2c9e5a10-8b7f-4e3d-b1a2-6f0d9c4e8a21
+                resultado: ACEPTADA
+                numero_version: 3
+                estado_peticion: ACEPTADA
+                motivo_autodecision: null
+                decidida_en: '2026-11-21T11:05:00+01:00'
+        '400': { $ref: '#/components/responses/EntradaInvalida' }
+        '401': { $ref: '#/components/responses/NoAutenticado' }
+        '403': { $ref: '#/components/responses/AccionNoPermitida' }
+        '404': { $ref: '#/components/responses/NoEncontrada' }
+        '409': { $ref: '#/components/responses/Conflicto' }
+
+components:
+  securitySchemes:
+    sesion:
+      type: http
+      scheme: bearer
+      description: Token de sesión devuelto por POST /auth/login. En el servidor solo se guarda su hash.
+
+  parameters:
+    IdPeticion:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+
+  responses:
+    EntradaInvalida:
+      description: Entrada inválida. Indica qué campo falla cuando se puede.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          examples:
+            titulo:
+              value:
+                codigo: ENTRADA_INVALIDA
+                mensaje: Revisa los datos marcados.
+                campos: { titulo: Es obligatorio y admite hasta 120 caracteres. }
+            campo_desconocido:
+              value:
+                codigo: ENTRADA_INVALIDA
+                mensaje: Revisa los datos marcados.
+                campos: { color_boton: No es un campo de este tipo de petición. }
+            sin_comentario:
+              value:
+                codigo: ENTRADA_INVALIDA
+                mensaje: Revisa los datos marcados.
+                campos: { comentario: Es obligatorio al devolver o rechazar. }
+    NoAutenticado:
+      description: Sin token de sesión, o con un token no válido, cerrado o caducado.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example:
+            codigo: NO_AUTENTICADO
+            mensaje: La sesión no es válida o ha caducado. Vuelve a iniciar sesión.
+    AccionNoPermitida:
+      description: El usuario puede ver la petición, pero su rol o su relación con ella no le permiten la acción.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          examples:
+            editar_ajena:
+              value:
+                codigo: ACCION_NO_PERMITIDA
+                mensaje: Solo el autor puede editar esta petición.
+            decidir_propia:
+              value:
+                codigo: ACCION_NO_PERMITIDA
+                mensaje: No puedes decidir sobre tu propia petición.
+    NoEncontrada:
+      description: La petición no existe o el usuario no puede verla. Nunca se distingue entre los dos casos.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          example:
+            codigo: NO_ENCONTRADA
+            mensaje: No se ha encontrado la petición.
+    Conflicto:
+      description: La versión, el estado o el envío han cambiado entre la lectura y la escritura. No se registra nada.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          examples:
+            version_superada:
+              value:
+                codigo: VERSION_SUPERADA
+                mensaje: Hay una versión más reciente de esta petición. Recárgala antes de continuar.
+            estado_no_permite:
+              value:
+                codigo: ESTADO_NO_PERMITE
+                mensaje: La petición ya no está en un estado que permita esta acción.
+            envio_cambiado:
+              value:
+                codigo: ENVIO_CAMBIADO
+                mensaje: La petición se ha retirado y reenviado desde que la abriste. Recárgala antes de decidir.
+
+  schemas:
+    Error:
+      type: object
+      required: [codigo, mensaje]
+      properties:
+        codigo:
+          type: string
+          description: Código estable para el frontend.
+          enum: [ENTRADA_INVALIDA, NO_AUTENTICADO, ACCION_NO_PERMITIDA, NO_ENCONTRADA, VERSION_SUPERADA, ESTADO_NO_PERMITE, ENVIO_CAMBIADO]
+        mensaje: { type: string, description: Mensaje legible para el usuario. }
+        campos:
+          type: object
+          description: Errores por clave de campo (solo con ENTRADA_INVALIDA).
+          additionalProperties: { type: string }
+
+    CrearPeticion:
+      type: object
+      required: [titulo, tipo, origen]
+      properties:
+        titulo: { type: string, minLength: 1, maxLength: 120 }
+        tipo: { type: string, enum: [INCIDENCIA, CAMBIO] }
+        origen: { type: string, enum: [CORREO, REUNION, JIRA, OTRO] }
+        texto_origen: { type: string, maxLength: 10000, nullable: true }
+
+    GuardarVersion:
+      type: object
+      required: [numero_base, titulo, campos]
+      properties:
+        numero_base: { type: integer, minimum: 1 }
+        titulo: { type: string, minLength: 1, maxLength: 120 }
+        texto_origen: { type: string, maxLength: 10000, nullable: true }
+        campos:
+          type: object
+          description: >
+            Claves de campo del tipo de la petición (las devuelve GET /reglas?tipo=).
+            Todos los valores son texto de hasta 2.000 caracteres. Una clave desconocida
+            o una opción fuera de la lista devuelven 400.
+          additionalProperties: { type: string, maxLength: 2000 }
+
+    Peticion:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        tipo: { type: string, enum: [INCIDENCIA, CAMBIO] }
+        origen: { type: string, enum: [CORREO, REUNION, JIRA, OTRO] }
+        estado:
+          type: string
+          enum: [BORRADOR, LISTA_PARA_REVISION, DEVUELTA, ACEPTADA, RECHAZADA, CANCELADA]
+        creada_en: { type: string, format: date-time }
+        enviada_en: { type: string, format: date-time, nullable: true }
+        ultima_version: { $ref: '#/components/schemas/Version' }
+
+    Version:
+      type: object
+      properties:
+        numero: { type: integer }
+        titulo: { type: string }
+        texto_origen: { type: string, nullable: true }
+        campos:
+          type: object
+          additionalProperties: { type: string }
+        analisis: { $ref: '#/components/schemas/Analisis' }
+
+    Analisis:
+      type: object
+      properties:
+        puntuacion: { type: integer, minimum: 0, maximum: 100 }
+        completa:
+          type: boolean
+          description: Ninguna regla obligatoria aplicable está en NO_CUMPLE; es la condición para enviar.
+        version_catalogo: { type: string, description: Hash del catálogo de reglas usado. }
+        resultados:
+          type: array
+          items: { $ref: '#/components/schemas/ResultadoRegla' }
+        avisos_terminos_vagos:
+          type: array
+          items:
+            type: object
+            properties:
+              campo_clave: { type: string }
+              termino: { type: string }
+
+    ResultadoRegla:
+      type: object
+      properties:
+        regla_codigo: { type: string, example: RC-06 }
+        regla_etiqueta: { type: string }
+        campo_clave: { type: string }
+        severidad: { type: string, enum: [OBLIGATORIA, RECOMENDADA] }
+        estado: { type: string, enum: [CUMPLE, NO_CUMPLE, NO_APLICA] }
+        pregunta:
+          type: string
+          nullable: true
+          description: Pregunta de plantilla; se muestra cuando la regla no se cumple.
+
+    Decidir:
+      oneOf:
+        - $ref: '#/components/schemas/Aceptar'
+        - $ref: '#/components/schemas/DevolverORechazar'
+      discriminator:
+        propertyName: resultado
+        mapping:
+          ACEPTADA: '#/components/schemas/Aceptar'
+          DEVUELTA: '#/components/schemas/DevolverORechazar'
+          RECHAZADA: '#/components/schemas/DevolverORechazar'
+
+    Aceptar:
+      type: object
+      required: [resultado, numero_version, enviada_en, salida_final]
+      properties:
+        resultado: { type: string, enum: [ACEPTADA] }
+        numero_version: { type: integer, minimum: 1 }
+        enviada_en: { type: string, format: date-time }
+        comentario: { type: string, nullable: true }
+        salida_final: { $ref: '#/components/schemas/SalidaFinal' }
+
+    DevolverORechazar:
+      type: object
+      required: [resultado, numero_version, enviada_en, comentario]
+      properties:
+        resultado: { type: string, enum: [DEVUELTA, RECHAZADA] }
+        numero_version: { type: integer, minimum: 1 }
+        enviada_en: { type: string, format: date-time }
+        comentario: { type: string, minLength: 1 }
+
+    SalidaFinal:
+      type: object
+      required: [titulo, descripcion, criterios]
+      description: Lo que se exportará. Parte de la salida compuesta y el revisor puede editarla.
+      properties:
+        titulo: { type: string, maxLength: 120 }
+        descripcion: { type: string }
+        criterios:
+          type: array
+          description: Criterios de aceptación (cambio) o hipótesis y datos a recopilar (incidencia).
+          items: { type: string }
+
+    Decision:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        resultado: { type: string, enum: [ACEPTADA, DEVUELTA, RECHAZADA] }
+        numero_version: { type: integer }
+        estado_peticion: { type: string, enum: [ACEPTADA, DEVUELTA, RECHAZADA] }
+        motivo_autodecision: { type: string, enum: [UNICO_REVISOR, PLAZO], nullable: true }
+        decidida_en: { type: string, format: date-time }
+```
+
+**Qué no muestra la especificación, pero se comprueba:**
+- **Guardar una versión:** un revisor que intenta editar una petición ajena enviada recibe 403. Un solicitante que pide una petición de otro solicitante recibe 404, porque no puede verla.
+- **Decidir:**
+  - la decisión del revisor sobre su propia petición sin excepción recibe 403;
+  - devolver o rechazar sin comentario recibe 400;
+  - dos decisiones simultáneas: una prospera y la otra recibe 409.
 
 ---
 
@@ -880,11 +1318,17 @@ Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. S
 
 ## 7. Pull Requests
 
-> Documenta 3 de las Pull Requests realizadas durante la ejecución del proyecto
+> **Planificado para la entrega final.** En la Entrega 1 todavía no hay código, así que no hay pull requests. El desarrollo se hará con ramas de funcionalidad y pull requests dentro del fork, y aquí se documentarán al menos tres: una por cada ticket de la sección 6 (base de datos, backend y frontend).
 
 **Pull Request 1**
 
+Pendiente: [BD-1] Modelo de datos, migraciones y acceso con contexto de equipo.
+
 **Pull Request 2**
 
+Pendiente: [BE-1] Motor de reglas y evaluación al guardar una versión.
+
 **Pull Request 3**
+
+Pendiente: [FE-1] Formulario dinámico y panel de reglas.
 
