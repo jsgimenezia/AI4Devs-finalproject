@@ -1,7 +1,7 @@
 # Documento de producto — Umbral: validador y asistente de peticiones
 
 > **Nombre del producto:** Umbral — *Unclear Messages Become Ready, Actionable and Listed*.
-> **Versión:** 1.8 (base para empezar a implementar) · **Fecha:** 19 de noviembre de 2026 · **Congelado:** a partir de esta versión solo se cambia como excepción documentada en el historial
+> **Versión:** 1.8.1 (base para empezar a implementar) · **Fecha:** 21 de noviembre de 2026 · **Congelado:** a partir de esta versión solo se cambia como excepción documentada en el historial
 > **Autor:** Javier (JSG) · **Contexto:** Proyecto final del Máster AI4Devs (LIDR Academy)
 > **Estado:** **cerrados por el autor:** alcance, stack, catálogo de reglas de los dos tipos de petición (códigos, campos y comprobaciones), estados y transiciones, permisos, sesión y aislamiento. **Provisionales:** las severidades de las reglas (6.2 y 6.3), los valores iniciales de 6.9 y la API y el diseño detallado. **Decididos tras medir:** modelo y esfuerzo de la IA, `claude-sonnet-5-5` con esfuerzo `low`, como desviación documentada del criterio (12.2).
 
@@ -34,6 +34,7 @@
 | 1.6 | Revisión externa de un compañero. La decisión indica también el `enviada_en` que vio el revisor, para detectar una retirada y un reenvío sin versión nueva (por ejemplo, tras añadir una aclaración), con su escenario en 21.5 y su test en 12.1. Regla general para acciones no permitidas: 403 por el rol o la relación con la petición y 409 por el estado, comprobando en el orden 404, 403 y 409; se aplica a las sugerencias. Los avisos de términos vagos se recalculan en cada lectura con un único servicio. El proxy de entrada forma parte del primer recorrido de extremo a extremo |
 | 1.7 | Sesión: se adopta ya la alternativa prevista en la sección 14, por el riesgo de desviación en una planificación justa. El token de sesión viaja en la cabecera `Authorization` y el frontend lo guarda en `localStorage`; desaparecen la cookie, la protección CSRF y la columna `csrf_token`, y las pruebas de CSRF pasan a ser de la cabecera. La sesión sigue en el servidor, con el mismo cierre, caducidad y equipo activo. Riesgo de XSS aceptado y descrito en 14. El proxy se mantiene por `X-Forwarded-For` y para no necesitar CORS |
 | 1.8 | Versión final antes de implementar, congelada. Espera, reintentos y `max_tokens` de 6.9 pasan de «a medir» a medidos. El modo autor del producto parte de las instrucciones medidas (`spike-autor-2`) y, si cambian, se vuelve a medir; el modo revisor no se midió. Diagramas Mermaid comprobados: los tres se dibujan sin errores |
+| 1.8.1 | Excepción a la congelación: en el diagrama del modelo de datos (9), `texto_origen` se marca como nulo, como ya decían RF-05 y la cuestión 21. Se detectó al redactar la sección 3 del README. No cambia ningún requisito |
 
 No constan versiones 0.8 ni 0.9. El detalle de cada versión está en el historial de git.
 
@@ -726,7 +727,7 @@ erDiagram
         uuid peticion_id FK
         int numero "unico por peticion"
         string titulo
-        text texto_origen
+        text texto_origen "nullable, el texto en bruto es opcional"
         json campos "claves de campo estables, valores de texto"
         uuid creada_por FK
         datetime creada_en

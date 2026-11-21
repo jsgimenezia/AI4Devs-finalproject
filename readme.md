@@ -187,12 +187,183 @@ Las dos deseables son la IA. Como la herramienta funciona completa sin ella, pue
 
 ### **3.1. Diagrama del modelo de datos:**
 
-> Recomendamos usar mermaid para el modelo de datos, y utilizar todos los parámetros que permite la sintaxis para dar el máximo detalle, por ejemplo las claves primarias y foráneas.
+> Modelo previsto para PostgreSQL (con Prisma). Los nombres de entidades y atributos pueden ajustarse en el diseño detallado de la Entrega 2.
 
+```mermaid
+erDiagram
+    EQUIPO ||--o{ MEMBRESIA : tiene
+    USUARIO ||--o{ MEMBRESIA : pertenece
+    USUARIO ||--o{ SESION : abre
+    EQUIPO ||--o{ INVITACION : emite
+    EQUIPO ||--o{ PETICION : recibe
+    USUARIO ||--o{ PETICION : crea
+    PETICION ||--|{ VERSION_PETICION : tiene
+    VERSION_PETICION ||--|| ANALISIS : genera
+    ANALISIS ||--o{ RESULTADO_REGLA : contiene
+    VERSION_PETICION ||--o{ SUGERENCIA_IA : "recibe bajo demanda"
+    USUARIO ||--o{ SUGERENCIA_IA : solicita
+    VERSION_PETICION ||--o{ ACLARACION : recoge
+    PETICION ||--o{ DECISION : recibe
+    VERSION_PETICION ||--o{ DECISION : "es decidida en"
+    USUARIO ||--o{ DECISION : toma
+    PETICION ||--|{ TRANSICION : registra
+    USUARIO ||--o{ TRANSICION : realiza
+
+    EQUIPO {
+        uuid id PK
+        string nombre
+    }
+    USUARIO {
+        uuid id PK
+        string email UK
+        string nombre
+        string password_hash "Argon2id"
+        datetime email_verificado_en "nullable, uso futuro"
+    }
+    MEMBRESIA {
+        uuid id PK
+        uuid usuario_id FK "unico junto con equipo_id"
+        uuid equipo_id FK
+        string rol "SOLICITANTE | REVISOR"
+        datetime creada_en
+    }
+    SESION {
+        uuid id PK
+        string token_hash UK "solo el hash del token de sesion"
+        uuid usuario_id FK
+        uuid equipo_activo_id FK
+        datetime creada_en
+        datetime caduca_en
+        datetime cerrada_en "nullable"
+    }
+    INVITACION {
+        uuid id PK
+        uuid equipo_id FK
+        uuid creada_por FK
+        string codigo UK "aleatorio, al menos 128 bits"
+        string rol "SOLICITANTE | REVISOR"
+        datetime caduca_en
+        datetime usada_en "nullable"
+        uuid usada_por FK "nullable"
+    }
+    PETICION {
+        uuid id PK
+        uuid equipo_id FK
+        uuid autor_id FK
+        string tipo "INCIDENCIA | CAMBIO"
+        string origen "CORREO | REUNION | JIRA | OTRO"
+        string estado "BORRADOR | LISTA_PARA_REVISION | DEVUELTA | ACEPTADA | RECHAZADA | CANCELADA"
+        datetime creada_en
+        datetime actualizada_en
+        datetime enviada_en "nullable, ultimo envio a revision"
+    }
+    VERSION_PETICION {
+        uuid id PK
+        uuid peticion_id FK
+        int numero "unico por peticion"
+        string titulo
+        text texto_origen "nullable, el texto en bruto es opcional"
+        json campos "claves de campo estables, valores de texto"
+        uuid creada_por FK
+        datetime creada_en
+    }
+    ANALISIS {
+        uuid id PK
+        uuid version_id FK "unico"
+        int puntuacion "0 a 100"
+        string version_catalogo "hash del catalogo"
+        datetime creado_en
+    }
+    RESULTADO_REGLA {
+        uuid id PK
+        uuid analisis_id FK
+        string regla_codigo "copia estable"
+        string regla_etiqueta "copia"
+        string campo_clave "copia"
+        string pregunta "copia de la plantilla"
+        string severidad "copia"
+        string estado "CUMPLE | NO_CUMPLE | NO_APLICA"
+        string detalle
+    }
+    SUGERENCIA_IA {
+        uuid id PK
+        uuid version_id FK
+        uuid solicitada_por FK
+        string modo "AUTOR | REVISOR"
+        string estado "OK | DESCARTADA"
+        string motivo_descarte "nullable: RECHAZO, TRUNCADA, ESQUEMA_INVALIDO, TIEMPO_AGOTADO, ERROR"
+        json contenido "nullable; solo si OK, ya validado contra el esquema"
+        string proveedor "SIMULADO | ANTHROPIC"
+        string modelo "nullable en el simulado"
+        string version_prompt
+        int tokens_entrada "nullable: simulado o tiempo agotado"
+        int tokens_salida "nullable: simulado o tiempo agotado"
+        datetime creada_en
+    }
+    ACLARACION {
+        uuid id PK
+        uuid version_id FK
+        text pregunta
+        text respuesta
+        uuid creada_por FK
+        datetime creada_en
+    }
+    DECISION {
+        uuid id PK
+        uuid peticion_id FK
+        uuid version_id FK "version decidida"
+        uuid revisor_id FK
+        string resultado "ACEPTADA | DEVUELTA | RECHAZADA"
+        text comentario "nullable; obligatorio al devolver y al rechazar"
+        json salida_final "nullable; obligatoria al aceptar: titulo, descripcion, criterios"
+        string motivo_autodecision "nullable: UNICO_REVISOR | PLAZO"
+        datetime decidida_en
+    }
+    TRANSICION {
+        uuid id PK
+        uuid peticion_id FK
+        string estado_origen "nullable al crear"
+        string estado_destino
+        uuid usuario_id FK
+        uuid version_id FK "ultima version en ese momento"
+        datetime creada_en
+    }
+```
 
 ### **3.2. Descripción de entidades principales:**
 
-> Recuerda incluir el máximo detalle de cada entidad, como el nombre y tipo de cada atributo, descripción breve si procede, claves primarias y foráneas, relaciones y tipo de relación, restricciones (unique, not null…), etc.
+**Convenciones:**
+- Todas las claves primarias son `uuid`.
+- Un atributo es obligatorio (`NOT NULL`) salvo que se indique «nulo».
+- `PK` es clave primaria, `FK` clave foránea y `UK` valor único.
+- Los atributos con valores en mayúsculas (`rol`, `estado`…) solo admiten los valores indicados.
+
+**Ideas que ordenan el modelo:**
+
+- **La petición está separada de su contenido.** `PETICION` guarda la identidad y el estado. Cada guardado crea una `VERSION_PETICION` nueva con el contenido de ese momento, y cada versión tiene un único `ANALISIS` con el resultado de cada regla. Así hay historial, comparación entre versiones y trazabilidad.
+- **Tablas de solo añadir.** `VERSION_PETICION`, `ANALISIS`, `RESULTADO_REGLA`, `SUGERENCIA_IA`, `ACLARACION`, `DECISION` y `TRANSICION` nunca se modifican ni se borran. En `PETICION` solo cambian `estado`, `actualizada_en` y `enviada_en`. Unos disparadores de PostgreSQL rechazarán `UPDATE` y `DELETE` en esas tablas. Si hay que recortar, son lo primero que se quita, y entonces la garantía queda en la capa de acceso a datos.
+- **Aislamiento entre equipos.** Todos los datos de negocio cuelgan de un equipo, directamente (`equipo_id`) o a través de la petición. Todas las consultas parten del equipo activo de la sesión.
+- **Las reglas no son tablas.** El catálogo de reglas (12 para incidencias y 11 para cambios) y el vocabulario de términos vagos viven como configuración tipada del backend, leída a través de una interfaz. Por eso `RESULTADO_REGLA` guarda una **copia** de la regla y no tiene clave foránea hacia ella: el historial no cambia aunque la regla cambie después.
+
+**Entidades:**
+
+| Entidad | Para qué sirve | Atributos y restricciones principales | Relaciones |
+|---|---|---|---|
+| `EQUIPO` | Unidad de aislamiento de datos | `nombre` | Tiene membresías, invitaciones y peticiones (1:N) |
+| `USUARIO` | Persona registrada | `email` (`UK`); `nombre`; `password_hash` (Argon2id, nunca la contraseña); `email_verificado_en` (nulo, reservado para el futuro) | Pertenece a equipos mediante `MEMBRESIA`; abre sesiones; crea peticiones; solicita sugerencias; toma decisiones; realiza transiciones |
+| `MEMBRESIA` | Relación N:M entre usuario y equipo, con rol | `usuario_id` (`FK`); `equipo_id` (`FK`); `rol` (`SOLICITANTE` o `REVISOR`); `creada_en`. La pareja (`usuario_id`, `equipo_id`) es única | N:1 con `USUARIO` y con `EQUIPO`. El esquema admite varias por usuario; el MVP aplica una por usuario |
+| `SESION` | Sesión en el servidor | `token_hash` (`UK`; solo el hash, nunca el token); `usuario_id` (`FK`); `equipo_activo_id` (`FK` a `EQUIPO`); `creada_en`; `caduca_en` (8 horas tras el inicio, sin renovación); `cerrada_en` (nulo hasta cerrar sesión) | N:1 con `USUARIO`. El equipo activo es la membresía más antigua |
+| `INVITACION` | Código para unirse a un equipo con un rol | `equipo_id` (`FK`); `creada_por` (`FK` a `USUARIO`); `codigo` (`UK`; aleatorio de al menos 128 bits); `rol`; `caduca_en`; `usada_en` y `usada_por` (nulos hasta usarse) | N:1 con `EQUIPO`. Se marca como usada en la misma transacción que crea el usuario y la membresía, con una actualización condicionada a que siga sin usar y sin caducar, para que no pueda usarse dos veces |
+| `PETICION` | Identidad y estado de una petición | `equipo_id` (`FK`); `autor_id` (`FK` a `USUARIO`); `tipo` (`INCIDENCIA` o `CAMBIO`; no cambia tras crearla); `origen` (`CORREO`, `REUNION`, `JIRA` u `OTRO`); `estado` (los seis estados del flujo); `creada_en`; `actualizada_en`; `enviada_en` (nulo; último envío a revisión) | N:1 con `EQUIPO` y con su autor; 1:N con versiones (al menos una), decisiones y transiciones |
+| `VERSION_PETICION` | Contenido de la petición en un momento dado | `peticion_id` (`FK`); `numero` (único por petición); `titulo` (hasta 120 caracteres); `texto_origen` (nulo; texto en bruto, hasta 10.000 caracteres); `campos` (JSON con las claves de campo del tipo y valores de texto); `creada_por` (`FK`); `creada_en` | N:1 con `PETICION`; 1:1 con `ANALISIS`; 1:N con sugerencias, aclaraciones y decisiones. Al guardar se indica el número sobre el que se trabaja: si ya existe uno posterior, se rechaza con un conflicto (409) |
+| `ANALISIS` | Resultado de evaluar una versión con las reglas | `version_id` (`FK`, `UK`); `puntuacion` (entero de 0 a 100); `version_catalogo` (hash del catálogo de reglas usado); `creado_en` | 1:1 con `VERSION_PETICION`; 1:N con `RESULTADO_REGLA` |
+| `RESULTADO_REGLA` | Resultado de una regla en un análisis | `analisis_id` (`FK`); copia de `regla_codigo`, `regla_etiqueta`, `campo_clave`, `pregunta` y `severidad`; `estado` (`CUMPLE`, `NO_CUMPLE` o `NO_APLICA`); `detalle` (explicación del resultado; formato y obligatoriedad por fijar) | N:1 con `ANALISIS`. Sin clave foránea a ninguna regla. La pregunta de plantilla que ve el solicitante es la de los resultados `NO_CUMPLE` |
+| `SUGERENCIA_IA` | Cada llamada al proveedor de IA | `version_id` (`FK`); `solicitada_por` (`FK` a `USUARIO`); `modo` (`AUTOR` o `REVISOR`); `estado` (`OK` o `DESCARTADA`); `motivo_descarte` (nulo; rechazo, truncada, esquema inválido, tiempo agotado o error); `contenido` (JSON, nulo; solo si es `OK` y ya validado contra el esquema); `proveedor` (`SIMULADO` o `ANTHROPIC`); `modelo` (nulo en el simulado); `version_prompt`; `tokens_entrada` y `tokens_salida` (nulos en el simulado o si se agotó el tiempo); `creada_en` | N:1 con `VERSION_PETICION` y con el usuario que la pidió. Se guardan también las descartadas, porque sirven para medir el coste y aplicar los límites de uso |
+| `ACLARACION` | Respuesta del solicitante a una pregunta adicional de la IA | `version_id` (`FK`); `pregunta`; `respuesta`; `creada_por` (`FK`); `creada_en` | N:1 con `VERSION_PETICION` (la última en el momento de responder). No crea una versión nueva |
+| `DECISION` | Decisión del revisor | `peticion_id` (`FK`); `version_id` (`FK`; versión decidida); `revisor_id` (`FK` a `USUARIO`); `resultado` (`ACEPTADA`, `DEVUELTA` o `RECHAZADA`); `comentario` (nulo; obligatorio al devolver y al rechazar); `salida_final` (JSON, nulo; obligatorio al aceptar, con título, descripción y criterios, y es lo que se exporta); `motivo_autodecision` (nulo; `UNICO_REVISOR` o `PLAZO` cuando el revisor decide sobre su propia petición); `decidida_en` | N:1 con `PETICION`, con la versión decidida y con el revisor |
+| `TRANSICION` | Registro de cada cambio de estado | `peticion_id` (`FK`); `estado_origen` (nulo al crear la petición); `estado_destino`; `usuario_id` (`FK`); `version_id` (`FK`; última versión en ese momento); `creada_en` | N:1 con `PETICION`, con el usuario y con la versión. Cada transición se aplica solo si la petición sigue en el estado de origen; si no, se rechaza con un conflicto y no se registra nada |
+
+**Lo que no es una tabla en el MVP:** las definiciones de reglas y los términos vagos (configuración tipada) y las preguntas de plantilla, que son el campo `pregunta` de los resultados que no se cumplen.
 
 ---
 
