@@ -327,6 +327,10 @@ Prácticas previstas:
 - **Secretos:** la clave de la IA nunca entra en el repositorio; se lee de una variable de entorno.
 - **Datos:** el repositorio y los tests solo usan datos ficticios. Los datos de demostración, con credenciales de prueba, solo se cargan si lo activa una variable de entorno.
 
+**Privacidad: cuestiones abiertas.** El MVP solo usa datos ficticios, pero con datos reales habría dos problemas que resolver. Los dos se relacionan con la cuestión 6 de `docs/producto.md` (retención y eliminación de datos):
+- **Minimización hacia la IA:** el campo «Quién lo detectó y cómo contactarle» (RI-10, `detectado_por`) es un dato personal y hoy se envía al proveedor junto con el resto de los campos. No hace falta para proponer los demás campos, así que puede excluirse de lo que se envía.
+- **Derecho de supresión frente al historial de solo añadir:** las versiones y las aclaraciones pueden contener nombres y datos de contacto. Los disparadores que impiden modificarlas o borrarlas chocan con la obligación de borrar los datos personales de quien lo pida. Antes de tratar datos reales hay que decidir cómo se resuelve, por ejemplo anonimizando los campos afectados en un procedimiento controlado.
+
 ### **2.6. Tests**
 
 > Los tests de la aplicación están **previstos**: se escribirán con el código, a partir de la Entrega 2. La **medición de la IA**, en cambio, **ya se ha hecho** y sus resultados están al final de este apartado.
@@ -350,6 +354,17 @@ Prácticas previstas:
   - **(b) Equipo con dos revisores:** devolución con comentario, corrección, reenvío, aceptación y exportación.
 
 **Conjunto de evaluación:** de 10 a 15 peticiones ficticias con los valores esperados de cada campo. En la integración continua se ejecuta con el proveedor simulado, que prueba la tubería pero no la calidad de ningún modelo.
+
+**Cómo se escribirán:**
+- **Test antes que código** en lo que se enuncia como «si X, entonces Y»: las reglas del motor, las transiciones de estado, la matriz de permisos y la autodecisión.
+  - El test se escribe primero y se ve fallar.
+  - Lo escribe un contexto del agente distinto del que implementa. Así el test describe la regla querida y no el código que salió.
+- **Los dos lados de cada borde:** en cada umbral se prueba un caso a cada lado, por ejemplo 120 y 121 caracteres en el título, o justo antes y justo después de los 7 días del plazo. Un test que nace verde se rompe a propósito para comprobar que detecta el fallo.
+- **Dos bases de datos del mismo motor**, una de trabajo y otra de pruebas.
+  - Cada test de integración siembra lo mínimo que necesita y no da por hecho ningún identificador.
+  - Por defecto, cada test va en una transacción que se deshace al terminar.
+  - Los de concurrencia usan conexiones distintas, así que limpian las tablas al terminar.
+- **Solo se finge lo externo:** el proveedor de IA (con el simulado) y el reloj. La base de datos es siempre real.
 
 **Trazabilidad:** cada requisito y cada regla se enlazará con al menos un test y con el comando que lo ejecuta.
 
@@ -1006,7 +1021,7 @@ components:
 
 ## 5. Historias de Usuario
 
-El MVP tiene siete historias (1.2): cinco imprescindibles (H1 a H5) y dos deseables (S1 y S2, la IA). Aquí se detallan las tres que forman el núcleo del producto: **H2, H3 y H4**. Los criterios de aceptación salen de los requisitos funcionales (RF-xx) y de los escenarios de [`docs/producto.md`](docs/producto.md), sección 21.
+El MVP tiene siete historias (1.2): cinco imprescindibles (H1 a H5) y dos deseables (S1 y S2, la IA). Aquí se detallan las tres que forman el núcleo del producto: **H2, H3 y H4**. Los criterios de aceptación salen de los requisitos funcionales (RF-xx) y de los escenarios de [`docs/producto.md`](docs/producto.md), sección 21. Se escriben como reglas de negocio observables. Los códigos de respuesta y los nombres internos son detalle de implementación: están en la sección 4 y en esos escenarios, que son la versión ejecutable de estos criterios.
 
 **Historia de Usuario 1**
 
@@ -1079,27 +1094,28 @@ Escenario: Término vago acompañado de una cifra
 
 ```gherkin
 Escenario: Responder a una pregunta crea una versión nueva
-  Dada una petición en "borrador" cuya última versión es la 1 y tiene la regla de métrica sin cumplir
-  Cuando el autor rellena la métrica de éxito y guarda indicando la versión 1
-  Entonces se crea la versión 2, se evalúa de nuevo y la regla de métrica pasa a "cumple"
-  Y el historial muestra la puntuación de las versiones 1 y 2
+  Dada una petición en "borrador" con una sola versión, en la que la regla de métrica no se cumple
+  Cuando el autor rellena la métrica de éxito y guarda
+  Entonces se crea una segunda versión, se evalúa de nuevo y la regla de métrica pasa a "cumple"
+  Y el historial muestra la puntuación de las dos versiones
 
 Escenario: Guardar sobre una versión que ya no es la última
-  Dada una petición cuya última versión es la 3
-  Cuando el autor guarda indicando la versión 2
-  Entonces el guardado se rechaza con un conflicto (409) y no se crea ninguna versión
+  Dado que el autor está editando la versión 2 de su petición
+  Y entretanto se ha guardado una versión 3, por ejemplo desde otra pestaña
+  Cuando guarda sus cambios
+  Entonces el guardado se rechaza, se le avisa de que hay una versión más reciente y no se crea ninguna versión
 
 Escenario: No se puede enviar con una regla obligatoria sin cumplir
   Dada una petición cuya última versión tiene al menos una regla obligatoria en "no cumple"
   Cuando el autor intenta enviarla a revisión
-  Entonces el envío se rechaza (422)
+  Entonces el envío se rechaza
   Y la petición sigue en "borrador" o en "devuelta"
 
 Escenario: Una petición completa pasa a revisión
   Dada una petición con todas las reglas obligatorias aplicables en "cumple"
-  Cuando el autor la envía indicando el número de su última versión
+  Cuando el autor la envía a revisión
   Entonces pasa a "lista para revisión"
-  Y se registran la transición y la fecha de envío
+  Y queda constancia del cambio de estado y de la fecha de envío
 
 Escenario: Retirar una petición de revisión
   Dada una petición en "lista para revisión"
@@ -1140,7 +1156,7 @@ Escenario: Devolver con comentario y corrección del autor
 Escenario: Devolver o rechazar sin comentario
   Dada una petición en "lista para revisión"
   Cuando el revisor intenta devolverla o rechazarla sin comentario
-  Entonces la decisión se rechaza como entrada inválida y no se registra nada
+  Entonces la decisión no se registra y se le pide el comentario
 
 Escenario: Aceptar con la salida final editada
   Dada una petición en "lista para revisión" que el revisor puede decidir
@@ -1152,24 +1168,25 @@ Escenario: El único revisor del equipo decide su propia petición
   Dado un equipo con un solo revisor
   Y una petición propia de ese revisor en "lista para revisión"
   Cuando la acepta
-  Entonces la decisión se guarda con el motivo de autodecisión "UNICO_REVISOR"
+  Entonces la decisión se guarda
+  Y queda constancia de que la tomó sobre su propia petición por ser el único revisor
 
 Escenario: Dos decisiones simultáneas sobre la misma petición
   Dada una petición en "lista para revisión"
   Cuando dos revisores deciden a la vez
   Entonces una decisión prospera
-  Y la otra se rechaza con un conflicto (409) sin registrar nada
+  Y la otra se rechaza sin registrar nada
 
 Escenario: Decidir tras una retirada y un reenvío sin versión nueva
-  Dada una petición en "lista para revisión" en su versión 3, que el revisor está viendo
-  Y su autor la retira, añade una aclaración (sigue en la versión 3) y la reenvía
-  Cuando el revisor decide indicando la versión 3 y la fecha de envío que vio
-  Entonces la decisión se rechaza con un conflicto (409) y no se registra nada
+  Dada una petición en "lista para revisión" que el revisor está viendo
+  Y su autor la retira, añade una aclaración sin crear versión nueva y la reenvía
+  Cuando el revisor decide sobre lo que estaba viendo
+  Entonces la decisión se rechaza, porque la petición ya no es la que vio, y no se registra nada
 
 Escenario: Un revisor no ve los borradores ajenos que nunca se han enviado
   Dado un borrador de un solicitante que nunca se ha enviado a revisión
-  Cuando un revisor del mismo equipo lo pide
-  Entonces la respuesta es 404, como si no existiera
+  Cuando un revisor del mismo equipo intenta abrirlo
+  Entonces no puede verlo: para él es como si no existiera
 ```
 
 - **Requisitos:** RF-20, RF-21, RF-23, RF-34 y RF-36.
@@ -1184,7 +1201,7 @@ Escenario: Un revisor no ve los borradores ajenos que nunca se han enviado
 
 ## 6. Tickets de Trabajo
 
-Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. Siguen el orden de construcción previsto: primero los datos, después el motor de reglas y la API, y por último la interfaz. Las estimaciones son orientativas: salen del plan del documento (sección 15), que reserva unas 6 h al backend, incluida la base de datos, y unas 4 h al frontend.
+Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. Siguen el orden de construcción previsto: primero los datos, después el motor de reglas y la API, y por último la interfaz. Cada ticket lleva su parte del presupuesto de horas del plan del documento (sección 15: unas 6 h de backend, incluida la base de datos, y unas 4 h de frontend). Las horas reales se anotarán al cerrar cada ticket, para decidir los recortes del punto de control del 19 de enero con datos.
 
 **Ticket 1**
 
@@ -1193,7 +1210,7 @@ Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. S
 - **Tipo:** base de datos.
 - **Historias:** es el cimiento de todas; en especial H2 y H3.
 - **Prioridad:** imprescindible; es lo primero que se construye junto con el motor de reglas.
-- **Estimación:** parte de las 6 h de backend.
+- **Presupuesto:** 1 h de las 6 h de backend. **Horas reales:** se anotan al cerrar el ticket.
 - **Depende de:** nada. **Bloquea:** BE-1 y el resto de la API.
 
 **Descripción.** Crear con Prisma el esquema de la sección 3 en PostgreSQL, con sus migraciones versionadas, y una capa de acceso a datos que obligue a indicar siempre el equipo. Es la pieza que más cuesta cambiar cuando ya hay datos guardados, por eso se hace bien desde el principio.
@@ -1230,7 +1247,7 @@ Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. S
 - **Tipo:** backend.
 - **Historias:** H2 y H3.
 - **Prioridad:** imprescindible; es el núcleo del producto.
-- **Estimación:** parte de las 6 h de backend.
+- **Presupuesto:** 1,5 h de las 6 h de backend. **Horas reales:** se anotan al cerrar el ticket.
 - **Depende de:** BD-1. **Bloquea:** FE-1 y el envío a revisión.
 
 **Descripción.** El motor de reglas decide qué le falta a una petición. Es una **función pura**: recibe los campos, las definiciones de las reglas y la fecha de referencia, y devuelve el resultado de cada regla, sin acceder a la red, al reloj ni a la IA. Alrededor del motor, la API guarda cada versión nueva y su análisis en una sola operación.
@@ -1274,7 +1291,7 @@ Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. S
 - **Tipo:** frontend.
 - **Historias:** H2 y H3.
 - **Prioridad:** imprescindible.
-- **Estimación:** parte de las 4 h de frontend.
+- **Presupuesto:** 1 h de las 4 h de frontend. **Horas reales:** se anotan al cerrar el ticket.
 - **Depende de:** BE-1. Puede empezar contra una API simulada que devuelva definiciones y análisis de ejemplo.
 
 **Descripción.** Pantalla de detalle y edición de una petición (pantalla 4 de 1.3). El formulario no está escrito campo a campo: se dibuja a partir de las definiciones que devuelve la API, con un componente por tipo de comprobación. Junto al formulario, un panel muestra el resultado de cada regla, su pregunta si no se cumple, la puntuación y los avisos de términos vagos.
@@ -1308,10 +1325,15 @@ Tres tickets de la Entrega 2, uno por capa, que juntos hacen posibles H2 y H3. S
 **Requisitos:** RF-06, RF-10, RF-11, RF-12 y RF-27.
 
 **Definición de hecho (común a los tres tickets):**
-- Los criterios de aceptación pasan como tests automáticos.
+- Los criterios de aceptación pasan como tests automáticos, escritos antes que el código (ver 2.6).
 - La integración continua está en verde: tipos, lint y tests.
 - Se cumple la definición de hecho de las historias (sección 5).
 - El cambio llega en una pull request propia, que se documentará en la sección 7.
+
+**Además, según el tipo:**
+- **Base de datos (BD-1):** una migración ya aplicada no se edita; los cambios van en una nueva.
+- **Backend (BE-1):** cada ruta nueva está incluida en el test de aislamiento entre equipos, y las reglas de negocio viven en el motor y en los servicios, no en los controladores.
+- **Frontend (FE-1):** cada pantalla muestra su estado de carga, de error y vacío.
 
 ---
 
